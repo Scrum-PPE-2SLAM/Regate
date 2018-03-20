@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -25,15 +23,10 @@ public class Classement extends JFrame {
 	private JLabel lblSelRegate;
 	private JTable tableClassement;
 	private JComboBox<String> cboSelRegate;
-	private Bdd maBdd;
-	private JButton btnSelectionner;
-	private ArrayList<Participant> lesParticipants; 
-	private ArrayList<ArrayList<String>> leClassement;
+	private JButton btnSelect;
 	
-	public Classement(Window window, Bdd maBdd){
-		
+	public Classement(Window window){
 		this.window = window;
-		this.maBdd = maBdd;
 	}
 	
 	public void createClassement(){	
@@ -106,12 +99,12 @@ public class Classement extends JFrame {
 			lblSelRegate.setBounds(217, 14, 156, 14);
 			panelSelRegate.add(lblSelRegate);
 			
-			cboSelRegate = new JComboBox<String>(maBdd.getListeNomRegate().toArray(new String[0]));
+			cboSelRegate = new JComboBox<String>();
 			cboSelRegate.setBounds(383, 11, 161, 20);
 			panelSelRegate.add(cboSelRegate);
 			
-			this.btnSelectionner = new JButton("Valider");
-			this.btnSelectionner.addActionListener(new ActionListener() {
+			this.btnSelect = new JButton("Valider");
+			this.btnSelect.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					for (int i=0; i<20; i++) {
 						tableClassement.setValueAt("",i,0);
@@ -120,50 +113,11 @@ public class Classement extends JFrame {
 						tableClassement.setValueAt("",i,3);
 						tableClassement.setValueAt("",i,4);
 					}
-					ajoutClassement();
 				}
 			});
-			this.btnSelectionner.setFont(new Font("Tahoma", Font.BOLD, 12));
-			this.btnSelectionner.setBounds(550, 11, 100, 20);
-			this.panelSelRegate.add(btnSelectionner);
+			this.btnSelect.setFont(new Font("Tahoma", Font.BOLD, 12));
+			this.btnSelect.setBounds(550, 11, 100, 20);
+			this.panelSelRegate.add(btnSelect);
 		}
-	
-	
-	public void ajoutClassement(){
-		
-int pos = 0;
-		lesParticipants = new ArrayList<Participant>();
-		lesParticipants = maBdd.getParticipantRegate(maBdd.getlisteRegate().get(cboSelRegate.getSelectedIndex()).getIdRegate());
-		leClassement = new ArrayList<ArrayList<String>>();
-		leClassement = maBdd.getClassementRegate(maBdd.getlisteRegate().get(cboSelRegate.getSelectedIndex()).getIdRegate());
-		for (int i=0; i <= lesParticipants.size(); i++) {
-			for (int j=0; j < lesParticipants.size(); j++) {
-				if (Integer.parseInt(leClassement.get(j).get(2)) == i+1) {
-					tableClassement.setValueAt(lesParticipants.get(j).getNom(), i, 1);
-					tableClassement.setValueAt(lesParticipants.get(j).getPrenom(), i, 2);
-					
-					tableClassement.setValueAt(leClassement.get(j).get(1), i, 3);
-					tableClassement.setValueAt(leClassement.get(j).get(3), i, 4);
-						
-					tableClassement.setValueAt(leClassement.get(j).get(2), i, 0);
-					pos +=1;
-					}
-				}
-			}
-		
-		for (int i = 0; i< lesParticipants.size(); i++) {
-			if (Integer.parseInt(leClassement.get(i).get(2)) == 0) {
-				tableClassement.setValueAt(lesParticipants.get(i).getNom(), pos, 1);
-				tableClassement.setValueAt(lesParticipants.get(i).getPrenom(), pos, 2);
-				
-				tableClassement.setValueAt(leClassement.get(i).get(1), pos, 3);
-				tableClassement.setValueAt(leClassement.get(i).get(3), pos, 4);
-					
-				tableClassement.setValueAt("Abandon", pos, 0);
-				pos += 1;
-				
-			}
-		}
-	}
 }
 
