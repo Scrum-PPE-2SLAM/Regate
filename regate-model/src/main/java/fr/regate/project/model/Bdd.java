@@ -1,9 +1,12 @@
+package fr.regate.project.model;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
 
 public class Bdd {
+	/*
 	private ArrayList<Participant> listeParticipant = new ArrayList<Participant>();
 	private ArrayList<Regate> listeRegate = new ArrayList<Regate>();
 	private ArrayList<Regate> listeInverseRegate = new ArrayList<Regate>();
@@ -14,26 +17,11 @@ public class Bdd {
 	private ArrayList<Integer> listeDistance= new ArrayList<Integer>();
 	private ArrayList<String> listeNomRegate = new ArrayList<String>();
 	private ArrayList<String> listeNomRegateInverse = new ArrayList<String>();
-	private static String url ="jdbc:mysql://localhost:3306/eole";
-	private static String user ="root";
-	private static String password = "";
-	private static Connection con;
 	private static Statement st;
 	private static ResultSet rs;
 	
-	public Bdd() throws SQLException{
-		Connexion();
-	}
+	public Bdd() {
 
-	public void Connexion(){
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url,user,password);
-			System.out.println("connexion établie");
-			st = con.createStatement();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void initialisation() throws SQLException{
@@ -322,4 +310,5 @@ public class Bdd {
 			System.out.println(e);
 	 }
 	}
+	*/
 }
