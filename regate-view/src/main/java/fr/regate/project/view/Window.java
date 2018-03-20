@@ -3,6 +3,12 @@ package fr.regate.project.view;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * @author Léo Jullerot <professionnel@leojullerot.fr> and Thomas Galocha <thomas.galocha@hotmail.fr>
+ * @version 1.1
+ * Window class create write window and menu for regate application.
+ */
+
 public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +17,12 @@ public class Window extends JFrame {
 	private int length;
 	private JPanel contentPane;
 
+    /**
+     * @param name The name of window
+     * @param width width of window
+     * @param length Length of window
+     * Constructor
+     */
 	public Window(String name, int width, int length) {
 		this.name = name;
 		this.width = width;
