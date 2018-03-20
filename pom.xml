@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>fr.regate.project</groupId>
-  <artifactId>regate</artifactId>
+  <artifactId>Regate</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -14,30 +14,42 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+  </dependencies>
   <modules>
-    <module>regate-model</module>
     <module>regate-view</module>
     <module>regate-controller</module>
+    <module>regate-model</module>
   </modules>
 
   <dependencyManagement>
-      <dependencies>
-          <dependency>
-            <groupId>fr.regate.project</groupId>
-            <artifactId>regate-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
-          </dependency>
-          <dependency>
-              <groupId>fr.regate.project</groupId>
-              <artifactId>regate-view</artifactId>
-              <version>1.0-SNAPSHOT</version>
-          </dependency>
-          <dependency>
-              <groupId>fr.regate.project</groupId>
-              <artifactId>regate-controller</artifactId>
-              <version>1.0-SNAPSHOT</version>
-          </dependency>
-      </dependencies>
+    <dependencies>
+      <dependency>
+        <groupId>fr.regate.project</groupId>
+        <artifactId>regate-model</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.regate.project</groupId>
+        <artifactId>regate-view</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>fr.regate.project</groupId>
+        <artifactId>regate-controller</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
 
   </dependencyManagement>
 </project>
