@@ -1,5 +1,8 @@
+package fr.regate.project.controller;
+
 import javax.swing.*;
 import java.awt.event.*;
+import fr.regate.project.view.*;
 
 public class DTimer implements ActionListener
 {
@@ -43,6 +46,6 @@ public class DTimer implements ActionListener
 	public void actionPerformed (ActionEvent e) 
 	{
 		this.timeCount++;
-		this.window.setChrono(timeCount*1000);
+		//this.window.setChrono(timeCount*1000);
 	}
 }
