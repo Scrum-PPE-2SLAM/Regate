@@ -1,7 +1,6 @@
 package fr.regate.project.view;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 
 public class Window extends JFrame {

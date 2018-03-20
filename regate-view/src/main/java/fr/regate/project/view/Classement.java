@@ -25,6 +25,7 @@ public class Classement extends JFrame {
 	private JComboBox<String> cboSelRegate;
 	private JButton btnSelect;
 	
+
 	public Classement(Window window){
 		this.window = window;
 	}
