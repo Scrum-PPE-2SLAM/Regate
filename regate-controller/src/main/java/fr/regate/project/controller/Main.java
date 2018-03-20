@@ -1,15 +1,12 @@
-import java.sql.SQLException;
+package fr.regate.project.controller;
+
+import fr.regate.project.view.*;
+
+
 
 public class Main {
-	public static void main(String[] args) throws SQLException 
+	public static void main(String[] args)
 	{
-		Bdd maBdd = new Bdd();
-		maBdd.initialisation();
-		
-		Window window = new Window("Regate Manager 2017",800,600, maBdd.getListeNomRegate(), maBdd.getParticipant(), maBdd.getListeType(), maBdd);
-		window.createWindow();
-		window.createMenu();
-		window.ajouteAccueil();
-		window.setVisible(true);
+		Window window = new Window("test",800,600);
 	}
 }

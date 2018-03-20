@@ -1,3 +1,5 @@
+package fr.regate.project.view;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,14 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
-
 class ButtonEditor extends DefaultCellEditor 
 {
 	private static final long serialVersionUID = 1L;
-	protected JButton button;
-	private String label;
-	private LancementRegate lr;
-	private boolean isPushed;
+	private JButton button;
 
 	public ButtonEditor(JCheckBox checkBox, LancementRegate lr) 
 	{
@@ -27,8 +25,6 @@ class ButtonEditor extends DefaultCellEditor
 	    		fireEditingStopped();
 	    	}
 	    });
-    
-	    this.lr = lr;
 	}
 
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) 
@@ -42,30 +38,13 @@ class ButtonEditor extends DefaultCellEditor
       button.setForeground(table.getForeground());
       button.setBackground(table.getBackground());
     }
-    label = (value == null) ? "" : value.toString();
+		String label = (value == null) ? "" : value.toString();
     button.setText(label);
-    isPushed = true;
     return button;
   }
 
-	public Object getCellEditorValue() 
+	public boolean stopCellEditing()
 	{
-		if (isPushed) 
-		{
-			if (label == "✔")
-			{
-				lr.setTime(true);
-			}else {
-				lr.setTime(false);
-			}
-		}
-		isPushed = false;
-		return new String("✔");
-	}
-
-	public boolean stopCellEditing() 
-	{
-		isPushed = false;
 		return super.stopCellEditing();
 	}
 
