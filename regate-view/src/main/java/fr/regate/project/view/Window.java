@@ -1,36 +1,35 @@
 package fr.regate.project.view;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
 import javax.swing.border.EmptyBorder;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
 
 public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private int height;
+	private int width;
 	private int length;
 	private JPanel contentPane;
 
-	public Window(String name, int height, int length, ArrayList<String> listRegate, ArrayList<String> listType) {
+	public Window(String name, int width, int length) {
 		this.name = name;
-		this.height = height;
+		this.width = width;
 		this.length = length;
 	}
 		
 	public void createWindow() {
 		setTitle(name);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setBounds(100, 100, height, length);
+		setBounds(100, 100, width, length);
 		contentPane = new JPanel();
 		reinitContentPane();
 	}
-	
+
+	public Window getCurrentWindow() {
+		return this;
+	}
+
 	public void createMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -71,7 +70,7 @@ public class Window extends JFrame {
 		JMenu mnClassement = new JMenu("Classement");
 		
 		menuBar.add(mnClassement);
-		
+
 		JMenuItem mntmClassementRegate = new JMenuItem("Classement régate");
 		mnClassement.add(mntmClassementRegate);
 		
