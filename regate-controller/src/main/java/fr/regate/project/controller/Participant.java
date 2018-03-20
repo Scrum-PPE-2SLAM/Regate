@@ -1,3 +1,4 @@
+package fr.regate.project.controller;
 public class Participant 
 {
 	private int idParticipant, tempsRealisé, catégorieVoilier, rating;
