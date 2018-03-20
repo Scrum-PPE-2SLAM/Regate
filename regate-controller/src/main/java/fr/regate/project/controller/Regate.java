@@ -4,19 +4,20 @@ package fr.regate.project.controller;
 public class Regate 
 {
 	private int idRegate, distance;
-	private String nomRegate, dateRegate, lieuDepart, lieuArrive;
-	private int etat;
+	private String nameRegate, dateRegate, startPoint, endPoint;
+	private int status;
 	
-	public Regate(int idRegate, int distance, String nomRegate, String dateRegate, String lieuDepart, String lieuArrive, int etat) 
+	public Regate(int idRegate, int distance, String nameRegate, String dateRegate, String startPoint,
+				  String endPoint, int status)
 	{
 		super();
 		this.idRegate = idRegate;
 		this.distance = distance;
-		this.nomRegate = nomRegate;
+		this.nameRegate = nameRegate;
 		this.dateRegate = dateRegate;
-		this.lieuDepart = lieuDepart;
-		this.lieuArrive = lieuArrive;
-		this.etat = etat;
+		this.startPoint = startPoint;
+		this.endPoint = endPoint;
+		this.status = status;
 	}
 
 	public int getIdRegate() 
@@ -29,9 +30,9 @@ public class Regate
 		return distance;
 	}
 
-	public String getNomRegate() 
+	public String getNameRegate()
 	{
-		return nomRegate;
+		return nameRegate;
 	}
 
 	public String getDateRegate() 
@@ -39,17 +40,17 @@ public class Regate
 		return dateRegate;
 	}
 
-	public String getLieuDepart() 
+	public String getStartPoint()
 	{
-		return lieuDepart;
+		return startPoint;
 	}
 
-	public String getLieuArrive() 
+	public String getEndPoint()
 	{
-		return lieuArrive;
+		return endPoint;
 	}
 	
-	public int getEtat() {
-		return etat;
+	public int getStatus() {
+		return status;
 	}
 }
