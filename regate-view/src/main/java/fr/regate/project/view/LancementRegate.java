@@ -17,7 +17,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-public abstract class LancementRegate extends JFrame
+public class LancementRegate extends JFrame
 {
     private static final long serialVersionUID = 1L;
     private JTable tableParticipants;
@@ -50,7 +50,7 @@ public abstract class LancementRegate extends JFrame
         lblSelRegate.setBounds(190, 14, 220, 14);
         panelSelRegate.add(lblSelRegate);
 
-        JComboBox cboSelRegate = new JComboBox();
+        JComboBox<String> cboSelRegate = new JComboBox<String>();
         cboSelRegate.setBounds(383, 11, 161, 20);
         panelSelRegate.add(cboSelRegate);
 
