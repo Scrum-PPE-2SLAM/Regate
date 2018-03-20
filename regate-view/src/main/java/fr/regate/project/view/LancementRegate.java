@@ -5,14 +5,7 @@ import java.awt.Font;
 import java.awt.Window;
 import java.text.SimpleDateFormat;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -200,7 +193,9 @@ public class LancementRegate extends JFrame
         });
 
         tableParticipants.getColumn("Arriv\u00E9e").setCellRenderer(new ButtonRenderer());
+        tableParticipants.getColumn("Arriv\u00E9e").setCellEditor(new ButtonEditor(new JCheckBox(), this));
         tableParticipants.getColumn("Abandon").setCellRenderer(new ButtonRenderer());
+        tableParticipants.getColumn("Abandon").setCellEditor(new ButtonEditor(new JCheckBox(), this));
 
         this.tableParticipants.getColumnModel().getColumn(2).setPreferredWidth(40);
         this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(40);

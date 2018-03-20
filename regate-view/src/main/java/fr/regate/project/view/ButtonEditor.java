@@ -9,46 +9,56 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
-class ButtonEditor extends DefaultCellEditor 
+
+class ButtonEditor extends DefaultCellEditor
 {
 	private static final long serialVersionUID = 1L;
-	private JButton button;
+	protected JButton button;
+	private String label;
+	private LancementRegate lr;
 
-	public ButtonEditor(JCheckBox checkBox, LancementRegate lr) 
+	public ButtonEditor(JCheckBox checkBox, LancementRegate lr)
 	{
 		super(checkBox);
-    
-	    button = new JButton();
-	    button.setOpaque(true);
-	    button.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		fireEditingStopped();
-	    	}
-	    });
+
+		button = new JButton();
+		button.setOpaque(true);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fireEditingStopped();
+			}
+		});
+
+		this.lr = lr;
 	}
 
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) 
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
 	{
-		if (isSelected) 
+		if (isSelected)
 		{
 			button.setForeground(table.getSelectionForeground());
 			button.setBackground(table.getSelectionBackground());
-		} else 
+		} else
 		{
-      button.setForeground(table.getForeground());
-      button.setBackground(table.getBackground());
-    }
-		String label = (value == null) ? "" : value.toString();
-    button.setText(label);
-    return button;
-  }
+			button.setForeground(table.getForeground());
+			button.setBackground(table.getBackground());
+		}
+		label = (value == null) ? "" : value.toString();
+		button.setText(label);
+		return button;
+	}
+
+	public Object getCellEditorValue()
+	{
+		return label;
+	}
 
 	public boolean stopCellEditing()
 	{
 		return super.stopCellEditing();
 	}
 
-	protected void fireEditingStopped() 
+	protected void fireEditingStopped()
 	{
 		super.fireEditingStopped();
 	}
