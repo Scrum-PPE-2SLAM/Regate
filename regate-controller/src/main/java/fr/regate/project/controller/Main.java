@@ -2,6 +2,7 @@ package fr.regate.project.controller;
 
 import fr.regate.project.view.*;
 
+
 public class Main {
 	public static void main(String[] args) {
 		
