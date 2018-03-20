@@ -26,7 +26,7 @@
 .classpath
 .project
 .settings/
-/.gitignore
+*/.gitignore
 
 # repository
 /target
