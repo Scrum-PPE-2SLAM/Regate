@@ -1,3 +1,5 @@
+package fr.regate.project.view;
+
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -16,18 +18,11 @@ public class Window extends JFrame {
 	private int height;
 	private int length;
 	private JPanel contentPane;
-	private ArrayList<String> listeRegate;
-	private ArrayList<String> listeType;
-	private ArrayList<ArrayList<Participant>> listeParticipant;
-	private Bdd maBdd;
 
-	public Window(String name, int height, int length, ArrayList<String> listeRegate, ArrayList<Participant> listeParticipant, ArrayList<String> listeType, Bdd maBdd ) {
+	public Window(String name, int height, int length, ArrayList<String> listRegate, ArrayList<String> listType) {
 		this.name = name;
 		this.height = height;
 		this.length = length;
-		this.listeRegate = listeRegate;
-		this.listeType = listeType;
-		this.maBdd = maBdd;
 	}
 		
 	public void createWindow() {
@@ -42,102 +37,98 @@ public class Window extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnFichier = new JMenu("Fichier");
-		menuBar.add(mnFichier);
+		JMenu mnFile = new JMenu("Fichier");
+		menuBar.add(mnFile);
 		
-		JMenuItem mntmEnregistrer = new JMenuItem("Enregistrer");
-		mnFichier.add(mntmEnregistrer);
+		JMenuItem mntmSave = new JMenuItem("Enregistrer");
+		mnFile.add(mntmSave);
 		
-		JMenuItem mntmQuitter = new JMenuItem("Quitter");
-		mntmQuitter.addActionListener(new ActionListener() {
+		JMenuItem mntmQuit = new JMenuItem("Quitter");
+		mntmQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
 		});
-		mnFichier.add(mntmQuitter);
+		mnFile.add(mntmQuit);
 		
-		JMenu mnRgate = new JMenu("Régate");
-		menuBar.add(mnRgate);
+		JMenu mnRegate = new JMenu("Régate");
+		menuBar.add(mnRegate);
 		
-		JMenuItem mntmNouvelleRgate = new JMenuItem("Nouvelle régate");
-		mntmNouvelleRgate.addActionListener(new ActionListener() {
+		JMenuItem mntmNewRegate = new JMenuItem("Nouvelle régate");
+		mntmNewRegate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ajoutRegate();
+				addRegate();
 			}
 		});
-		mnRgate.add(mntmNouvelleRgate);
+		mnRegate.add(mntmNewRegate);
 		
-		JMenuItem mntmModifierRgate = new JMenuItem("Modifier régate");
-		mntmModifierRgate.addActionListener(new ActionListener() {
+		JMenuItem mntmModifyRegate = new JMenuItem("Modifier régate");
+		mntmModifyRegate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				modifierRegate();
+				modifyRegate();
 			}
 		});
-		mnRgate.add(mntmModifierRgate);
+		mnRegate.add(mntmModifyRegate);
 		
-		JMenuItem mntmSupprimerRgate = new JMenuItem("Supprimer régate");
-		mntmSupprimerRgate.addActionListener(new ActionListener() {
+		JMenuItem mntmDeleteRgate = new JMenuItem("Supprimer régate");
+		mntmDeleteRgate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lancementRegate2();
+				runRegate();
 			}
 		});
-		mnRgate.add(mntmSupprimerRgate);
+		mnRegate.add(mntmDeleteRgate);
 		
-		JMenuItem mntmLancerRgate = new JMenuItem("Lancer régate");
-		mntmLancerRgate.addActionListener(new ActionListener() {
+		JMenuItem mntmRunRgate = new JMenuItem("Lancer régate");
+		mntmRunRgate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lancementRegate();
+				runRegate();
 			}
 		});
-		mnRgate.add(mntmLancerRgate);
+		mnRegate.add(mntmRunRgate);
 		
 		JMenu mnParticipants = new JMenu("Participants");
 		menuBar.add(mnParticipants);
 		
-		JMenuItem mntmAjouterParticipant = new JMenuItem("Ajouter participant");
-		mntmAjouterParticipant.addActionListener(new ActionListener() {
+		JMenuItem mntmAddParticipant = new JMenuItem("Ajouter participant");
+		mntmAddParticipant.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AjouterParticipant();
+				AddParticipant();
 			}
 		});
-		mnParticipants.add(mntmAjouterParticipant);
+		mnParticipants.add(mntmAddParticipant);
 		
-		JMenuItem mntmModifierParticipant = new JMenuItem("Modifier participant");
-		mnParticipants.add(mntmModifierParticipant);
+		JMenuItem mntmModifyParticipant = new JMenuItem("Modifier participant");
+		mnParticipants.add(mntmModifyParticipant);
 		
 		JMenu mnClassement = new JMenu("Classement");
 		
 		menuBar.add(mnClassement);
 		
 		
-		JMenuItem mntmClassementRgate = new JMenuItem("Classement régate");
-		mntmClassementRgate.addActionListener(new ActionListener() {
+		JMenuItem mntmClassementRegate = new JMenuItem("Classement régate");
+		mntmClassementRegate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				classement();
 			}
 		});
-		mnClassement.add(mntmClassementRgate);
+		mnClassement.add(mntmClassementRegate);
 		
-		JMenuItem mntmClassementParCatgorie = new JMenuItem("Classement par catégorie");
-		mntmClassementParCatgorie.addActionListener(new ActionListener() {
+		JMenuItem mntmClassementPerCatgorie = new JMenuItem("Classement par catégorie");
+		mntmClassementPerCatgorie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				classementParCategorie();
+				classementPerCategorie();
 			}
 		});
-		mnClassement.add(mntmClassementParCatgorie);
+		mnClassement.add(mntmClassementPerCatgorie);
 		
-		JMenu mnAide = new JMenu("Aide");
-		menuBar.add(mnAide);
+		JMenu mnHelp = new JMenu("Aide");
+		menuBar.add(mnHelp);
 		
 		JMenuItem mntmCopiright = new JMenuItem("Copiright");
-		mnAide.add(mntmCopiright);
+		mnHelp.add(mntmCopiright);
 		
 		JMenuItem mntmContact = new JMenuItem("Contact");
-		mnAide.add(mntmContact);
-		
-		
-		
-		
+		mnHelp.add(mntmContact);
 	}
 
 	
@@ -148,73 +139,49 @@ public class Window extends JFrame {
 		contentPane.setLayout(null);
 	}
 	
-	public void lancementRegate() {
+	public void runRegate() {
 		reinitContentPane();
-		LancementRegate lancementRegate = new LancementRegate(this, maBdd);
-		lancementRegate.createAll();
+		LancementRegate runRegate = new LancementRegate(this);
+		runRegate.createAll();
 		contentPane.revalidate();
 	}
 	
 	public void classement() {
 		reinitContentPane();
-		Classement classement = new Classement(this, maBdd);
+		Classement classement = new Classement(this);
 		classement.createClassement();
 		classement.createPanelSelRegate("Général");
 		contentPane.revalidate();
 	}
 	
-	public void classementParCategorie(){
+	public void classementPerCategorie(){
 		reinitContentPane();
-		Classement classement = new Classement(this, maBdd);
+		Classement classement = new Classement(this);
 		classement.createClassement();
 		classement.createPanelSelRegate("Par catégorie");
 		contentPane.revalidate();
 	}
 	
-	public void lancementRegate2() {
+	public void addRegate() {
 		reinitContentPane();
-		LancementRegate lancementRegate = new LancementRegate(this, maBdd);
-		lancementRegate.creationPanelSelRegate();
-		lancementRegate.creationPanelInfoRegate();
-		contentPane.revalidate();
-	}
-	
-	public ArrayList<String> getListeRegate(){
-		return listeRegate;
-	}
-	public ArrayList<String> getListeType(){
-		return listeType;
-	}
-	public ArrayList<ArrayList<Participant>> getListeParticipant(){
-		return listeParticipant;
-	}
-	
-	public void ajoutRegate() {
-		reinitContentPane();
-		AjoutRegate ajoutRegate = new AjoutRegate(this, maBdd);
-		ajoutRegate.creationPanelAjoutRegate();
-		ajoutRegate.creationPanelParticipants();
-		ajoutRegate.creationPanelTitre("AJOUT NOUVELLE REGATE ");
-		contentPane.revalidate();
-	}
-	public void ajouteAccueil(){
-		reinitContentPane();
-		Accueil accueil = new Accueil(this);
-		accueil.createAccueil();
-		contentPane.revalidate();
-	}
-	public void AjouterParticipant(){
-		reinitContentPane();
-		AjoutParticipant nouveauParticipant = new AjoutParticipant(this, maBdd);
-		nouveauParticipant.createNouveauParticipant();
-		contentPane.revalidate();
-	}
-	
-	public void modifierRegate() {
-		reinitContentPane();
-		ModifRegate modifRegate = new ModifRegate(this, maBdd);
-		modifRegate.ajoutCombo(listeRegate.toArray(new String[0]));
+		AjoutRegate addRegate = new AjoutRegate(this);
+		addRegate.creationPanelAjoutRegate();
+		addRegate.creationPanelParticipants();
+		addRegate.creationPanelTitre("AJOUT NOUVELLE REGATE ");
 		contentPane.revalidate();
 	}
 
+	public void AddParticipant(){
+		reinitContentPane();
+		AjoutParticipant addParticipant = new AjoutParticipant(this);
+		addParticipant.createNouveauParticipant();
+		contentPane.revalidate();
+	}
+	
+	public void modifyRegate() {
+		reinitContentPane();
+		ModifRegate modifRegate = new ModifRegate(this);
+		modifRegate.ajoutCombo(listRegate.toArray(new String[0]));
+		contentPane.revalidate();
+	}
 }
