@@ -22,6 +22,12 @@
 # intelliJ config files
 .idea/
 
+# Eclipse config files
+.classpath
+.project
+.settings/
+/.gitignore
+
 # repository
 /target
 
