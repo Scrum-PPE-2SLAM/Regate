@@ -1,10 +1,11 @@
-import java.awt.Window;
+package fr.regate.project.view;
+
 import javax.swing.*;
 
 public class Accueil extends JFrame
 {
 	private static final long serialVersionUID = 1L;
-	private JLabel JImageBateau = new JLabel(new ImageIcon("bateau2.gif"));
+	private JLabel JImageShip = new JLabel(new ImageIcon("bateau2.gif"));
 	private JPanel cpImage = new JPanel();
 	Window window;
 	
@@ -17,7 +18,7 @@ public class Accueil extends JFrame
 	public void createAccueil()
 	{
 		this.cpImage.setBounds(0, 0, window.getWidth(), window.getHeight());
-		this.cpImage.add(JImageBateau);
+		this.cpImage.add(JImageShip);
 		this.window.add(cpImage);
 	}
 
