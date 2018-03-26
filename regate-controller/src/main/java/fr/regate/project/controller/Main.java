@@ -5,13 +5,15 @@ import fr.regate.project.view.*;
 
 public class Main {
 	public static void main(String[] args) {
-		
-		Window window = new Window("Regate Manager 2017",800,600);
-		LancementRegate lr = new LancementRegate(window);
+
+	    Controller controller = new Controller();
+	    Window window = controller.getWindow();
+	    LancementRegate lr = controller.getLr();
 		window.createWindow();
 		window.createMenu();
 		lr.createAll();
 		window.setVisible(true);
+		ButtonListener bl = new ButtonListener(lr);
 
 	}
 }
