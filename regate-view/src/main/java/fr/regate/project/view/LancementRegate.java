@@ -3,6 +3,7 @@ package fr.regate.project.view;
 import java.awt.*;
 import java.awt.Window;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -17,6 +18,7 @@ public class LancementRegate extends JFrame
     private JTextField tfNameRegate, tfStartPoint, tfEndPoint, tfDistance;
     private JTextField tfDate;
     private Window window;
+    private JButton btnSelect, btnEnd, btnReinit, btnStart;
 
     public LancementRegate(Window window)
     {
@@ -46,7 +48,7 @@ public class LancementRegate extends JFrame
         cboSelRegate.setBounds(383, 11, 161, 20);
         panelSelRegate.add(cboSelRegate);
 
-        JButton btnSelect = new JButton("Valider");
+        btnSelect = new JButton("Valider");
 
         btnSelect.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnSelect.setBounds(550, 11, 100, 20);
@@ -118,13 +120,13 @@ public class LancementRegate extends JFrame
         panelChrono.setLayout(null);
         this.window.add(panelChrono);
 
-        JButton btnEnd = new JButton("FIN");
+        btnEnd = new JButton("FIN");
 
         btnEnd.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnEnd.setBounds(272, 42, 88, 59);
         panelChrono.add(btnEnd);
 
-        JButton btnReinit = new JButton("Reinitialiser");
+        btnReinit = new JButton("Reinitialiser");
 
         btnReinit.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnReinit.setBounds(171, 112, 189, 23);
@@ -136,7 +138,7 @@ public class LancementRegate extends JFrame
         this.lblChrono.setBounds(10, 42, 171, 76);
         panelChrono.add(lblChrono);
 
-        JButton btnStart = new JButton("DEPART");
+        btnStart = new JButton("DEPART");
         btnStart.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnStart.setBounds(174, 42, 88, 59);
         panelChrono.add(btnStart);
@@ -206,5 +208,30 @@ public class LancementRegate extends JFrame
     public void updateChrono(int timeCount, SimpleDateFormat df)
     {
         this.lblChrono.setText(df.format(timeCount - 3.6 * Math.pow(10,6)));
+    }
+
+    public JButton getBtnSelect() {
+        return btnSelect;
+    }
+
+    public JButton getBtnEnd() {
+        return btnEnd;
+    }
+
+    public JButton getBtnReinit() {
+        return btnReinit;
+    }
+
+    public JButton getBtnStart() {
+        return btnStart;
+    }
+
+    public ArrayList<JButton> getAllBtn() {
+        ArrayList<JButton> btnList = new ArrayList<JButton>();
+        btnList.add(btnEnd);
+        btnList.add(btnReinit);
+        btnList.add(btnSelect);
+        btnList.add(btnStart);
+        return btnList;
     }
 }
