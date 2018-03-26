@@ -1,7 +1,6 @@
 package fr.regate.project.view;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.Window;
 import java.text.SimpleDateFormat;
 

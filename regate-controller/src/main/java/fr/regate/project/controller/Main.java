@@ -12,5 +12,6 @@ public class Main {
 		window.createMenu();
 		lr.createAll();
 		window.setVisible(true);
+
 	}
 }
