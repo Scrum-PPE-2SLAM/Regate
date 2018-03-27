@@ -1,51 +1,55 @@
 package fr.regate.project.controller;
 
-import fr.regate.project.view.*;
+import fr.regate.project.view.LancementRegate;
+
+import javax.swing.*;
 
 public class Controller {
-    private Window window;
-    private Accueil accueil;
-    private AjoutParticipant ap;
-    private AjoutRegate ar;
-    private Classement cla;
-    private LancementRegate lr;
-    private ModifRegate mr;
+    private DTimer chrono;
+    private LancementRegate runRegate;
 
-    public Controller() {
-        window = new Window("Regate Manager 2017",800,600);
-        accueil = new Accueil(window);
-        ap = new AjoutParticipant(window);
-        ar = new AjoutRegate(window);
-        cla = new Classement(window);
-        lr = new LancementRegate(window);
-        mr = new ModifRegate(window);
+    public Controller(LoadView views) {
+        chrono = new DTimer(views.getLr());
+        runRegate = views.getLr();
     }
 
-    public Window getWindow() {
-        return window;
+
+    public void runChrono() {
+        if (chrono.isRunning()) {
+            JOptionPane.showMessageDialog(null, "le chronomètre nTourne vous ne pouvez pas le lancer.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }else if (runRegate.getLblChrono().getText() != "00:00:00") {
+            JOptionPane.showMessageDialog(null, "le chronomètre n'est pas à 0. Veuillez le réinitialiser.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }else {
+            chrono.startDTimer();
+        }
     }
 
-    public Accueil getAccueil() {
-        return accueil;
+    public void stopChrono() {
+        if (chrono.isRunning()) {
+            chrono.stopDTimer();
+        } else {
+            JOptionPane.showMessageDialog(null, "le chronomètre ne tourne pas!", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    public AjoutParticipant getAp() {
-        return ap;
+    public void reinitChrono() {
+        if (chrono.isRunning()) {
+            JOptionPane.showMessageDialog(null, "le chronomètre tourne! impossible de le réinitialiser.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }else {
+            int option = JOptionPane.showConfirmDialog(null, "Etes-vous sur de vouloir réinitialiser le chronomètre?", "Reinitialisation chronomètre", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if(option == JOptionPane.OK_OPTION){
+                chrono.reinitDTimer();
+                runRegate.setLblChrono("00:00:00");
+            }
+        }
     }
 
-    public AjoutRegate getAr() {
-        return ar;
-    }
-
-    public Classement getCla() {
-        return cla;
-    }
-
-    public LancementRegate getLr() {
-        return lr;
-    }
-
-    public ModifRegate getMr() {
-        return mr;
+    public void validate() {
+        if (chrono.isRunning() || runRegate.regateIsLoad()) {
+            JOptionPane.showMessageDialog(null, "Une régate est en cours. Impossible d'en selectionner une autre.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }else {
+            runRegate.reinitTab();
+        }
     }
 }

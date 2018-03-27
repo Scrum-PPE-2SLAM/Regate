@@ -96,5 +96,9 @@ public class AjoutParticipant extends JFrame
 		this.panelNewParticipant.add(lblRating);
 		this.panelNewParticipant.add(tfRating);
 	}
+
+	public JButton getBtnSend() {
+		return btnSend;
+	}
 }
 
