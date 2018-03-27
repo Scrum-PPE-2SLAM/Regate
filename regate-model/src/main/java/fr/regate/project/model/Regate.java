@@ -1,22 +1,24 @@
 package fr.regate.project.model;
 
+import java.sql.Date;
 
 public class Regate 
 {
 	private int idRegate, distance;
-	private String nameRegate, dateRegate, startPoint, endPoint;
+	private String nameRegate, startPlace, endPlace;
 	private int status;
+	private Date dateRegate;
 	
-	public Regate(int idRegate, int distance, String nameRegate, String dateRegate, String startPoint,
-				  String endPoint, int status)
+	public Regate(int idRegate, String nameRegate, Date dateRegate, String startPlace,
+				  String endPlace, int distance, int status)
 	{
 		super();
 		this.idRegate = idRegate;
-		this.distance = distance;
 		this.nameRegate = nameRegate;
 		this.dateRegate = dateRegate;
-		this.startPoint = startPoint;
-		this.endPoint = endPoint;
+		this.startPlace = startPlace;
+		this.endPlace = endPlace;
+		this.distance = distance;
 		this.status = status;
 	}
 
@@ -35,19 +37,19 @@ public class Regate
 		return nameRegate;
 	}
 
-	public String getDateRegate() 
+	public Date getDateRegate() 
 	{
 		return dateRegate;
 	}
 
 	public String getStartPoint()
 	{
-		return startPoint;
+		return startPlace;
 	}
 
 	public String getEndPoint()
 	{
-		return endPoint;
+		return endPlace;
 	}
 	
 	public int getStatus() {
