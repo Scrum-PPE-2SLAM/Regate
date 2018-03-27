@@ -44,13 +44,13 @@ public class ButtonListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == RUNREGATE_BTN_END) {
-            controller.stopChrono();
+            controller.runRegStopChrono();
         }else if (e.getSource() == RUNREGATE_BTN_VALIDATE) {
-           controller.validate();
+           controller.runRegValidate();
         }else if (e.getSource() == RUNREGATE_BTN_START) {
-            controller.runChrono();
+            controller.runRegRunChrono();
         }else if (e.getSource() == RUNREGATE_BTN_REINIT) {
-            controller.reinitChrono();
+            controller.runRegReinitChrono();
         }
     }
 }

@@ -14,7 +14,7 @@ public class Controller {
     }
 
 
-    public void runChrono() {
+    public void runRegRunChrono() {
         if (chrono.isRunning()) {
             JOptionPane.showMessageDialog(null, "le chronomètre nTourne vous ne pouvez pas le lancer.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else if (runRegate.getLblChrono().getText() != "00:00:00") {
@@ -24,7 +24,7 @@ public class Controller {
         }
     }
 
-    public void stopChrono() {
+    public void runRegStopChrono() {
         if (chrono.isRunning()) {
             chrono.stopDTimer();
         } else {
@@ -32,7 +32,7 @@ public class Controller {
         }
     }
 
-    public void reinitChrono() {
+    public void runRegReinitChrono() {
         if (chrono.isRunning()) {
             JOptionPane.showMessageDialog(null, "le chronomètre tourne! impossible de le réinitialiser.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else {
@@ -45,7 +45,7 @@ public class Controller {
         }
     }
 
-    public void validate() {
+    public void runRegValidate() {
         if (chrono.isRunning() || runRegate.regateIsLoad()) {
             JOptionPane.showMessageDialog(null, "Une régate est en cours. Impossible d'en selectionner une autre.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else {
