@@ -6,14 +6,10 @@ import fr.regate.project.view.*;
 public class Main {
 	public static void main(String[] args) {
 
-	    Controller controller = new Controller();
-	    Window window = controller.getWindow();
-	    LancementRegate lr = controller.getLr();
-		window.createWindow();
-		window.createMenu();
-		lr.createAll();
+	    LoadView loadView = new LoadView();
+	    Window window = loadView.getWindow();
+	    LancementRegate lr = loadView.getLr();
 		window.setVisible(true);
-		ButtonListener bl = new ButtonListener(lr);
-
+		ButtonListener bl = new ButtonListener(loadView);
 	}
 }
