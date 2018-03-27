@@ -18,8 +18,6 @@ public class Main {
 	    Window window = loadView.getWindow();
 	    LancementRegate lr = loadView.getLr();
 		window.setVisible(true);
-<<<<<<< HEAD
-		ButtonListener bl = new ButtonListener(lr);
 		
 		BddConnection BddCo = new BddConnection(URL_BDD, USER_BDD, PASSWORD_BDD);
 		
@@ -35,10 +33,7 @@ public class Main {
 		}
 		
 		BddCo.CloseConnection();
-		
 
-=======
 		ButtonListener bl = new ButtonListener(loadView);
->>>>>>> e3c79630a8bd162a449c67fa9cb895411de9a732
 	}
 }
