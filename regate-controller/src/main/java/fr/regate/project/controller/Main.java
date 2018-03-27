@@ -10,8 +10,8 @@ import fr.regate.project.view.*;
 public class Main {
 	public static void main(String[] args) {
 		final String URL_BDD = "jdbc:mysql://localhost:3306/eole";
-		final String USER_BDD = "root";
-		final String PASSWORD_BDD = "";
+		final String USER_BDD = "user";
+		final String PASSWORD_BDD = "password";
 		
 
 	    LoadView loadView = new LoadView();
