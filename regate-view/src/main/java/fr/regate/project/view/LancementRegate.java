@@ -204,6 +204,21 @@ public class LancementRegate extends JFrame
         this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(40);
         this.tableParticipants.setRowHeight(18);
     }
+    public boolean regateIsLoad() {
+        for (int i = 0; i < 20; i++) {
+            if (tableParticipants.getValueAt(i, 4) != null)
+                return true;
+        }
+        return false;
+    }
+
+    public void reinitTab() {
+        for (int i = 0; i<20; i++) {
+            tableParticipants.setValueAt(null, i, 0);
+            tableParticipants.setValueAt(null, i, 1);
+            tableParticipants.setValueAt(null, i, 4);
+        }
+    }
 
     public void updateChrono(int timeCount, SimpleDateFormat df)
     {
@@ -233,5 +248,13 @@ public class LancementRegate extends JFrame
         btnList.add(btnSelect);
         btnList.add(btnStart);
         return btnList;
+    }
+
+    public JLabel getLblChrono() {
+        return lblChrono;
+    }
+
+    public void setLblChrono(String chrono) {
+        lblChrono.setText(chrono);
     }
 }

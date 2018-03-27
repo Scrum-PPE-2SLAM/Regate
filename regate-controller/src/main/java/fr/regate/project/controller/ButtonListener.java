@@ -12,6 +12,7 @@ public class ButtonListener implements ActionListener {
     private Classement cla;
     private LancementRegate runRegate;
     private ModifRegate mr;
+    private Controller controller;
 
     private final JButton RUNREGATE_BTN_END;
     private final JButton RUNREGATE_BTN_VALIDATE;
@@ -25,6 +26,7 @@ public class ButtonListener implements ActionListener {
         cla = views.getCla();
         this.runRegate = views.getLr();
         mr = views.getMr();
+        controller = new Controller(views);
 
         RUNREGATE_BTN_END = runRegate.getBtnEnd();
         RUNREGATE_BTN_START = runRegate.getBtnStart();
@@ -42,13 +44,13 @@ public class ButtonListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == RUNREGATE_BTN_END) {
-            System.out.print(e.getSource());
-        }else if (e.getSource() != RUNREGATE_BTN_VALIDATE) {
-            System.out.print(e.getSource());
-        }else if (e.getSource() != RUNREGATE_BTN_START) {
-            System.out.print(e.getSource());
-        }else if (e.getSource() != RUNREGATE_BTN_REINIT) {
-            System.out.print(e.getSource());
+            controller.stopChrono();
+        }else if (e.getSource() == RUNREGATE_BTN_VALIDATE) {
+           controller.validate();
+        }else if (e.getSource() == RUNREGATE_BTN_START) {
+            controller.runChrono();
+        }else if (e.getSource() == RUNREGATE_BTN_REINIT) {
+            controller.reinitChrono();
         }
     }
 }
