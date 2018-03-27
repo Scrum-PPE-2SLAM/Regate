@@ -1,18 +1,36 @@
 package fr.regate.project.model;
 public class Participant 
 {
-	private int idParticipant, tempsRealisé, catégorieVoilier, rating;
-	private String nom, prenom, nomVoilier;
+	private int idParticipant, tempsRealisé;
+	private String name, firstName, phone, email;
 	
 	
-	public Participant(int idParticipant,  String nom, String prenom, String nomVoilier, int catégorieVoilier, int rating) 
-	{
+	public Participant(int idParticipant,  String name, String firstName, String phone, String email) {
 		this.idParticipant = idParticipant;
-		this.catégorieVoilier = catégorieVoilier;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.nomVoilier = nomVoilier;
-		this.rating = rating;
+		this.name = name;
+		this.firstName = firstName;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	public int getIdParticipant() {
+		return idParticipant;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	public int getTempsRealisé() {
@@ -23,27 +41,4 @@ public class Participant
 		this.tempsRealisé = tempsRealisé;
 	}
 
-	public int getIdParticipant() {
-		return idParticipant;
-	}
-
-	public int getCatégorieVoilier() {
-		return catégorieVoilier;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public String getnomVoilier() {
-		return nomVoilier;
-	}
-	
-	public int getRating() {
-		return rating;
-	}
 }
