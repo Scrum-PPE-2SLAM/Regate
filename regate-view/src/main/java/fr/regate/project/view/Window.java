@@ -157,7 +157,7 @@ public class Window extends JFrame {
         return mntmDeleteRgate;
     }
 
-    public JMenuItem getMntmRunRgate() {
+    public JMenuItem getMntmRunRegate() {
         return mntmRunRgate;
     }
 

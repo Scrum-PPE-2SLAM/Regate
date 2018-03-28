@@ -18,7 +18,7 @@ public class ModifRegate extends JFrame
 		this.window = window;
 	}
 	
-	public void ajoutFenetre() 
+	public void CreateChangeRegate() 
 	{
 		this.addRegate = new AjoutRegate(window);
 		this.addRegate.creationPanelAjoutRegate();

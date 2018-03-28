@@ -24,7 +24,6 @@ public class LoadView {
         lr = new LancementRegate(window);
         mr = new ModifRegate(window);
 
-
     }
 
     public Window getWindow() {
@@ -54,4 +53,5 @@ public class LoadView {
     public ModifRegate getMr() {
         return mr;
     }
+   
 }

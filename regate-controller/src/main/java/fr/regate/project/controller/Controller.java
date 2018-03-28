@@ -54,7 +54,7 @@ public class Controller {
         }
     }
 
-    public void printNewRegateView() {
+    public void printAddRegateView() {
         views.getWindow().reinitContentPane();
         AjoutRegate ajoutRegate = views.getAr();
         ajoutRegate.creationPanelAjoutRegate();
@@ -62,4 +62,34 @@ public class Controller {
         ajoutRegate.creationPanelTitre("AJOUT NOUVELLE REGATE ");
         views.getWindow().revalidateContentPane();
     }
+    
+    public void printRunRegateView() {
+    	views.getWindow().reinitContentPane();
+    	runRegate.createAll();
+    	views.getWindow().revalidateContentPane();   	
+    }
+    
+    public void printAddParticipantView() {
+    	views.getWindow().reinitContentPane();
+    	AjoutParticipant ajoutParticipant = views.getAp();
+    	ajoutParticipant.createNouveauParticipant();
+    	views.getWindow().revalidateContentPane(); 
+    	
+    }
+    
+    public void printChangeRegateView() {
+    	views.getWindow().reinitContentPane();
+    	ModifRegate modifierRegate = views.getMr();
+    	modifierRegate.CreateChangeRegate();
+    	views.getWindow().revalidateContentPane();
+    }
+    
+    public void printClassementView() {
+    	views.getWindow().reinitContentPane();
+    	Classement classement = views.getCla();
+    	classement.createClassement();
+    	views.getWindow().reinitContentPane();
+    }
+    
+    
 }
