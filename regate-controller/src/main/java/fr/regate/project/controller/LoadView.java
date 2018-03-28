@@ -25,6 +25,8 @@ public class LoadView {
         mr = new ModifRegate(window);
 
         lr.createAll();
+        // Si tu décommente ap.createNouveauParticipant(); et commente lr.createAll(); tu verras le probleme que ça fais 
+        //ap.createNouveauParticipant();
     }
 
     public Window getWindow() {
