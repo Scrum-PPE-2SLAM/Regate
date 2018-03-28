@@ -19,19 +19,5 @@ public class Main {
 	    LancementRegate lr = loadView.getLr();
 		window.setVisible(true);
 		ButtonListener bl = new ButtonListener(loadView);
-		
-		
-		// Création de la connexion a la base de données, ne doit pas se situer ici
-		BddConnection BddCo = new BddConnection(URL_BDD, USER_BDD, PASSWORD_BDD);
-		RequestBdd request = new RequestBdd();
-		BddCo.Connexion();
-		try {
-			request.getListParticipant();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		BddCo.CloseConnection();
-
-		
 	}
 }

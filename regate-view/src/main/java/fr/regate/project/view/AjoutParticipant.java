@@ -20,6 +20,7 @@ public class AjoutParticipant extends JFrame
 	public AjoutParticipant(Window window)
 	{
 		this.window = window;
+		this.btnSend = new JButton("Enregistrer");
 	}
 
 	public void createNouveauParticipant()
@@ -75,7 +76,7 @@ public class AjoutParticipant extends JFrame
 		this.tfRating.setBounds(135, 173, 185, 26);
 		this.panelNewParticipant.setLayout(null);
 		
-		this.btnSend = new JButton("Enregistrer");
+
 		
 		this.btnSend.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btnSend.setBounds(150, 220, 120, 20);

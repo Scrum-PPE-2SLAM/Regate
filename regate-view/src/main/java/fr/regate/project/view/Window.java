@@ -2,11 +2,12 @@ package fr.regate.project.view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.util.ArrayList;
 
 /**
+ * Window class create write window and menu for regate application.
  * @author Léo Jullerot <professionnel@leojullerot.fr> and Thomas Galocha <thomas.galocha@hotmail.fr>
  * @version 1.1
- * Window class create write window and menu for regate application.
  */
 
 public class Window extends JFrame {
@@ -16,6 +17,25 @@ public class Window extends JFrame {
 	private int width;
 	private int length;
 	private JPanel contentPane;
+
+    private JMenuBar menuBar;
+    private JMenu mnFile;
+    private JMenuItem mntmSave;
+    private JMenuItem mntmQuit;
+    private JMenu mnRegate;
+    private JMenuItem mntmNewRegate;
+    private JMenuItem mntmModifyRegate;
+    private JMenuItem mntmDeleteRgate;
+    private JMenuItem mntmRunRgate;
+    private JMenu mnParticipants;
+    private JMenuItem mntmAddParticipant;
+    private JMenuItem mntmModifyParticipant;
+    private JMenu mnClassement;
+    private JMenuItem mntmClassementRegate;
+    private JMenuItem mntmClassementPerCatgorie;
+    private JMenu mnHelp;
+    private JMenuItem mntmCopiright;
+    private JMenuItem mntmContact;
 
     /**
      * @param name The name of window
@@ -37,71 +57,135 @@ public class Window extends JFrame {
 		reinitContentPane();
 	}
 
-	public Window getCurrentWindow() {
-		return this;
-	}
-
 	public void createMenu() {
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnFile = new JMenu("Fichier");
+		mnFile = new JMenu("Fichier");
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmSave = new JMenuItem("Enregistrer");
+		mntmSave = new JMenuItem("Enregistrer");
 		mnFile.add(mntmSave);
 		
-		JMenuItem mntmQuit = new JMenuItem("Quitter");
+		mntmQuit = new JMenuItem("Quitter");
 		mnFile.add(mntmQuit);
 		
-		JMenu mnRegate = new JMenu("Régate");
+		mnRegate = new JMenu("Régate");
 		menuBar.add(mnRegate);
 		
-		JMenuItem mntmNewRegate = new JMenuItem("Nouvelle régate");
+		mntmNewRegate = new JMenuItem("Nouvelle régate");
 		mnRegate.add(mntmNewRegate);
 		
-		JMenuItem mntmModifyRegate = new JMenuItem("Modifier régate");
+		mntmModifyRegate = new JMenuItem("Modifier régate");
 		mnRegate.add(mntmModifyRegate);
 		
-		JMenuItem mntmDeleteRgate = new JMenuItem("Supprimer régate");
+		mntmDeleteRgate = new JMenuItem("Supprimer régate");
 		mnRegate.add(mntmDeleteRgate);
 		
-		JMenuItem mntmRunRgate = new JMenuItem("Lancer régate");
+		mntmRunRgate = new JMenuItem("Lancer régate");
 		mnRegate.add(mntmRunRgate);
 		
-		JMenu mnParticipants = new JMenu("Participants");
+		mnParticipants = new JMenu("Participants");
 		menuBar.add(mnParticipants);
 		
-		JMenuItem mntmAddParticipant = new JMenuItem("Ajouter participant");
+		mntmAddParticipant = new JMenuItem("Ajouter participant");
 		mnParticipants.add(mntmAddParticipant);
 		
-		JMenuItem mntmModifyParticipant = new JMenuItem("Modifier participant");
+		mntmModifyParticipant = new JMenuItem("Modifier participant");
 		mnParticipants.add(mntmModifyParticipant);
 		
-		JMenu mnClassement = new JMenu("Classement");
-		
+		mnClassement = new JMenu("Classement");
 		menuBar.add(mnClassement);
 
-		JMenuItem mntmClassementRegate = new JMenuItem("Classement régate");
+		mntmClassementRegate = new JMenuItem("Classement régate");
 		mnClassement.add(mntmClassementRegate);
 		
-		JMenuItem mntmClassementPerCatgorie = new JMenuItem("Classement par catégorie");
+		mntmClassementPerCatgorie = new JMenuItem("Classement par catégorie");
 		mnClassement.add(mntmClassementPerCatgorie);
 		
-		JMenu mnHelp = new JMenu("Aide");
+		mnHelp = new JMenu("Aide");
 		menuBar.add(mnHelp);
 		
-		JMenuItem mntmCopiright = new JMenuItem("Copiright");
+		mntmCopiright = new JMenuItem("Copiright");
 		mnHelp.add(mntmCopiright);
 		
-		JMenuItem mntmContact = new JMenuItem("Contact");
+		mntmContact = new JMenuItem("Contact");
 		mnHelp.add(mntmContact);
 	}
 
-	private void reinitContentPane() {
+	public void reinitContentPane() {
 		contentPane.removeAll();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	}
+
+	public ArrayList<JMenuItem> getMenuItemList() {
+	    ArrayList<JMenuItem> listeMenuItem = new ArrayList<JMenuItem>();
+        listeMenuItem.add(mntmSave);
+        listeMenuItem.add(mntmQuit);
+        listeMenuItem.add(mntmNewRegate);
+        listeMenuItem.add(mntmModifyRegate);
+        listeMenuItem.add(mntmDeleteRgate);
+        listeMenuItem.add(mntmRunRgate);
+        listeMenuItem.add(mntmAddParticipant);
+        listeMenuItem.add(mntmModifyParticipant);
+        listeMenuItem.add(mntmClassementRegate);
+        listeMenuItem.add(mntmClassementPerCatgorie);
+        listeMenuItem.add(mntmCopiright);
+        listeMenuItem.add(mntmContact);
+	    return listeMenuItem;
+    }
+
+    public JMenuItem getMntmSave() {
+        return mntmSave;
+    }
+
+    public JMenuItem getMntmQuit() {
+        return mntmQuit;
+    }
+
+    public JMenuItem getMntmNewRegate() {
+        return mntmNewRegate;
+    }
+
+    public JMenuItem getMntmModifyRegate() {
+        return mntmModifyRegate;
+    }
+
+    public JMenuItem getMntmDeleteRgate() {
+        return mntmDeleteRgate;
+    }
+
+    public JMenuItem getMntmRunRgate() {
+        return mntmRunRgate;
+    }
+
+    public JMenuItem getMntmAddParticipant() {
+        return mntmAddParticipant;
+    }
+
+    public JMenuItem getMntmModifyParticipant() {
+        return mntmModifyParticipant;
+    }
+
+    public JMenuItem getMntmClassementRegate() {
+        return mntmClassementRegate;
+    }
+
+    public JMenuItem getMntmClassementPerCatgorie() {
+        return mntmClassementPerCatgorie;
+    }
+
+    public JMenuItem getMntmCopiright() {
+        return mntmCopiright;
+    }
+
+    public JMenuItem getMntmContact() {
+        return mntmContact;
+    }
+
+    public void revalidateContentPane() {
+	    contentPane.revalidate();
+    }
 }

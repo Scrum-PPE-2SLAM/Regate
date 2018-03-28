@@ -1,18 +1,19 @@
 package fr.regate.project.controller;
 
-import fr.regate.project.view.LancementRegate;
+import fr.regate.project.view.*;
 
 import javax.swing.*;
 
 public class Controller {
     private DTimer chrono;
     private LancementRegate runRegate;
+    LoadView views;
 
     public Controller(LoadView views) {
         chrono = new DTimer(views.getLr());
         runRegate = views.getLr();
+        this.views = views;
     }
-
 
     public void runRegRunChrono() {
         if (chrono.isRunning()) {
@@ -51,5 +52,14 @@ public class Controller {
         }else {
             runRegate.reinitTab();
         }
+    }
+
+    public void printNewRegateView() {
+        views.getWindow().reinitContentPane();
+        AjoutRegate ajoutRegate = views.getAr();
+        ajoutRegate.creationPanelAjoutRegate();
+        ajoutRegate.creationPanelParticipants();
+        ajoutRegate.creationPanelTitre("AJOUT NOUVELLE REGATE ");
+        views.getWindow().revalidateContentPane();
     }
 }

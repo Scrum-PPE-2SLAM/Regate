@@ -23,6 +23,10 @@ public class LancementRegate extends JFrame
     public LancementRegate(Window window)
     {
         this.window = window;
+        this.btnStart = new JButton("DEPART");
+        this.btnSelect = new JButton("Valider");
+        this.btnEnd = new JButton("FIN");
+        this.btnReinit = new JButton("Reinitialiser");
     }
 
     public void createAll()
@@ -47,8 +51,6 @@ public class LancementRegate extends JFrame
         JComboBox<String> cboSelRegate = new JComboBox<String>();
         cboSelRegate.setBounds(383, 11, 161, 20);
         panelSelRegate.add(cboSelRegate);
-
-        btnSelect = new JButton("Valider");
 
         btnSelect.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnSelect.setBounds(550, 11, 100, 20);
@@ -120,13 +122,13 @@ public class LancementRegate extends JFrame
         panelChrono.setLayout(null);
         this.window.add(panelChrono);
 
-        btnEnd = new JButton("FIN");
+
 
         btnEnd.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnEnd.setBounds(272, 42, 88, 59);
         panelChrono.add(btnEnd);
 
-        btnReinit = new JButton("Reinitialiser");
+
 
         btnReinit.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnReinit.setBounds(171, 112, 189, 23);
@@ -138,7 +140,7 @@ public class LancementRegate extends JFrame
         this.lblChrono.setBounds(10, 42, 171, 76);
         panelChrono.add(lblChrono);
 
-        btnStart = new JButton("DEPART");
+
         btnStart.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnStart.setBounds(174, 42, 88, 59);
         panelChrono.add(btnStart);
