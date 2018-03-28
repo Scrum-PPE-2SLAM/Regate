@@ -13,14 +13,18 @@ public class ButtonListener implements ActionListener {
     private LancementRegate runRegate;
     private ModifRegate mr;
     private Controller controller;
+    private Window window;
 
     private final JButton RUNREGATE_BTN_END;
     private final JButton RUNREGATE_BTN_VALIDATE;
     private final JButton RUNREGATE_BTN_START;
     private final JButton RUNREGATE_BTN_REINIT;
 
+    private final JMenuItem MENU_ITEM_NEWREGATE;
+
 
     public ButtonListener(LoadView views) {
+        window = views.getWindow();
         ap = views.getAp();
         ar = views.getAr();
         cla = views.getCla();
@@ -33,6 +37,11 @@ public class ButtonListener implements ActionListener {
         RUNREGATE_BTN_VALIDATE = runRegate.getBtnSelect();
         RUNREGATE_BTN_REINIT = runRegate.getBtnReinit();
 
+        MENU_ITEM_NEWREGATE = window.getMntmNewRegate();
+
+
+
+
         this.listeners();
     }
 
@@ -40,6 +49,12 @@ public class ButtonListener implements ActionListener {
         for (int i = 0; i < runRegate.getAllBtn().size(); i++) {
             runRegate.getAllBtn().get(i).addActionListener(this);
         }
+
+        for (int i = 0; i < window.getMenuItemList().size(); i++) {
+            window.getMenuItemList().get(i).addActionListener(this);
+        }
+
+        ap.getBtnSend().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -51,6 +66,8 @@ public class ButtonListener implements ActionListener {
             controller.runRegRunChrono();
         }else if (e.getSource() == RUNREGATE_BTN_REINIT) {
             controller.runRegReinitChrono();
+        }else if (e.getSource() == MENU_ITEM_NEWREGATE) {
+            controller.printNewRegateView();
         }
     }
 }
