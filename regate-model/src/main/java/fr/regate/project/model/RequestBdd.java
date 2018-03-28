@@ -135,14 +135,25 @@ public class RequestBdd {
 	    System.out.println("request send !");
 	}
 	
-//	public void reqLinkPartToRegate(int idParticipant, int idRegate) {
-//		 PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`classement` (`ID_PARTICIPANT`, `ID_REGATE`, `TEMPS_REEL`, `POSITION`)VALUES (?, ?, ?, ?); ");
-//		 prepare.setInt(1, idParticipant);
-//		 prepare.setInt (2, idRegate);
-//	     prepare.setString (3, null);
-//	     prepare.setInt (4, -1);
-//	 
-//	     prepare.executeUpdate();
-//	}
+	/**
+	 * Request for link participant/ship/regate in classement table 
+	 * 
+	 * @param idParticipant
+	 * @param idRegate
+	 * @param idShip
+	 * @param date
+	 * @throws SQLException
+	 */
+	public void reqLinkPartToRegate(int idParticipant, int idRegate, int idShip, Date date) throws SQLException{
+		 PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`classement` (`S_ID`, `P_ID`, `R_ID`, `I_DATE`)"
+		 		+ "VALUES (?, ?, ?, ?); ");
+		 prepare.setInt(1, idShip);
+		 prepare.setInt(2, idParticipant);
+		 prepare.setInt (3, idRegate);
+	     prepare.setDate (4, date);
+	 
+	     prepare.executeUpdate();
+	     System.out.println("Request send !");
+	}
 	
 }
