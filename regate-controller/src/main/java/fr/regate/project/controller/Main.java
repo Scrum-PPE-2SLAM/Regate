@@ -27,7 +27,6 @@ public class Main {
 		
 		try {
 			request.getListParticipant();
-			request.reqAddParticipant("Jullerot", "Léo", "060606", "leo.jullerot@gmail.com");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

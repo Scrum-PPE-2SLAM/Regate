@@ -11,9 +11,11 @@ public class RequestBdd {
 
 	private ArrayList<Participant> listParticipant = new ArrayList<Participant>();
 	private ArrayList<Regate> listRegate = new ArrayList<Regate>();
+	private ArrayList<Ship> listShip = new ArrayList<Ship>();
 	
 	
 	/**
+	 * Récupère la liste des participants inscris dans la bdd
 	 * 
 	 * @return liste de tout les participants
 	 * @throws SQLException
@@ -31,6 +33,7 @@ public class RequestBdd {
 	}
 
 	/**
+	 * Récupère la lise des régates dans la bdd
 	 * 
 	 * @return liste des différentes régates
 	 * @throws SQLException
@@ -47,7 +50,32 @@ public class RequestBdd {
 		return listRegate;
 	}
 	
+	/**
+	 * Récupère la liste des bateaux dans la bdd
+	 * 
+	 * @return ArrayList<Ship> 
+	 * @throws SQLException
+	 */
+	public ArrayList<Ship> getListShip() throws SQLException {
+		String requestGetAllShip = "SELECT * FROM ship";
+		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetAllShip));
+		while(BddConnection.getRs().next()) {
+			Ship ship = new Ship(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2), BddConnection.getRs().getInt(3), BddConnection.getRs().getInt(4));
+			
+			listShip.add(ship);
+		}
+		return listShip;
+	}
 	
+	/**
+	 * Ajout d'un participant dans la base de données 
+	 * 
+	 * @param name
+	 * @param firstName
+	 * @param phone
+	 * @param email
+	 * @throws SQLException
+	 */
 	public void reqAddParticipant(String name, String firstName, String phone, String email) throws SQLException {
 		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`participant` (`P_NAME`, `P_FIRSTNAME`, `P_PHONE`, `P_EMAIL`)"
 				+ "VALUES (?, ?, ?, ?); ");
@@ -60,6 +88,18 @@ public class RequestBdd {
 	    System.out.println("request send !");
 	}
 	
+	
+	/**
+	 * Ajout d'une regate dans la base de données
+	 * 
+	 * @param nameRegate
+	 * @param dateRegate
+	 * @param startPlace
+	 * @param endPlace
+	 * @param distance
+	 * @param status
+	 * @throws SQLException
+	 */
 	public void reqAddRegate(String nameRegate, Date dateRegate, String startPlace, String endPlace, int distance, int status) throws SQLException {
 		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`regate` (`R_NAME`, `R_DATE `, `R_STARTPLACE`, `R_ENDPLACE`, `R_DISTANCE`, `R_STATUS`)"
 				+ "VALUES (?, ?, ?, ?, ?, ?); ");
@@ -74,6 +114,15 @@ public class RequestBdd {
 	    System.out.println("request send !");
 	}
 	
+	/**
+	 * Ajout d'un bateau dans la base de données 
+	 * 
+	 * @param nameShip
+	 * @param dateRegate
+	 * @param Category
+	 * @param rating
+	 * @throws SQLException
+	 */
 	public void reqAddShip(String nameShip, Date dateRegate, int Category, int rating) throws SQLException {
 		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`ship` (`S_NAME`, `S_CATEGORY `, `S_RATING`)"
 				+ "VALUES (?, ?, ?); ");
