@@ -53,6 +53,7 @@ public class Window extends JFrame {
 		setTitle(name);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, width, length);
+		setResizable(false);
 		contentPane = new JPanel();
 		reinitContentPane();
 	}

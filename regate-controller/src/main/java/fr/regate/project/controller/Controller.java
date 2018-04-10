@@ -1,6 +1,9 @@
 package fr.regate.project.controller;
 
 import fr.regate.project.view.*;
+import fr.regate.project.model.*;
+
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -8,6 +11,7 @@ public class Controller {
     private DTimer chrono;
     private LancementRegate runRegate;
     LoadView views;
+    
 
     public Controller(LoadView views) {
         chrono = new DTimer(views.showRunRegateView());
@@ -82,5 +86,28 @@ public class Controller {
                 views.showModifRegateView();
                 break;
         }
+    }
+    
+    public void bddAddParticipant() {
+    	String nameParticipant = views.getAp().getNameParticipant();
+    	String firstNameParticipant = views.getAp().getFirstName();
+    	String phoneNumber = views.getAp().getPhoneNumber();
+    	String email = views.getAp().getEmail();
+    	
+    	try {
+			RequestBdd.reqAddParticipant(nameParticipant, firstNameParticipant, phoneNumber, email);
+			JOptionPane.showMessageDialog(null, nameParticipant + " " + firstNameParticipant + " à bien été ajouté a la base de données", "information", JOptionPane.INFORMATION_MESSAGE);
+			
+			// Refresh all the text field
+			views.getAp().setNameParticipant("");
+			views.getAp().setFirstName("");
+			views.getAp().setPhoneNumber("");
+			views.getAp().setEmail("");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
     }
 }
