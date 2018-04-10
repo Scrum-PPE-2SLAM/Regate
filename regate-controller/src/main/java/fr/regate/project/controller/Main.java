@@ -16,7 +16,10 @@ public class Main {
 
 	    LoadView loadView = new LoadView();
 	    Window window = loadView.getWindow();
-		window.setVisible(true);
 		ButtonListener bl = new ButtonListener(loadView);
+		loadView.showAccueilView();
+		window.setVisible(true);
+
+
 	}
 }
