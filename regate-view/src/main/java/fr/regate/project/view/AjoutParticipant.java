@@ -1,7 +1,6 @@
 package fr.regate.project.view;
 
 import java.awt.Font;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,8 +12,8 @@ import javax.swing.SwingConstants;
 public class AjoutParticipant extends JFrame
 {
 	private static final long serialVersionUID = 1L;
-	private JLabel lblNameParticipant, lblFirstNameParticipant, lblPhoneNumber, lblEmail, lblRating, lblTitle;
-	private JTextField tfNameParticipant, tfFirstNameParticipant, tfPhoneNumber, tfEmail, tfRating;
+	private JLabel lblNameParticipant, lblFirstNameParticipant, lblPhoneNumber, lblEmail, lblTitle;
+	private JTextField tfNameParticipant, tfFirstNameParticipant, tfPhoneNumber, tfEmail;
 	private Window window;
 	private JPanel panelNewParticipant, panelTitle;
 	private JButton btnSend;
@@ -110,6 +109,22 @@ public class AjoutParticipant extends JFrame
 	
 	public String getEmail() {
 		return tfEmail.getText();
+	}
+	
+	public void setNameParticipant(String nameParticipant) {
+		tfNameParticipant.setText(nameParticipant);
+	}
+	
+	public void setFirstName(String firstName) {
+		tfFirstNameParticipant.setText(firstName);
+	}
+	
+	public void setPhoneNumber(String phoneNumber) {
+		tfPhoneNumber.setText(phoneNumber);
+	}
+	
+	public void setEmail(String email) {
+		tfEmail.setText(email);
 	}
 }
 

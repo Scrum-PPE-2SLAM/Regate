@@ -127,6 +127,13 @@ public class Controller {
     	
     	try {
 			RequestBdd.reqAddParticipant(nameParticipant, firstNameParticipant, phoneNumber, email);
+			JOptionPane.showMessageDialog(null, nameParticipant + " " + firstNameParticipant + " à bien été ajouté a la base de données", "information", JOptionPane.INFORMATION_MESSAGE);
+			
+			// Refresh all the text field
+			views.getAp().setNameParticipant("");
+			views.getAp().setFirstName("");
+			views.getAp().setPhoneNumber("");
+			views.getAp().setEmail("");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
