@@ -2,8 +2,6 @@ package fr.regate.project.controller;
 
 import fr.regate.project.view.*;
 
-import java.util.Hashtable;
-
 public class LoadView {
     private Window window;
     private Accueil accueil;
@@ -32,6 +30,50 @@ public class LoadView {
         return window;
     }
 
+    public Accueil showAccueilView() {
+        window.reinitContentPane();
+        accueil.createAccueil();
+        window.revalidateContentPane();
+        return accueil;
+    }
+
+    public AjoutParticipant showAddParticipantView() {
+        window.reinitContentPane();
+        ap.createNouveauParticipant();
+        window.revalidateContentPane();
+        return ap;
+    }
+
+    public AjoutRegate showAddRegateView() {
+        window.reinitContentPane();
+        ar.creationPanelAjoutRegate();
+        ar.creationPanelParticipants();
+        ar.creationPanelTitre("AJOUT NOUVELLE REGATE ");
+        window.revalidateContentPane();
+        return ar;
+    }
+
+    public Classement showclassementView() {
+        window.reinitContentPane();
+        cla.createClassement();
+        window.reinitContentPane();
+        return cla;
+    }
+
+    public LancementRegate showRunRegateView() {
+        window.reinitContentPane();
+        lr.createAll();
+        window.revalidateContentPane();
+        return lr;
+    }
+
+    public ModifRegate showModifRegateView() {
+        window.reinitContentPane();
+        mr.CreateChangeRegate();
+        window.revalidateContentPane();
+        return mr;
+    }
+
     public Accueil getAccueil() {
         return accueil;
     }
@@ -49,27 +91,10 @@ public class LoadView {
     }
 
     public LancementRegate getLr() {
-        window.reinitContentPane();
-        lr.createAll();
-        window.revalidateContentPane();
         return lr;
-    }
-
-    public Hashtable getAllViews() {
-        Hashtable listeView=new Hashtable();
-        listeView.put("Window",window);
-        listeView.put("Accueil",accueil);
-        listeView.put("AddParticipant",ap);
-        listeView.put("AddRegate",ar);
-        listeView.put("Classement",cla);
-        listeView.put("RunRegate",lr);
-        listeView.put("ModifRegate",mr);
-
-        return listeView;
     }
 
     public ModifRegate getMr() {
         return mr;
     }
-   
 }

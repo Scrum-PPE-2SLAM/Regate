@@ -10,8 +10,8 @@ public class Controller {
     LoadView views;
 
     public Controller(LoadView views) {
-        chrono = new DTimer(views.getLr());
-        runRegate = views.getLr();
+        chrono = new DTimer(views.showRunRegateView());
+        runRegate = views.showRunRegateView();
         this.views = views;
     }
 
@@ -54,15 +54,6 @@ public class Controller {
         }
     }
 
-    public void printAddRegateView() {
-        views.getWindow().reinitContentPane();
-        AjoutRegate ajoutRegate = views.getAr();
-        ajoutRegate.creationPanelAjoutRegate();
-        ajoutRegate.creationPanelParticipants();
-        ajoutRegate.creationPanelTitre("AJOUT NOUVELLE REGATE ");
-        views.getWindow().revalidateContentPane();
-    }
-
     private enum ViewName {
         ACCUEIL,
         ADD_PARTICIPANT,
@@ -75,45 +66,21 @@ public class Controller {
     public void showView(String viewName) {
         switch (ViewName.valueOf(viewName)) {
             case ACCUEIL:
-                views.getAccueil();
+                views.showAccueilView();
             case ADD_PARTICIPANT:
-                views.getAp();
+                views.showAddParticipantView();
                 break;
             case ADD_REGATE:
-                views.getAr();
+                views.showAddRegateView();
                 break;
             case CLASSEMENT:
-                views.getCla();
+                views.showclassementView();
             case RUN_REGATE:
-                views.getLr();
+                views.showRunRegateView();
                 break;
             case MODIF_REGATE:
-                views.getMr();
+                views.showModifRegateView();
                 break;
         }
     }
-    
-    public void printAddParticipantView() {
-    	views.getWindow().reinitContentPane();
-    	AjoutParticipant ajoutParticipant = views.getAp();
-    	ajoutParticipant.createNouveauParticipant();
-    	views.getWindow().revalidateContentPane(); 
-    	
-    }
-    
-    public void printChangeRegateView() {
-    	views.getWindow().reinitContentPane();
-    	ModifRegate modifierRegate = views.getMr();
-    	modifierRegate.CreateChangeRegate();
-    	views.getWindow().revalidateContentPane();
-    }
-    
-    public void printClassementView() {
-    	views.getWindow().reinitContentPane();
-    	Classement classement = views.getCla();
-    	classement.createClassement();
-    	views.getWindow().reinitContentPane();
-    }
-    
-    
 }
