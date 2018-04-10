@@ -16,7 +16,6 @@ public class Main {
 
 	    LoadView loadView = new LoadView();
 	    Window window = loadView.getWindow();
-	    LancementRegate lr = loadView.getLr();
 		window.setVisible(true);
 		ButtonListener bl = new ButtonListener(loadView);
 	}

@@ -62,11 +62,35 @@ public class Controller {
         ajoutRegate.creationPanelTitre("AJOUT NOUVELLE REGATE ");
         views.getWindow().revalidateContentPane();
     }
-    
-    public void printRunRegateView() {
-    	views.getWindow().reinitContentPane();
-    	runRegate.createAll();
-    	views.getWindow().revalidateContentPane();   	
+
+    private enum ViewName {
+        ACCUEIL,
+        ADD_PARTICIPANT,
+        ADD_REGATE,
+        CLASSEMENT,
+        RUN_REGATE,
+        MODIF_REGATE;
+    }
+
+    public void showView(String viewName) {
+        switch (ViewName.valueOf(viewName)) {
+            case ACCUEIL:
+                views.getAccueil();
+            case ADD_PARTICIPANT:
+                views.getAp();
+                break;
+            case ADD_REGATE:
+                views.getAr();
+                break;
+            case CLASSEMENT:
+                views.getCla();
+            case RUN_REGATE:
+                views.getLr();
+                break;
+            case MODIF_REGATE:
+                views.getMr();
+                break;
+        }
     }
     
     public void printAddParticipantView() {

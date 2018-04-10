@@ -29,12 +29,12 @@ public class ButtonListener implements ActionListener {
 
 
     public ButtonListener(LoadView views) {
-        window = views.getWindow();
-        ap = views.getAp();
-        ar = views.getAr();
-        cla = views.getCla();
-        this.runRegate = views.getLr();
-        mr = views.getMr();
+        window = (Window) views.getAllViews().get("Window");
+        ap = (AjoutParticipant) views.getAllViews().get("AddParticipant");
+        ar = (AjoutRegate) views.getAllViews().get("AddRegate");
+        cla = (Classement) views.getAllViews().get("Classement");
+        runRegate = (LancementRegate) views.getAllViews().get("RunRegate");
+        mr = (ModifRegate) views.getAllViews().get("ModifRegate");
         controller = new Controller(views);
 
         RUNREGATE_BTN_END = runRegate.getBtnEnd();
@@ -75,7 +75,7 @@ public class ButtonListener implements ActionListener {
         }else if (e.getSource() == MENU_ITEM_ADDREGATE) {
             controller.printAddRegateView();
         }else if (e.getSource() == MENU_ITEM_RUNREGATE) {
-        	controller.printRunRegateView();
+        	controller.showView("RUN_REGATE");
         }else if (e.getSource() == MENU_ITEM_ADDPARTICIPANT) {
         	controller.printAddParticipantView();
         }else if (e.getSource() == MENU_ITEM_CHANGEREGATE) {
