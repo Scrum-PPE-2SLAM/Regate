@@ -1,6 +1,9 @@
 package fr.regate.project.controller;
 
 import fr.regate.project.view.*;
+import fr.regate.project.model.*;
+
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -8,6 +11,7 @@ public class Controller {
     private DTimer chrono;
     private LancementRegate runRegate;
     LoadView views;
+    
 
     public Controller(LoadView views) {
         chrono = new DTimer(views.getLr());
@@ -115,5 +119,20 @@ public class Controller {
     	views.getWindow().reinitContentPane();
     }
     
+    public void bddAddParticipant() {
+    	String nameParticipant = views.getAp().getNameParticipant();
+    	String firstNameParticipant = views.getAp().getFirstName();
+    	String phoneNumber = views.getAp().getPhoneNumber();
+    	String email = views.getAp().getEmail();
+    	
+    	try {
+			RequestBdd.reqAddParticipant(nameParticipant, firstNameParticipant, phoneNumber, email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    }
     
 }

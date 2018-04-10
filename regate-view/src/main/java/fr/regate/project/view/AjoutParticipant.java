@@ -1,6 +1,8 @@
 package fr.regate.project.view;
 
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,8 +13,8 @@ import javax.swing.SwingConstants;
 public class AjoutParticipant extends JFrame
 {
 	private static final long serialVersionUID = 1L;
-	private JLabel lblNameParticipant, lblFirstNameParticipant, lblNameShip, lblCategoryShip, lblRating, lblTitle;
-	private JTextField tfNameParticipant, tfFirstNameParticipant, tfNameShip, tfCategoryShip, tfRating;
+	private JLabel lblNameParticipant, lblFirstNameParticipant, lblPhoneNumber, lblEmail, lblRating, lblTitle;
+	private JTextField tfNameParticipant, tfFirstNameParticipant, tfPhoneNumber, tfEmail, tfRating;
 	private Window window;
 	private JPanel panelNewParticipant, panelTitle;
 	private JButton btnSend;
@@ -41,19 +43,17 @@ public class AjoutParticipant extends JFrame
 		this.window.add(panelNewParticipant);
 		
 		this.lblNameParticipant = new JLabel("Nom du participant: ");
-		this.lblNameParticipant.setBounds(29, 21, 96, 43);
+		this.lblNameParticipant.setBounds(20, 21, 150, 43);
 		
 		this.lblFirstNameParticipant = new JLabel("Prénom : ");
-		this.lblFirstNameParticipant.setBounds(87, 52, 38, 43);
+		this.lblFirstNameParticipant.setBounds(20, 52, 100, 43);
 		
-		this.lblNameShip = new JLabel("Nom du voilier: ");
-		this.lblNameShip.setBounds(46, 92, 79, 43);
+		this.lblPhoneNumber = new JLabel("Téléphone : ");
+		this.lblPhoneNumber.setBounds(20, 92, 100, 43);
 		
-		this.lblCategoryShip = new JLabel("Catgorie du voilier : ");
-		this.lblCategoryShip.setBounds(51, 130, 74, 43);
+		this.lblEmail = new JLabel("Email : ");
+		this.lblEmail.setBounds(20, 130, 150, 43);
 		
-		this.lblRating = new JLabel("Rating : ");
-		this.lblRating.setBounds(68, 165, 57, 43);
 		
 		this.tfNameParticipant = new JTextField(15); 
 		this.tfNameParticipant.setEditable(true);
@@ -63,17 +63,14 @@ public class AjoutParticipant extends JFrame
 		this.tfFirstNameParticipant.setEditable(true);
 		this.tfFirstNameParticipant.setBounds(135, 67, 185, 26);
 		
-		this.tfNameShip = new JTextField(15);
-		this.tfNameShip.setEditable(true);
-		this.tfNameShip.setBounds(135, 105, 185, 26);
+		this.tfPhoneNumber = new JTextField(15);
+		this.tfPhoneNumber.setEditable(true);
+		this.tfPhoneNumber.setBounds(135, 105, 185, 26);
 		
-		this.tfCategoryShip = new JTextField(15);
-		this.tfCategoryShip.setEditable(true);
-		this.tfCategoryShip.setBounds(135, 138, 185, 26);
+		this.tfEmail = new JTextField(15);
+		this.tfEmail.setEditable(true);
+		this.tfEmail.setBounds(135, 138, 185, 26);
 		
-		this.tfRating = new JTextField(15);
-		this.tfRating.setEditable(true);
-		this.tfRating.setBounds(135, 173, 185, 26);
 		this.panelNewParticipant.setLayout(null);
 		
 
@@ -88,18 +85,31 @@ public class AjoutParticipant extends JFrame
 		this.panelNewParticipant.add(lblFirstNameParticipant);
 		this.panelNewParticipant.add(tfFirstNameParticipant);
 		
-		this.panelNewParticipant.add(lblNameShip);
-		this.panelNewParticipant.add(tfNameShip);
+		this.panelNewParticipant.add(lblPhoneNumber);
+		this.panelNewParticipant.add(tfPhoneNumber);
 		
-		this.panelNewParticipant.add(lblCategoryShip);
-		this.panelNewParticipant.add(tfCategoryShip);
-		
-		this.panelNewParticipant.add(lblRating);
-		this.panelNewParticipant.add(tfRating);
+		this.panelNewParticipant.add(lblEmail);
+		this.panelNewParticipant.add(tfEmail);
 	}
 
 	public JButton getBtnSend() {
 		return btnSend;
+	}
+	
+	public String getNameParticipant() {
+		return tfNameParticipant.getText();
+	}
+	
+	public String getFirstName() {
+		return tfFirstNameParticipant.getText();
+	}
+	
+	public String getPhoneNumber() {
+		return tfPhoneNumber.getText();
+	}
+	
+	public String getEmail() {
+		return tfEmail.getText();
 	}
 }
 

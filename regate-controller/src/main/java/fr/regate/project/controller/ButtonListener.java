@@ -19,6 +19,7 @@ public class ButtonListener implements ActionListener {
     private final JButton RUNREGATE_BTN_VALIDATE;
     private final JButton RUNREGATE_BTN_START;
     private final JButton RUNREGATE_BTN_REINIT;
+    private final JButton ADDPARTICIPANT_BTN_SEND;
 
     private final JMenuItem MENU_ITEM_ADDREGATE;
     private final JMenuItem MENU_ITEM_RUNREGATE;
@@ -47,6 +48,8 @@ public class ButtonListener implements ActionListener {
         MENU_ITEM_ADDPARTICIPANT = window.getMntmAddParticipant();
         MENU_ITEM_CHANGEREGATE = window.getMntmModifyRegate();
         MENU_ITEM_CLASSEMENT = window.getMntmClassementPerCatgorie();
+        
+        ADDPARTICIPANT_BTN_SEND = ap.getBtnSend();
         
         this.listeners();
     }
@@ -82,6 +85,10 @@ public class ButtonListener implements ActionListener {
         	controller.printChangeRegateView();
         }else if (e.getSource() == MENU_ITEM_CLASSEMENT) {
         	controller.printClassementView();
+        }
+        
+        else if (e.getSource() == ADDPARTICIPANT_BTN_SEND) {
+        	controller.bddAddParticipant();
         }
     }
 }

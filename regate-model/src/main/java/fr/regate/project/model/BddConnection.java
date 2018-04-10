@@ -51,14 +51,16 @@ public class BddConnection {
 		BddConnection.rs = rs;
 	}
 
-	public void Connexion(){
+	public boolean Connexion(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(url,user,password);
             System.out.println("connection established");
             st = con.createStatement();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 

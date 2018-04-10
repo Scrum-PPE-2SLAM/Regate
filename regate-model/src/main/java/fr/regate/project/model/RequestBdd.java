@@ -2,7 +2,6 @@ package fr.regate.project.model;
 
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import java.sql.*;
 
 
@@ -76,7 +75,7 @@ public class RequestBdd {
 	 * @param email
 	 * @throws SQLException
 	 */
-	public void reqAddParticipant(String name, String firstName, String phone, String email) throws SQLException {
+	public static void reqAddParticipant(String name, String firstName, String phone, String email) throws SQLException {
 		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`participant` (`P_NAME`, `P_FIRSTNAME`, `P_PHONE`, `P_EMAIL`)"
 				+ "VALUES (?, ?, ?, ?); ");
 		prepare.setString (1, name);
