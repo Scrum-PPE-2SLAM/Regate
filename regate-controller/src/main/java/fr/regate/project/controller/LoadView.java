@@ -1,11 +1,14 @@
 package fr.regate.project.controller;
 
+import java.sql.SQLException;
+
+import fr.regate.project.model.RequestBdd;
 import fr.regate.project.view.*;
 
 public class LoadView {
     private Window window;
     private Accueil accueil;
-    private AjoutParticipant ap;
+    private AjoutParticipant ap, mp;
     private AjoutRegate ar;
     private Classement cla;
     private LancementRegate lr;
@@ -19,11 +22,11 @@ public class LoadView {
 
         accueil = new Accueil(window);
         ap = new AjoutParticipant(window);
+        mp = new AjoutParticipant(window);
         ar = new AjoutRegate(window);
         cla = new Classement(window);
         lr = new LancementRegate(window);
         mr = new ModifRegate(window);
-
     }
 
     public Window getWindow() {
@@ -39,7 +42,21 @@ public class LoadView {
 
     public AjoutParticipant showAddParticipantView() {
         window.reinitContentPane();
-        ap.createNouveauParticipant();
+        ap.createParticipant("AJOUT PARTICIPANT", "Enregistrer");
+        window.revalidateContentPane();
+        return ap;
+    }
+    
+    public AjoutParticipant showModifParticipantView() {
+        window.reinitContentPane();
+        mp.createParticipant("MODIFIER PARTICIPANT", "Modifier");
+        try {
+			mp.setCboSelParticipant(Controller.getAllNameParticipants());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        mp.modifParticipant();
         window.revalidateContentPane();
         return ap;
     }
@@ -48,7 +65,7 @@ public class LoadView {
         window.reinitContentPane();
         ar.creationPanelAjoutRegate();
         ar.creationPanelParticipants();
-        ar.creationPanelTitre("AJOUT NOUVELLE REGATE ");
+        ar.creationPanelTitre("AJOUT NOUVELLE REGATE");
         window.revalidateContentPane();
         return ar;
     }

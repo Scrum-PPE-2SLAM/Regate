@@ -8,7 +8,7 @@ import java.sql.*;
 public class RequestBdd {
 
 
-	private ArrayList<Participant> listParticipant = new ArrayList<Participant>();
+	private static ArrayList<Participant> listParticipant = new ArrayList<Participant>();
 	private ArrayList<Regate> listRegate = new ArrayList<Regate>();
 	private ArrayList<Ship> listShip = new ArrayList<Ship>();
 	
@@ -19,7 +19,7 @@ public class RequestBdd {
 	 * @return liste de tout les participants
 	 * @throws SQLException
 	 */
-	public ArrayList<Participant> getListParticipant() throws SQLException{
+	public static ArrayList<Participant> getListParticipant() throws SQLException{
 		String requestGetAllParticipant = "SELECT * FROM participant";
 		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetAllParticipant));
 		while(BddConnection.getRs().next()) {

@@ -4,6 +4,7 @@ import fr.regate.project.view.*;
 import fr.regate.project.model.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -61,6 +62,7 @@ public class Controller {
     private enum ViewName {
         ACCUEIL,
         ADD_PARTICIPANT,
+        MODIF_PARTICIPANT,
         ADD_REGATE,
         CLASSEMENT,
         RUN_REGATE,
@@ -74,6 +76,9 @@ public class Controller {
             case ADD_PARTICIPANT:
                 views.showAddParticipantView();
                 break;
+            case MODIF_PARTICIPANT :
+            	views.showModifParticipantView();
+            	break;
             case ADD_REGATE:
                 views.showAddRegateView();
                 break;
@@ -107,7 +112,14 @@ public class Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	
+    }
+    
+    public static String[] getAllNameParticipants() throws SQLException {
+    	ArrayList<String> mesParticipants = new ArrayList<String>();
+    	for(Participant monParticipant : RequestBdd.getListParticipant()) {
+    		mesParticipants.add(monParticipant.getIdParticipant() +" : " +monParticipant.getName() +" " + monParticipant.getFirstName());
+    	}
+    	String[] stringArray = mesParticipants.toArray(new String[0]);
+    	return stringArray;
     }
 }

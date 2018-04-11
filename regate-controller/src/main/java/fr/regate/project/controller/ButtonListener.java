@@ -19,6 +19,7 @@ public class ButtonListener implements ActionListener {
     private final JMenuItem MENU_ITEM_ADDPARTICIPANT;
     private final JMenuItem MENU_ITEM_CHANGEREGATE;
     private final JMenuItem MENU_ITEM_CLASSEMENT;
+    private final JMenuItem MENU_ITEM_MODIFYPARTICIPANT;
     
 
 
@@ -34,6 +35,7 @@ public class ButtonListener implements ActionListener {
         MENU_ITEM_ADDREGATE = views.getWindow().getMntmNewRegate();
         MENU_ITEM_RUNREGATE = views.getWindow().getMntmRunRegate();
         MENU_ITEM_ADDPARTICIPANT = views.getWindow().getMntmAddParticipant();
+        MENU_ITEM_MODIFYPARTICIPANT = views.getWindow().getMntmModifyParticipant();
         MENU_ITEM_CHANGEREGATE = views.getWindow().getMntmModifyRegate();
         MENU_ITEM_CLASSEMENT = views.getWindow().getMntmClassementPerCatgorie();
         
@@ -69,6 +71,8 @@ public class ButtonListener implements ActionListener {
         	controller.showView("RUN_REGATE");
         }else if (e.getSource() == MENU_ITEM_ADDPARTICIPANT) {
         	controller.showView("ADD_PARTICIPANT");
+        }else if (e.getSource() == MENU_ITEM_MODIFYPARTICIPANT) {
+        	controller.showView("MODIF_PARTICIPANT");
         }else if (e.getSource() == MENU_ITEM_CHANGEREGATE) {
             controller.showView("MODIF_REGATE");
         }else if (e.getSource() == MENU_ITEM_CLASSEMENT) {
