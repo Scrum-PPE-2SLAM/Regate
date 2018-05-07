@@ -96,7 +96,7 @@ public class Controller {
                 views.showRunRegateView();
                 break;
             case MODIF_REGATE:
-                views.showModifRegateView();
+                views.showModifRegateView(this.getAllNameParticipants(), this.getAllShip(), this.getAllRegate());
                 break;
         }
     }
@@ -186,6 +186,18 @@ public class Controller {
     	return StringArray;
     }
     
+    public String[] getAllRegate() {
+    	this.refreshManagerInfo();
+    	ArrayList<String> mesRegates = new ArrayList<String>();
+    	for (Regate maRegate : manager.getAllRegates()) {
+    		if(maRegate.getStatus() < 1) {    			
+    			mesRegates.add(maRegate.getIdRegate() + " : " + maRegate.getNameRegate());
+    		}
+    	}
+    	String[] StringArray = mesRegates.toArray(new String[0]);
+    	return StringArray;
+    }
+    
     public void ajoutParticipantTable(){
 		Participant monParticipant;
     	Ship monBateau;
@@ -208,7 +220,7 @@ public class Controller {
 				views.getAr().setTableParticipants(monParticipant.getName(), pos, 0);
 				views.getAr().setTableParticipants(monParticipant.getFirstName(), pos, 1);
 				views.getAr().setTableParticipants(monBateau.getNameShip(), pos, 2);
-				views.getAr().setTableParticipants(String.valueOf(monBateau.getCategoryShip()), pos, 3);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getCategoryShip() ), pos, 3);
 				views.getAr().setTableParticipants(String.valueOf(monBateau.getRating()), pos, 4);
 			}else {
 				JOptionPane.showMessageDialog(null, monParticipant.getName() +" "+ monParticipant.getFirstName() + " est déjà inscrit !", "information", JOptionPane.INFORMATION_MESSAGE);

@@ -59,9 +59,7 @@ public class LoadView {
     public AjoutParticipant showModifParticipantView(String[] listAllParticipant) {
         window.reinitContentPane();
         mp.createParticipant("MODIFIER PARTICIPANT", "Modifier");
-
         mp.setCboSelParticipant(listAllParticipant);
-
         mp.modifParticipant();
         window.revalidateContentPane();
         return ap;
@@ -77,7 +75,18 @@ public class LoadView {
         window.revalidateContentPane();
         return ar;
     }
-
+    
+    public ModifRegate showModifRegateView(String[] listAllParticipant, String[] listAllShip, String[] listeRegate) {
+        window.reinitContentPane();
+        ar.creationPanelAjoutRegate();
+        ar.setCboSelParticipant(listAllParticipant);
+        ar.setCboSelShip(listAllShip);
+        ar.creationPanelParticipants();
+        ar.creationPanelTitre("MODIFIER REGATE");
+        ar.ajoutCombo(listeRegate);
+        window.revalidateContentPane();
+        return mr;
+    }
    
     public Classement showclassementView() {
         window.reinitContentPane();
@@ -93,12 +102,7 @@ public class LoadView {
         return lr;
     }
 
-    public ModifRegate showModifRegateView() {
-        window.reinitContentPane();
-        mr.CreateChangeRegate();
-        window.revalidateContentPane();
-        return mr;
-    }
+   
 
     public Accueil getAccueil() {
         return accueil;

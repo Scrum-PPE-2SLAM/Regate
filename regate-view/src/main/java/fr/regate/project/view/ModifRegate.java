@@ -18,13 +18,13 @@ public class ModifRegate extends JFrame
 		this.window = window;
 	}
 	
-	public void CreateChangeRegate() 
-	{
-		this.addRegate = new AjoutRegate(window);
-		this.addRegate.creationPanelAjoutRegate();
-		this.addRegate.creationPanelParticipants();
-		this.addRegate.creationPanelTitre("MODIFICATION REGATE");
-	}
+	//public void CreateChangeRegate() 
+	//{
+	//	this.addRegate = new AjoutRegate(window);
+	//	this.addRegate.creationPanelTitre("MODIFICATION REGATE");
+	//	this.addRegate.creationPanelAjoutRegate();
+	//	this.addRegate.creationPanelParticipants();
+	//}
 	
 	public void ajoutCombo(String[] listeRegate) 
 	{
@@ -35,6 +35,7 @@ public class ModifRegate extends JFrame
 		this.cboSelRegate = new JComboBox<String>(listeRegate);
 		this.cboSelRegate.setBounds(383, 65, 161, 20);
 		this.addRegate.panelTitreRegate.add(cboSelRegate);
+		
 	}
 	
 }

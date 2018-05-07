@@ -25,10 +25,10 @@ public class AjoutRegate extends JFrame
 	private JLabel lblNameRegate, lblDate, lblPlaceDeparture, lblPlaceArrival, lblDistance, lblSelRegate;
 	private JTextField tfNameRegate, tfPlaceDeparture, tfPlaceArrival, tfDistance;
 	private Window window;
-	private JButton btnSend, btnAjoutParticipant;
+	private JButton btnSend, btnAjoutParticipant, btnSelRegate;
 	private JScrollPane scrollPane;
 	private JTable tableParticipants;
-	private JComboBox<String> cboSelParticipant, cboSelShip;
+	private JComboBox<String> cboSelParticipant, cboSelShip, cboSelRegate;
 
 	public AjoutRegate(Window window) 
 	{
@@ -176,6 +176,22 @@ public class AjoutRegate extends JFrame
 		this.panelTitreRegate.add(lblSelRegate);
 	}
 	
+	public void ajoutCombo(String[] listeRegate) 
+	{
+		this.lblSelRegate = new JLabel("Selectionner la régate à modifier : ");
+		this.lblSelRegate.setBounds(175, 68, 380, 14);
+		this.panelTitreRegate.add(lblSelRegate);
+		
+		this.cboSelRegate = new JComboBox<String>(listeRegate);
+		this.cboSelRegate.setBounds(383, 65, 161, 20);
+		this.panelTitreRegate.add(cboSelRegate);
+		
+		btnSelRegate = new JButton("Selectionner");
+		btnSelRegate.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnSelRegate.setBounds(550, 65, 120, 20);
+		this.panelTitreRegate.add(btnSelRegate);
+		
+	}
 	public void setCboSelParticipant(String[] value) {
 		cboSelParticipant = new JComboBox<String>(value);
 	}
