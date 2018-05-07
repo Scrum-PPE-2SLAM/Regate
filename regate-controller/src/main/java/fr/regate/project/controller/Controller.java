@@ -66,6 +66,7 @@ public class Controller {
     private enum ViewName {
         ACCUEIL,
         ADD_PARTICIPANT,
+        ADD_SHIP,
         MODIF_PARTICIPANT,
         ADD_REGATE,
         CLASSEMENT,
@@ -83,8 +84,11 @@ public class Controller {
             case MODIF_PARTICIPANT :
             	views.showModifParticipantView(this.getAllNameParticipants());
             	break;
+            case ADD_SHIP :
+            	views.showAddShipView();
+            	break;
             case ADD_REGATE:
-                views.showAddRegateView(this.getAllNameParticipants());
+                views.showAddRegateView(this.getAllNameParticipants(), this.getAllShip());
                 break;
             case CLASSEMENT:
                 views.showclassementView();
@@ -148,6 +152,20 @@ public class Controller {
     	
     }
     
+    public void bddAddShip() {
+    	String nameShip = views.getAb().getNameShip();
+    	int categoryShip = Integer.parseInt(views.getAb().getCategory());
+    	int rating = Integer.parseInt(views.getAb().getRating());
+    	
+    	try {
+			RequestBdd.reqAddShip(nameShip, categoryShip, rating);
+			JOptionPane.showMessageDialog(null,"le bateau " + nameShip + " à bien été ajouté a la base de données", "information", JOptionPane.INFORMATION_MESSAGE);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     public String[] getAllNameParticipants() {
         this.refreshManagerInfo();
     	ArrayList<String> mesParticipants = new ArrayList<String>();
@@ -158,12 +176,24 @@ public class Controller {
     	return stringArray;
     }
     
+    public String[] getAllShip() {
+    	this.refreshManagerInfo();
+    	ArrayList<String> mesBateaux = new ArrayList<String>();
+    	for (Ship monBateau : manager.getAllShip()) {
+    		mesBateaux.add(monBateau.getIdShip() + " : " + monBateau.getNameShip()); 
+    	}
+    	String[] StringArray = mesBateaux.toArray(new String[0]);
+    	return StringArray;
+    }
+    
     public void ajoutParticipantTable(){
 		Participant monParticipant;
+    	Ship monBateau;
 		Boolean verif = false;
 		if (views.getAr().getTableParticipants().getValueAt(19, 0) == null) {
 			int pos = 0;
 			monParticipant = manager.getAllParticipants().get(views.getAr().getCboSelParticipant().getSelectedIndex());
+			monBateau = manager.getAllShip().get(views.getAr().getCboSelShip().getSelectedIndex());
 			for (int i = 0; i<20; i++) {
 				if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
 					pos += 1;
@@ -177,6 +207,9 @@ public class Controller {
 			if (verif == false) {
 				views.getAr().setTableParticipants(monParticipant.getName(), pos, 0);
 				views.getAr().setTableParticipants(monParticipant.getFirstName(), pos, 1);
+				views.getAr().setTableParticipants(monBateau.getNameShip(), pos, 2);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getCategoryShip()), pos, 3);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getRating()), pos, 4);
 			}else {
 				JOptionPane.showMessageDialog(null, monParticipant.getName() +" "+ monParticipant.getFirstName() + " est déjà inscrit !", "information", JOptionPane.INFORMATION_MESSAGE);
 			}	
@@ -187,6 +220,7 @@ public class Controller {
         try {
             manager.setAllParticipants(RequestBdd.getListParticipant());
             manager.setAllRegates(RequestBdd.getListRegate());
+            manager.setAllShip(RequestBdd.getListShip());
         } catch (SQLException e) {
             e.printStackTrace();
         }

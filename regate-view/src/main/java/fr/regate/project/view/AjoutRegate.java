@@ -17,7 +17,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-
 public class AjoutRegate extends JFrame 
 {
 	private static final long serialVersionUID = 1L;
@@ -29,14 +28,14 @@ public class AjoutRegate extends JFrame
 	private JButton btnSend, btnAjoutParticipant;
 	private JScrollPane scrollPane;
 	private JTable tableParticipants;
-	private JComboBox<String> cboSelParticipant;
+	private JComboBox<String> cboSelParticipant, cboSelShip;
 
 	public AjoutRegate(Window window) 
 	{
 		this.window = window;
 		
 		this.btnSend = new JButton("Enregistrer");
-		btnAjoutParticipant  = new JButton("Ajout Participant");
+		btnAjoutParticipant  = new JButton("Ajouter");
 	}
 	
 	public void creationPanelAjoutRegate() 
@@ -94,9 +93,7 @@ public class AjoutRegate extends JFrame
 		this.panelInfoRegate.add(tfDistance);		
 	}
 	
-	public void creationPanelParticipants() 
-	{	
-		ArrayList<String> listeCombo = new ArrayList<String>();
+	public void creationPanelParticipants() {
 		
 		this.panelTableParticipant = new JPanel();
 		this.panelTableParticipant.setBorder(new TitledBorder(null, "Participants", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -106,14 +103,16 @@ public class AjoutRegate extends JFrame
 		this.cboSelParticipant.setBounds(10, 20, 161, 20);
 		this.panelTableParticipant.add(cboSelParticipant);
 		
+		this.cboSelShip.setBounds(180, 20, 161, 20);
+		this.panelTableParticipant.add(cboSelShip);
 		
 		
 		btnAjoutParticipant.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnAjoutParticipant.setBounds(180, 20, 120, 20);
+		btnAjoutParticipant.setBounds(100, 50, 120, 20);
 		this.panelTableParticipant.add(btnAjoutParticipant);
 
 		this.scrollPane = new JScrollPane();
-		this.scrollPane.setBounds(10, 50, 350, 285);
+		this.scrollPane.setBounds(10, 80, 350, 285);
 		this.panelTableParticipant.add(scrollPane);
 		
 		this.tableParticipants = new JTable(20,5);
@@ -155,8 +154,11 @@ public class AjoutRegate extends JFrame
 			}
 		});
 		
-		this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(45);
-		this.tableParticipants.getColumnModel().getColumn(2).setPreferredWidth(45);
+		this.tableParticipants.getColumnModel().getColumn(0).setPreferredWidth(50);
+		this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(50);
+		this.tableParticipants.getColumnModel().getColumn(2).setPreferredWidth(50);
+		this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(20);
+		this.tableParticipants.getColumnModel().getColumn(4).setPreferredWidth(20);
 		this.tableParticipants.setRowHeight(18);
 	}
 	
@@ -179,6 +181,13 @@ public class AjoutRegate extends JFrame
 	}
 	public JComboBox<String> getCboSelParticipant() {
 		return cboSelParticipant;
+	}
+	
+	public JComboBox<String> getCboSelShip(){
+		return cboSelShip;
+	}
+	public void setCboSelShip(String[] value) {
+		cboSelShip = new JComboBox<String>(value);
 	}
 	
 	public JButton getBtnSend() {

@@ -13,6 +13,7 @@ public class LoadView {
     private Classement cla;
     private LancementRegate lr;
     private ModifRegate mr;
+    private AjouterBateau ab;
 
     public LoadView() {
         window = new Window("Regate Manager 2017",800,600);
@@ -27,6 +28,7 @@ public class LoadView {
         cla = new Classement(window);
         lr = new LancementRegate(window);
         mr = new ModifRegate(window);
+        ab = new AjouterBateau(window);
     }
 
     public Window getWindow() {
@@ -47,6 +49,13 @@ public class LoadView {
         return ap;
     }
     
+    public AjouterBateau showAddShipView() {
+    	window.reinitContentPane();
+        ab.createShip("AJOUT BATEAU", "Enregistrer");
+        window.revalidateContentPane();
+        return ab;
+    }
+    
     public AjoutParticipant showModifParticipantView(String[] listAllParticipant) {
         window.reinitContentPane();
         mp.createParticipant("MODIFIER PARTICIPANT", "Modifier");
@@ -58,17 +67,18 @@ public class LoadView {
         return ap;
     }
 
-    public AjoutRegate showAddRegateView(String[] listAllParticipant) {
+    public AjoutRegate showAddRegateView(String[] listAllParticipant, String[] listAllShip) {
         window.reinitContentPane();
         ar.creationPanelAjoutRegate();
         ar.setCboSelParticipant(listAllParticipant);
-        
+        ar.setCboSelShip(listAllShip);
         ar.creationPanelParticipants();
         ar.creationPanelTitre("AJOUT NOUVELLE REGATE");
         window.revalidateContentPane();
         return ar;
     }
 
+   
     public Classement showclassementView() {
         window.reinitContentPane();
         cla.createClassement();
@@ -112,5 +122,9 @@ public class LoadView {
 
     public ModifRegate getMr() {
         return mr;
+    }
+    
+    public AjouterBateau getAb() {
+    	return ab;
     }
 }

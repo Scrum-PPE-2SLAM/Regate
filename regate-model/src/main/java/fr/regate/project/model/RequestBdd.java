@@ -13,7 +13,7 @@ public class RequestBdd {
 
 
 	private static ArrayList<Participant> listParticipant = new ArrayList<Participant>();
-	private ArrayList<Ship> listShip = new ArrayList<Ship>();
+	private static ArrayList<Ship> listShip = new ArrayList<Ship>();
 	
 	
 	/**
@@ -61,8 +61,9 @@ public class RequestBdd {
 	 * @return ArrayList<Ship> 
 	 * @throws SQLException
 	 */
-	public ArrayList<Ship> getListShip() throws SQLException {
+	public static ArrayList<Ship> getListShip() throws SQLException {
 		String requestGetAllShip = "SELECT * FROM ship";
+		listShip.clear();
 		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetAllShip));
 		while(BddConnection.getRs().next()) {
 			Ship ship = new Ship(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2), BddConnection.getRs().getInt(3), BddConnection.getRs().getInt(4));
@@ -128,13 +129,12 @@ public class RequestBdd {
 	 * @param rating
 	 * @throws SQLException
 	 */
-	public void reqAddShip(String nameShip, Date dateRegate, int Category, int rating) throws SQLException {
-		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`ship` (`S_NAME`, `S_CATEGORY `, `S_RATING`)"
+	public static void reqAddShip(String nameShip, int Category, int rating) throws SQLException {
+		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`ship` (`S_NAME`, `S_CATEGORY`, `S_RATING`)"
 				+ "VALUES (?, ?, ?); ");
 		prepare.setString (1, nameShip);
-	    prepare.setDate (2, dateRegate);
-	    prepare.setInt (5, Category);
-	    prepare.setInt (6, rating);
+	    prepare.setInt (2, Category);
+	    prepare.setInt (3, rating);
 		
 	    prepare.executeUpdate();
 	    System.out.println("request send !");

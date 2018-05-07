@@ -15,6 +15,7 @@ public class ButtonListener implements ActionListener {
     private final JButton ADDPARTICIPANT_BTN_SEND;
     private final JButton ADDREGATE_BTN_SEND;
     private final JButton ADDREGATE_BTN_ADDPARTICIPANT;
+    private final JButton ADDSHIP_BTN_SEND;
 
     private final JMenuItem MENU_ITEM_ADDREGATE;
     private final JMenuItem MENU_ITEM_RUNREGATE;
@@ -22,6 +23,7 @@ public class ButtonListener implements ActionListener {
     private final JMenuItem MENU_ITEM_CHANGEREGATE;
     private final JMenuItem MENU_ITEM_CLASSEMENT;
     private final JMenuItem MENU_ITEM_MODIFYPARTICIPANT;
+    private final JMenuItem MENU_ITEM_ADDSHIP;
     
 
 
@@ -40,12 +42,14 @@ public class ButtonListener implements ActionListener {
         MENU_ITEM_MODIFYPARTICIPANT = views.getWindow().getMntmModifyParticipant();
         MENU_ITEM_CHANGEREGATE = views.getWindow().getMntmModifyRegate();
         MENU_ITEM_CLASSEMENT = views.getWindow().getMntmClassementPerCatgorie();
-        
+        MENU_ITEM_ADDSHIP = views.getWindow().getmntmAddShip();
        
         ADDPARTICIPANT_BTN_SEND = views.getAp().getBtnSend();
         
         ADDREGATE_BTN_SEND = views.getAr().getBtnSend();
         ADDREGATE_BTN_ADDPARTICIPANT = views.getAr().getBtnAddParticipant();
+        
+        ADDSHIP_BTN_SEND =views.getAb().getBtnSend();
         this.listeners();
     }
 
@@ -59,7 +63,7 @@ public class ButtonListener implements ActionListener {
         }
 
         views.getAp().getBtnSend().addActionListener(this);
-        
+        views.getAb().getBtnSend().addActionListener(this);
         views.getAr().getBtnSend().addActionListener(this);
         views.getAr().getBtnAddParticipant().addActionListener(this);
     }
@@ -87,6 +91,8 @@ public class ButtonListener implements ActionListener {
             controller.showView("MODIF_REGATE");
         }else if (e.getSource() == MENU_ITEM_CLASSEMENT) {
             controller.showView("CLASSEMENT");
+        }else if (e.getSource() == MENU_ITEM_ADDSHIP) {
+        	controller.showView("ADD_SHIP");
         }
         
         else if (e.getSource() == ADDPARTICIPANT_BTN_SEND) {
@@ -95,6 +101,8 @@ public class ButtonListener implements ActionListener {
         	controller.bddAddRegate();
         }else if (e.getSource() == ADDREGATE_BTN_ADDPARTICIPANT) {
         	controller.ajoutParticipantTable();
+        }else if (e.getSource() == ADDSHIP_BTN_SEND) {
+        	controller.bddAddShip();
         }
     }
 }

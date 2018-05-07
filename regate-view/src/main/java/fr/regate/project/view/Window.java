@@ -36,6 +36,8 @@ public class Window extends JFrame {
     private JMenu mnHelp;
     private JMenuItem mntmCopiright;
     private JMenuItem mntmContact;
+    private JMenu mnShip;
+    private JMenuItem mntmAddShip;
 
     /**
      * @param name The name of window
@@ -95,6 +97,12 @@ public class Window extends JFrame {
 		mntmModifyParticipant = new JMenuItem("Modifier participant");
 		mnParticipants.add(mntmModifyParticipant);
 		
+		mnShip = new JMenu("Bateau");
+		menuBar.add(mnShip);
+		
+		mntmAddShip = new JMenuItem("Ajouter un bateau");
+		mnShip.add(mntmAddShip);
+		
 		mnClassement = new JMenu("Classement");
 		menuBar.add(mnClassement);
 
@@ -112,6 +120,8 @@ public class Window extends JFrame {
 		
 		mntmContact = new JMenuItem("Contact");
 		mnHelp.add(mntmContact);
+		
+		
 	}
 
 	public void reinitContentPane() {
@@ -135,6 +145,7 @@ public class Window extends JFrame {
         listeMenuItem.add(mntmClassementPerCatgorie);
         listeMenuItem.add(mntmCopiright);
         listeMenuItem.add(mntmContact);
+        listeMenuItem.add(mntmAddShip);
 	    return listeMenuItem;
     }
 
@@ -184,6 +195,9 @@ public class Window extends JFrame {
 
     public JMenuItem getMntmContact() {
         return mntmContact;
+    }
+    public JMenuItem getmntmAddShip() {
+        return mntmAddShip;
     }
 
     public void revalidateContentPane() {
