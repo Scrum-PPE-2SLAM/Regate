@@ -64,6 +64,13 @@ public class LoadView {
     public AjoutRegate showAddRegateView() {
         window.reinitContentPane();
         ar.creationPanelAjoutRegate();
+        try {
+			ar.setCboSelParticipant(Controller.getAllNameParticipants());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         ar.creationPanelParticipants();
         ar.creationPanelTitre("AJOUT NOUVELLE REGATE");
         window.revalidateContentPane();

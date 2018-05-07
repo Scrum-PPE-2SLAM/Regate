@@ -3,8 +3,10 @@ package fr.regate.project.controller;
 import fr.regate.project.view.*;
 import fr.regate.project.model.*;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.*;
 
@@ -112,6 +114,32 @@ public class Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    public void bddAddRegate() {
+    	String nameRegate = views.getAr().getNameRegate();
+    	Date dateRegate = null;
+
+    	String startPlace = views.getAr().getPlaceDeparture();
+    	String endPlace = views.getAr().getPlaceArrival();
+    	int distance = views.getAr().getDistance();
+    	int status = 0;
+    	
+    	try {
+			RequestBdd.reqAddRegate(nameRegate, dateRegate, startPlace, endPlace, distance, status);
+			JOptionPane.showMessageDialog(null, nameRegate + " à bien été ajouté a la base de données", "information", JOptionPane.INFORMATION_MESSAGE);
+			
+			// Refresh all the text field
+			views.getAr().setNameRegate("");
+			views.getAr().setPlaceDeparture("");
+			views.getAr().setPlaceArrival("");
+			views.getAr().setDistance("");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
     
     public static String[] getAllNameParticipants() throws SQLException {

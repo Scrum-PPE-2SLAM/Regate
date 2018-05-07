@@ -13,6 +13,7 @@ public class ButtonListener implements ActionListener {
     private final JButton RUNREGATE_BTN_START;
     private final JButton RUNREGATE_BTN_REINIT;
     private final JButton ADDPARTICIPANT_BTN_SEND;
+    private final JButton ADDREGATE_BTN_SEND;
 
     private final JMenuItem MENU_ITEM_ADDREGATE;
     private final JMenuItem MENU_ITEM_RUNREGATE;
@@ -39,8 +40,10 @@ public class ButtonListener implements ActionListener {
         MENU_ITEM_CHANGEREGATE = views.getWindow().getMntmModifyRegate();
         MENU_ITEM_CLASSEMENT = views.getWindow().getMntmClassementPerCatgorie();
         
+       
         ADDPARTICIPANT_BTN_SEND = views.getAp().getBtnSend();
         
+        ADDREGATE_BTN_SEND = views.getAr().getBtnSend();
         this.listeners();
     }
 
@@ -54,6 +57,8 @@ public class ButtonListener implements ActionListener {
         }
 
         views.getAp().getBtnSend().addActionListener(this);
+        
+        views.getAr().getBtnSend().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -65,7 +70,9 @@ public class ButtonListener implements ActionListener {
             controller.runRegRunChrono();
         }else if (e.getSource() == RUNREGATE_BTN_REINIT) {
             controller.runRegReinitChrono();
-        }else if (e.getSource() == MENU_ITEM_ADDREGATE) {
+        }
+        
+        else if (e.getSource() == MENU_ITEM_ADDREGATE) {
             controller.showView("ADD_REGATE");
         }else if (e.getSource() == MENU_ITEM_RUNREGATE) {
         	controller.showView("RUN_REGATE");
@@ -81,6 +88,9 @@ public class ButtonListener implements ActionListener {
         
         else if (e.getSource() == ADDPARTICIPANT_BTN_SEND) {
         	controller.bddAddParticipant();
+        }else if (e.getSource() == ADDREGATE_BTN_SEND) {
+        	controller.bddAddRegate();
+        	System.out.println("ok");
         }
     }
 }

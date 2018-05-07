@@ -34,6 +34,8 @@ public class AjoutRegate extends JFrame
 	public AjoutRegate(Window window) 
 	{
 		this.window = window;
+		
+		this.btnSend = new JButton("Enregistrer");
 	}
 	
 	public void creationPanelAjoutRegate() 
@@ -75,12 +77,10 @@ public class AjoutRegate extends JFrame
 		//this.cboDate = new JDateChooser();
 		//this.cboDate.setBounds(145, 120, 118, 26);
 	
-		this.btnSend = new JButton("Enregistrer");
-		
 		this.btnSend.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btnSend.setBounds(150, 290, 120, 20);
-		this.panelInfoRegate.add(btnSend);
 		
+		this.panelInfoRegate.add(btnSend);
 		this.panelInfoRegate.add(lblNameRegate);
 		this.panelInfoRegate.add(tfNameRegate);
 		this.panelInfoRegate.add(lblDate);
@@ -101,8 +101,7 @@ public class AjoutRegate extends JFrame
 		this.panelTableParticipant.setBorder(new TitledBorder(null, "Participants", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.panelTableParticipant.setBounds(404, 120, 370, 340);
 		this.panelTableParticipant.setLayout(null);
-		this.window.add(panelTableParticipant);	
-		this.cboSelParticipant = new JComboBox<String>(listeCombo.toArray(new String[0]));
+		this.window.add(panelTableParticipant);
 		this.cboSelParticipant.setBounds(10, 20, 161, 20);
 		this.panelTableParticipant.add(cboSelParticipant);
 		
@@ -173,6 +172,41 @@ public class AjoutRegate extends JFrame
 		this.lblSelRegate.setBounds(10, 14, 744, 32);
 		this.panelTitreRegate.add(lblSelRegate);
 	}
+	
+	public void setCboSelParticipant(String[] value) {
+		cboSelParticipant = new JComboBox<String>(value);
+	}
+	
+	public JButton getBtnSend() {
+		return btnSend;
+	}
+	public String getNameRegate() {
+		return tfNameRegate.getText();
+	}
+	public String getPlaceDeparture() {
+		return tfPlaceDeparture.getText();
+	}
+	public String getPlaceArrival() {
+		return tfPlaceArrival.getText();
+	}
+	public int getDistance() {
+		return Integer.parseInt(tfDistance.getText());
+	}
+	
+	public void setNameRegate(String value) {
+		tfNameRegate.setText(value);
+	}
+	public void setPlaceDeparture(String value) {
+		tfPlaceDeparture.setText(value);
+	}
+	public void setPlaceArrival(String value) {
+		tfPlaceArrival.setText(value);
+	}
+	public void setDistance(String value) {
+		tfDistance.setText(value);
+	}
+	
+	
 
 	
 }
