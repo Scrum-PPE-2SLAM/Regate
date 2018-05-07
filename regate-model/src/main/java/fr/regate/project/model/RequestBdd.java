@@ -4,7 +4,11 @@ package fr.regate.project.model;
 import java.util.ArrayList;
 import java.sql.*;
 
-
+/**
+ * 
+ * @author thomas
+ *
+ */
 public class RequestBdd {
 
 
