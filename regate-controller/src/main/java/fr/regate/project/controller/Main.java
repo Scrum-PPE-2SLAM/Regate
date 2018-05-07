@@ -12,7 +12,7 @@ public class Main {
 		final String URL_BDD = "jdbc:mysql://localhost:3306/eole";
 		final String USER_BDD = "user";
 		final String PASSWORD_BDD = "password";
-		
+
 		BddConnection bdd = new BddConnection(URL_BDD, USER_BDD, PASSWORD_BDD);
 		bdd.Connexion();
 	    LoadView loadView = new LoadView();

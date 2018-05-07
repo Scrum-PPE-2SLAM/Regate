@@ -13,7 +13,6 @@ public class RequestBdd {
 
 
 	private static ArrayList<Participant> listParticipant = new ArrayList<Participant>();
-	private ArrayList<Regate> listRegate = new ArrayList<Regate>();
 	private ArrayList<Ship> listShip = new ArrayList<Ship>();
 	
 	
@@ -41,7 +40,9 @@ public class RequestBdd {
 	 * @return liste des différentes régates
 	 * @throws SQLException
 	 */
-	public ArrayList<Regate> getListRegate() throws SQLException {
+	public static ArrayList<Regate> getListRegate() throws SQLException {
+		ArrayList<Regate> listRegate = new ArrayList<Regate>();
+		
 		String requestGetAllRegate = "SELECT * FROM regate";
 		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetAllRegate));
 		while(BddConnection.getRs().next()) {
