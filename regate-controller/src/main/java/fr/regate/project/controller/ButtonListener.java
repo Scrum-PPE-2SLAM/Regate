@@ -14,6 +14,7 @@ public class ButtonListener implements ActionListener {
     private final JButton RUNREGATE_BTN_REINIT;
     private final JButton ADDPARTICIPANT_BTN_SEND;
     private final JButton ADDREGATE_BTN_SEND;
+    private final JButton ADDREGATE_BTN_ADDPARTICIPANT;
 
     private final JMenuItem MENU_ITEM_ADDREGATE;
     private final JMenuItem MENU_ITEM_RUNREGATE;
@@ -44,6 +45,7 @@ public class ButtonListener implements ActionListener {
         ADDPARTICIPANT_BTN_SEND = views.getAp().getBtnSend();
         
         ADDREGATE_BTN_SEND = views.getAr().getBtnSend();
+        ADDREGATE_BTN_ADDPARTICIPANT = views.getAr().getBtnAddParticipant();
         this.listeners();
     }
 
@@ -59,6 +61,7 @@ public class ButtonListener implements ActionListener {
         views.getAp().getBtnSend().addActionListener(this);
         
         views.getAr().getBtnSend().addActionListener(this);
+        views.getAr().getBtnAddParticipant().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -90,7 +93,8 @@ public class ButtonListener implements ActionListener {
         	controller.bddAddParticipant();
         }else if (e.getSource() == ADDREGATE_BTN_SEND) {
         	controller.bddAddRegate();
-        	System.out.println("ok");
+        }else if (e.getSource() == ADDREGATE_BTN_ADDPARTICIPANT) {
+        	controller.ajoutParticipantTable();
         }
     }
 }

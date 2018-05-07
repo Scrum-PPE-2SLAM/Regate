@@ -26,7 +26,7 @@ public class AjoutRegate extends JFrame
 	private JLabel lblNameRegate, lblDate, lblPlaceDeparture, lblPlaceArrival, lblDistance, lblSelRegate;
 	private JTextField tfNameRegate, tfPlaceDeparture, tfPlaceArrival, tfDistance;
 	private Window window;
-	private JButton btnSend;
+	private JButton btnSend, btnAjoutParticipant;
 	private JScrollPane scrollPane;
 	private JTable tableParticipants;
 	private JComboBox<String> cboSelParticipant;
@@ -36,6 +36,7 @@ public class AjoutRegate extends JFrame
 		this.window = window;
 		
 		this.btnSend = new JButton("Enregistrer");
+		btnAjoutParticipant  = new JButton("Ajout Participant");
 	}
 	
 	public void creationPanelAjoutRegate() 
@@ -105,11 +106,11 @@ public class AjoutRegate extends JFrame
 		this.cboSelParticipant.setBounds(10, 20, 161, 20);
 		this.panelTableParticipant.add(cboSelParticipant);
 		
-		JButton btnAjout = new JButton("Ajout Participant");
 		
-		btnAjout.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnAjout.setBounds(180, 20, 120, 20);
-		this.panelTableParticipant.add(btnAjout);
+		
+		btnAjoutParticipant.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnAjoutParticipant.setBounds(180, 20, 120, 20);
+		this.panelTableParticipant.add(btnAjoutParticipant);
 
 		this.scrollPane = new JScrollPane();
 		this.scrollPane.setBounds(10, 50, 350, 285);
@@ -183,6 +184,9 @@ public class AjoutRegate extends JFrame
 	public JButton getBtnSend() {
 		return btnSend;
 	}
+	public JButton getBtnAddParticipant() {
+		return btnAjoutParticipant;
+	}
 	public String getNameRegate() {
 		return tfNameRegate.getText();
 	}
@@ -212,8 +216,8 @@ public class AjoutRegate extends JFrame
 	public JTable getTableParticipants() {
 		return tableParticipants;
 	}
-	public void setTableParticipants() {
-		
+	public void setTableParticipants(String monString, int row, int column) {
+		tableParticipants.setValueAt(monString, row, column);
 	}
 	
 

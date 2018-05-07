@@ -157,32 +157,31 @@ public class Controller {
     		String[] stringArray = mesParticipants.toArray(new String[0]);
     	return stringArray;
     }
-<<<<<<< HEAD
     
-    public void ajoutParticipantTable()
-	{
+    public void ajoutParticipantTable(){
 		Participant monParticipant;
-		
-		if (views.getAr().getTableParticipants().getValueAt(19, 0) == null) 
-		{
+		Boolean verif = false;
+		if (views.getAr().getTableParticipants().getValueAt(19, 0) == null) {
 			int pos = 0;
-			for (int i = 0; i<20; i++) 
-			{
-				if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) 
-				{
+			monParticipant = manager.getAllParticipants().get(views.getAr().getCboSelParticipant().getSelectedIndex());
+			for (int i = 0; i<20; i++) {
+				if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
 					pos += 1;
+					// Compare if the participant is already registered in the regate
+					if(views.getAr().getTableParticipants().getValueAt(i, 0).toString().contains(monParticipant.getName()) 
+							&& views.getAr().getTableParticipants().getValueAt(i, 1).toString().contains(monParticipant.getFirstName())) {
+						verif = true;
+					}
 				}
 			}
-				monParticipant = manager.getAllParticipants.get(views.getAr().getCboSelParticipant().getSelectedIndex());
-				listeParticipantRegate.add(list);
-				tableParticipants.setValueAt(list.getNom(), pos, 0);
-				tableParticipants.setValueAt(list.getPrenom(), pos, 1);
-				tableParticipants.setValueAt(list.getnomVoilier(), pos, 2);
-				tableParticipants.setValueAt(list.getCatégorieVoilier(), pos, 3);
-				tableParticipants.setValueAt(list.getRating(), pos, 4);
+			if (verif == false) {
+				views.getAr().setTableParticipants(monParticipant.getName(), pos, 0);
+				views.getAr().setTableParticipants(monParticipant.getFirstName(), pos, 1);
+			}else {
+				JOptionPane.showMessageDialog(null, monParticipant.getName() +" "+ monParticipant.getFirstName() + " est déjà inscrit !", "information", JOptionPane.INFORMATION_MESSAGE);
+			}	
 		}
-}
-=======
+    }
 
     public void refreshManagerInfo() {
         try {
@@ -192,5 +191,5 @@ public class Controller {
             e.printStackTrace();
         }
     }
->>>>>>> 1919110440a89ebe6e54f79934bd2bce4c13e149
+
 }
