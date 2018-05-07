@@ -157,7 +157,6 @@ public class Controller {
     		String[] stringArray = mesParticipants.toArray(new String[0]);
     	return stringArray;
     }
-<<<<<<< HEAD
     
     public void ajoutParticipantTable()
 	{
@@ -173,16 +172,16 @@ public class Controller {
 					pos += 1;
 				}
 			}
-				monParticipant = manager.getAllParticipants.get(views.getAr().getCboSelParticipant().getSelectedIndex());
+				/*monParticipant = manager.getAllParticipants.get(views.getAr().getCboSelParticipant().getSelectedIndex());
 				listeParticipantRegate.add(list);
 				tableParticipants.setValueAt(list.getNom(), pos, 0);
 				tableParticipants.setValueAt(list.getPrenom(), pos, 1);
 				tableParticipants.setValueAt(list.getnomVoilier(), pos, 2);
 				tableParticipants.setValueAt(list.getCatégorieVoilier(), pos, 3);
 				tableParticipants.setValueAt(list.getRating(), pos, 4);
+		*/
 		}
 }
-=======
 
     public void refreshManagerInfo() {
         try {
@@ -192,5 +191,4 @@ public class Controller {
             e.printStackTrace();
         }
     }
->>>>>>> 1919110440a89ebe6e54f79934bd2bce4c13e149
 }
