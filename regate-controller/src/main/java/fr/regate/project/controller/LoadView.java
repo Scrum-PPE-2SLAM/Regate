@@ -47,29 +47,21 @@ public class LoadView {
         return ap;
     }
     
-    public AjoutParticipant showModifParticipantView() {
+    public AjoutParticipant showModifParticipantView(String[] listAllParticipant) {
         window.reinitContentPane();
         mp.createParticipant("MODIFIER PARTICIPANT", "Modifier");
-        try {
-			mp.setCboSelParticipant(Controller.getAllNameParticipants());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+        mp.setCboSelParticipant(listAllParticipant);
+
         mp.modifParticipant();
         window.revalidateContentPane();
         return ap;
     }
 
-    public AjoutRegate showAddRegateView() {
+    public AjoutRegate showAddRegateView(String[] listAllParticipant) {
         window.reinitContentPane();
         ar.creationPanelAjoutRegate();
-        try {
-			ar.setCboSelParticipant(Controller.getAllNameParticipants());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        ar.setCboSelParticipant(listAllParticipant);
         
         ar.creationPanelParticipants();
         ar.creationPanelTitre("AJOUT NOUVELLE REGATE");

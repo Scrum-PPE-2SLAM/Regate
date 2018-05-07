@@ -15,4 +15,22 @@ public class Manager {
     public static Manager getGestion() {
         return GestionHolder.INSTANCE;
     }
+
+    public ArrayList<Participant> getAllParticipants() {
+        return allParticipants;
+    }
+
+    public void setAllParticipants(ArrayList<Participant> allParticipants) {
+        this.allParticipants = allParticipants;
+    }
+
+    public ArrayList<Regate> getAllRegates() {
+        return allRegates;
+    }
+
+    public void setAllRegates(ArrayList<Regate> allRegates) {
+        this.allRegates = allRegates;
+    }
 }
+
+

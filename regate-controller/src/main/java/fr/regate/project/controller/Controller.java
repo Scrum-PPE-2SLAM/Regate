@@ -13,13 +13,15 @@ import javax.swing.*;
 public class Controller {
     private DTimer chrono;
     private LancementRegate runRegate;
-    LoadView views;
-    
+    private LoadView views;
+    private Manager manager;
 
     public Controller(LoadView views) {
         chrono = new DTimer(views.showRunRegateView());
         runRegate = views.showRunRegateView();
         this.views = views;
+
+        manager = Manager.getGestion();
     }
 
     public void runRegRunChrono() {
@@ -79,10 +81,10 @@ public class Controller {
                 views.showAddParticipantView();
                 break;
             case MODIF_PARTICIPANT :
-            	views.showModifParticipantView();
+            	views.showModifParticipantView(this.getAllNameParticipants());
             	break;
             case ADD_REGATE:
-                views.showAddRegateView();
+                views.showAddRegateView(this.getAllNameParticipants());
                 break;
             case CLASSEMENT:
                 views.showclassementView();
@@ -110,6 +112,8 @@ public class Controller {
 			views.getAp().setFirstName("");
 			views.getAp().setPhoneNumber("");
 			views.getAp().setEmail("");
+
+            this.refreshManagerInfo();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,6 +138,8 @@ public class Controller {
 			views.getAr().setPlaceDeparture("");
 			views.getAr().setPlaceArrival("");
 			views.getAr().setDistance("");
+
+			this.refreshManagerInfo();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -142,14 +148,16 @@ public class Controller {
     	
     }
     
-    public static String[] getAllNameParticipants() throws SQLException {
+    public String[] getAllNameParticipants() {
+        this.refreshManagerInfo();
     	ArrayList<String> mesParticipants = new ArrayList<String>();
-    	for(Participant monParticipant : RequestBdd.getListParticipant()) {
-    		mesParticipants.add(monParticipant.getIdParticipant() +" : " +monParticipant.getName() +" " + monParticipant.getFirstName());
-    	}
-    	String[] stringArray = mesParticipants.toArray(new String[0]);
+    	for(Participant monParticipant : manager.getAllParticipants()) {
+            mesParticipants.add(monParticipant.getIdParticipant() + " : " + monParticipant.getName() + " " + monParticipant.getFirstName());
+        }
+    		String[] stringArray = mesParticipants.toArray(new String[0]);
     	return stringArray;
     }
+<<<<<<< HEAD
     
     public void ajoutParticipantTable()
 	{
@@ -174,4 +182,15 @@ public class Controller {
 				tableParticipants.setValueAt(list.getRating(), pos, 4);
 		}
 }
+=======
+
+    public void refreshManagerInfo() {
+        try {
+            manager.setAllParticipants(RequestBdd.getListParticipant());
+            manager.setAllRegates(RequestBdd.getListRegate());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+>>>>>>> 1919110440a89ebe6e54f79934bd2bce4c13e149
 }
