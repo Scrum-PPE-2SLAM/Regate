@@ -150,4 +150,28 @@ public class Controller {
     	String[] stringArray = mesParticipants.toArray(new String[0]);
     	return stringArray;
     }
+    
+    public void ajoutParticipantTable()
+	{
+		Participant monParticipant;
+		
+		if (views.getAr().getTableParticipants().getValueAt(19, 0) == null) 
+		{
+			int pos = 0;
+			for (int i = 0; i<20; i++) 
+			{
+				if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) 
+				{
+					pos += 1;
+				}
+			}
+				monParticipant = manager.getAllParticipants.get(views.getAr().getCboSelParticipant().getSelectedIndex());
+				listeParticipantRegate.add(list);
+				tableParticipants.setValueAt(list.getNom(), pos, 0);
+				tableParticipants.setValueAt(list.getPrenom(), pos, 1);
+				tableParticipants.setValueAt(list.getnomVoilier(), pos, 2);
+				tableParticipants.setValueAt(list.getCatégorieVoilier(), pos, 3);
+				tableParticipants.setValueAt(list.getRating(), pos, 4);
+		}
+}
 }

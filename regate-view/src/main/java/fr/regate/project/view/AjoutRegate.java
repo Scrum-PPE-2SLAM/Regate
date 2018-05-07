@@ -176,6 +176,9 @@ public class AjoutRegate extends JFrame
 	public void setCboSelParticipant(String[] value) {
 		cboSelParticipant = new JComboBox<String>(value);
 	}
+	public JComboBox<String> getCboSelParticipant() {
+		return cboSelParticipant;
+	}
 	
 	public JButton getBtnSend() {
 		return btnSend;
@@ -206,6 +209,12 @@ public class AjoutRegate extends JFrame
 		tfDistance.setText(value);
 	}
 	
+	public JTable getTableParticipants() {
+		return tableParticipants;
+	}
+	public void setTableParticipants() {
+		
+	}
 	
 
 	
