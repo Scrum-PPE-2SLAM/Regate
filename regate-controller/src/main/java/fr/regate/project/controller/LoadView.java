@@ -98,6 +98,7 @@ public class LoadView {
     public LancementRegate showRunRegateView() {
         window.reinitContentPane();
         lr.createAll();
+        
         window.revalidateContentPane();
         return lr;
     }

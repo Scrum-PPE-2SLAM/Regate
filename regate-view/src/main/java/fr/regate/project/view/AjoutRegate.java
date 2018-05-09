@@ -36,6 +36,7 @@ public class AjoutRegate extends JFrame
 		
 		this.btnSend = new JButton("Enregistrer");
 		btnAjoutParticipant  = new JButton("Ajouter");
+		btnSelRegate = new JButton("Selectionner");
 	}
 	
 	public void creationPanelAjoutRegate() 
@@ -121,44 +122,48 @@ public class AjoutRegate extends JFrame
 		this.tableParticipants.setFillsViewportHeight(true);
 		this.tableParticipants.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
 			},
-			new String[] {"Nom", "Prénom", "Voilier", "Catégorie", "Rating"}
+			new String[] {"idP", "Nom", "Prénom", "idB", "Voilier", "Catégorie", "Rating"}
 		) {
 
 			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
-				false, true, true, false, false
+				false, true, true, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
 		
-		this.tableParticipants.getColumnModel().getColumn(0).setPreferredWidth(50);
+		this.tableParticipants.getColumnModel().getColumn(0).setPreferredWidth(0);
 		this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(50);
 		this.tableParticipants.getColumnModel().getColumn(2).setPreferredWidth(50);
-		this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(20);
-		this.tableParticipants.getColumnModel().getColumn(4).setPreferredWidth(20);
+		this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(0);
+		this.tableParticipants.getColumnModel().getColumn(4).setPreferredWidth(50);
+		this.tableParticipants.getColumnModel().getColumn(5).setPreferredWidth(20);
+		this.tableParticipants.getColumnModel().getColumn(6).setPreferredWidth(20);
+		
+		
 		this.tableParticipants.setRowHeight(18);
 	}
 	
@@ -186,12 +191,16 @@ public class AjoutRegate extends JFrame
 		this.cboSelRegate.setBounds(383, 65, 161, 20);
 		this.panelTitreRegate.add(cboSelRegate);
 		
-		btnSelRegate = new JButton("Selectionner");
+		
 		btnSelRegate.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSelRegate.setBounds(550, 65, 120, 20);
 		this.panelTitreRegate.add(btnSelRegate);
 		
 	}
+	public JButton getBtnSelRegate(){
+		return btnSelRegate;
+	}
+	
 	public void setCboSelParticipant(String[] value) {
 		cboSelParticipant = new JComboBox<String>(value);
 	}
@@ -201,6 +210,10 @@ public class AjoutRegate extends JFrame
 	
 	public JComboBox<String> getCboSelShip(){
 		return cboSelShip;
+	}
+	
+	public JComboBox<String> getCboSelRegateToModif(){
+		return cboSelRegate;
 	}
 	public void setCboSelShip(String[] value) {
 		cboSelShip = new JComboBox<String>(value);

@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Enumeration;
 
 import javax.swing.*;
 
@@ -17,7 +18,7 @@ public class Controller {
     private Manager manager;
 
     public Controller(LoadView views) {
-        chrono = new DTimer(views.showRunRegateView());
+    	chrono = new DTimer(views.showRunRegateView());
         runRegate = views.showRunRegateView();
         this.views = views;
 
@@ -166,6 +167,34 @@ public class Controller {
 		}
     }
     
+    public void bddLinkRegateToPart() {
+    	this.refreshManagerInfo();
+    	
+    	int pos=0;
+    	ArrayList<Integer> mesBateauxId = new ArrayList<Integer>();
+    	ArrayList<Integer> mesParticipantsId = new ArrayList<Integer>();
+    	Regate maRegate;
+    	
+    	maRegate = manager.getAllRegates().get(manager.getAllRegates().size()-1);
+    	for (int i = 0; i<20; i++) {
+			if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
+				mesParticipantsId.add(Integer.parseInt(views.getAr().getTableParticipants().getValueAt(i, 0).toString()));
+				mesBateauxId.add(Integer.parseInt(views.getAr().getTableParticipants().getValueAt(i, 3).toString()));
+			}
+		}
+    	for(int i = 0; i < mesParticipantsId.size(); i++) {
+    		try {
+    			RequestBdd.reqLinkPartToRegate(mesParticipantsId.get(i), maRegate.getIdRegate(), mesBateauxId.get(i), maRegate.getDateRegate());
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+        	
+    	}
+    	
+    	
+    }
+    
     public String[] getAllNameParticipants() {
         this.refreshManagerInfo();
     	ArrayList<String> mesParticipants = new ArrayList<String>();
@@ -199,6 +228,7 @@ public class Controller {
     }
     
     public void ajoutParticipantTable(){
+    	this.refreshManagerInfo();
 		Participant monParticipant;
     	Ship monBateau;
 		Boolean verif = false;
@@ -210,24 +240,77 @@ public class Controller {
 				if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
 					pos += 1;
 					// Compare if the participant is already registered in the regate
-					if(views.getAr().getTableParticipants().getValueAt(i, 0).toString().contains(monParticipant.getName()) 
-							&& views.getAr().getTableParticipants().getValueAt(i, 1).toString().contains(monParticipant.getFirstName())) {
+					if(views.getAr().getTableParticipants().getValueAt(i, 0).toString().contains(String.valueOf(monParticipant.getIdParticipant())) 
+							&& views.getAr().getTableParticipants().getValueAt(i, 0).toString().contains(String.valueOf(monParticipant.getIdParticipant()))) {
 						verif = true;
 					}
 				}
 			}
 			if (verif == false) {
-				views.getAr().setTableParticipants(monParticipant.getName(), pos, 0);
-				views.getAr().setTableParticipants(monParticipant.getFirstName(), pos, 1);
-				views.getAr().setTableParticipants(monBateau.getNameShip(), pos, 2);
-				views.getAr().setTableParticipants(String.valueOf(monBateau.getCategoryShip() ), pos, 3);
-				views.getAr().setTableParticipants(String.valueOf(monBateau.getRating()), pos, 4);
+				views.getAr().setTableParticipants(String.valueOf(monParticipant.getIdParticipant()), pos, 0);
+				views.getAr().setTableParticipants(monParticipant.getName(), pos, 1);
+				views.getAr().setTableParticipants(monParticipant.getFirstName(), pos, 2);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getIdShip()), pos, 3);
+				views.getAr().setTableParticipants(monBateau.getNameShip(), pos, 4);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getCategoryShip() ), pos, 5);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getRating()), pos, 6);
 			}else {
 				JOptionPane.showMessageDialog(null, monParticipant.getName() +" "+ monParticipant.getFirstName() + " est déjà inscrit !", "information", JOptionPane.INFORMATION_MESSAGE);
 			}	
 		}
     }
-
+    
+    public void selRegate() {
+    	this.refreshManagerInfo();
+    	clearJtable();
+    	
+    	Regate maRegate = manager.getAllRegates().get(views.getAr().getCboSelRegateToModif().getSelectedIndex());
+    	ArrayList<Participant> mesParticipants;
+    	ArrayList<Ship> mesBateaux;
+    	int posBateau =0;
+    	int posPart = 0;
+    	
+    	try {
+    		mesParticipants = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
+    		mesBateaux = RequestBdd.getShipInscrit(maRegate.getIdRegate());
+    		
+    		for(Ship monBateau : mesBateaux) {
+    			views.getAr().setTableParticipants(String.valueOf(monBateau.getIdShip()), posBateau, 3);
+    			views.getAr().setTableParticipants(monBateau.getNameShip(), posBateau, 4);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getCategoryShip() ), posBateau, 5);
+				views.getAr().setTableParticipants(String.valueOf(monBateau.getRating()), posBateau, 6);
+				posBateau ++;
+        	}
+    		for(Participant monParticipant : mesParticipants) {
+    			views.getAr().setTableParticipants(String.valueOf(monParticipant.getIdParticipant()), posPart, 0);
+				views.getAr().setTableParticipants(monParticipant.getName(), posPart, 1);
+				views.getAr().setTableParticipants(monParticipant.getFirstName(), posPart, 2);
+				posPart++;
+    		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    	views.getAr().setNameRegate(maRegate.getNameRegate());
+    	views.getAr().setPlaceDeparture(maRegate.getStartPoint());
+    	views.getAr().setPlaceArrival(maRegate.getEndPoint());
+    	views.getAr().setDistance(String.valueOf(maRegate.getDistance()));
+    	
+    }
+    
+    public void clearJtable() {
+    	
+		for (int i = 0; i<20; i++) {
+			if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
+				for(int j = 0; j < 7; j++ ) {
+					views.getAr().setTableParticipants("", i, j);					
+				}
+			}
+    	}
+    }
+    
     public void refreshManagerInfo() {
         try {
             manager.setAllParticipants(RequestBdd.getListParticipant());

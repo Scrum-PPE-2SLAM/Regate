@@ -2,6 +2,7 @@ package fr.regate.project.model;
 
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.sql.*;
 
 /**
@@ -34,7 +35,21 @@ public class RequestBdd {
 		}
 		return listParticipant;
 	}
-
+/*
+	public static Participant getParticipant(int idParticipant) throws SQLException {
+		String requestParticipant = "Select * FROM participant where P_ID = "+ idParticipant;
+		Participant participant = new Participant();
+		BddConnection.setRs(BddConnection.getSt().executeQuery(requestParticipant));
+		while(BddConnection.getRs().next()) {
+			participant = new Participant(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2),
+					BddConnection.getRs().getString(3), BddConnection.getRs().getString(4), BddConnection.getRs().getString(5));
+			
+			
+		}
+		return participant;
+		
+	}
+*/
 	/**
 	 * Récupère la lise des régates dans la bdd
 	 * 
@@ -73,6 +88,32 @@ public class RequestBdd {
 		return listShip;
 	}
 	
+	public static ArrayList<Participant> getParticipantsInscrit(int idRegate) throws SQLException {
+		String requestGetALLInscription = "SELECT * FROM participant AS p INNER JOIN inscription AS i ON i.P_ID = p.P_ID AND i.R_ID = " + idRegate;
+		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetALLInscription));
+		ArrayList<Participant> mesParticipants = new ArrayList<Participant>();
+		
+		while(BddConnection.getRs().next()) {
+			Participant participant = new Participant(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2), BddConnection.getRs().getString(3), BddConnection.getRs().getString(4), BddConnection.getRs().getString(5));	
+			mesParticipants.add(participant);
+		}
+		return mesParticipants;
+	}
+	
+	public static ArrayList<Ship> getShipInscrit(int idRegate) throws SQLException{
+		String requestGetALLShipInscrit = "SELECT * FROM ship as s INNER JOIN inscription AS i ON i.S_ID = s.S_ID AND i.R_ID = " + idRegate;
+		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetALLShipInscrit));
+		ArrayList<Ship> mesBateaux = new ArrayList<Ship>();
+		
+		while(BddConnection.getRs().next()) {
+		
+			Ship monBateau = new Ship(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2), BddConnection.getRs().getInt(3), BddConnection.getRs().getInt(4));
+			mesBateaux.add(monBateau);
+		
+		}
+		return mesBateaux;
+	}
+	
 	/**
 	 * Ajout d'un participant dans la base de données 
 	 * 
@@ -91,7 +132,7 @@ public class RequestBdd {
 	    prepare.setString (4, email);
 		
 	    prepare.executeUpdate();
-	    System.out.println("request send !");
+	    System.out.println("request add participant send !");
 	}
 	
 	
@@ -117,7 +158,7 @@ public class RequestBdd {
 	    prepare.setInt (5, status);
 		
 	    prepare.executeUpdate();
-	    System.out.println("request send !");
+	    System.out.println("request add régate send !");
 	}
 	
 	/**
@@ -137,7 +178,7 @@ public class RequestBdd {
 	    prepare.setInt (3, rating);
 		
 	    prepare.executeUpdate();
-	    System.out.println("request send !");
+	    System.out.println("request add ship send !");
 	}
 	
 	/**
@@ -149,16 +190,18 @@ public class RequestBdd {
 	 * @param date
 	 * @throws SQLException
 	 */
-	public void reqLinkPartToRegate(int idParticipant, int idRegate, int idShip, Date date) throws SQLException{
-		 PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`classement` (`S_ID`, `P_ID`, `R_ID`, `I_DATE`)"
-		 		+ "VALUES (?, ?, ?, ?); ");
+	public static void reqLinkPartToRegate(int idParticipant, int idRegate, int idShip, Date date) throws SQLException{
+		 PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`inscription` (`S_ID`, `P_ID`, `R_ID`)"
+		 		+ "VALUES (?, ?, ?); ");
 		 prepare.setInt(1, idShip);
 		 prepare.setInt(2, idParticipant);
 		 prepare.setInt (3, idRegate);
-	     prepare.setDate (4, date);
+	    // prepare.setDate (4, date);
 	 
 	     prepare.executeUpdate();
-	     System.out.println("Request send !");
+	     System.out.println("Request inscription send !");
 	}
+	
+	
 	
 }
