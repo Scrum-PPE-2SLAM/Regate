@@ -297,7 +297,7 @@ public class Controller {
 		for (int i = 0; i<20; i++) {
 			if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
 				for(int j = 0; j < 7; j++ ) {
-					views.getAr().setTableParticipants("", i, j);					
+					views.getAr().setTableParticipants(null, i, j);					
 				}
 			}
     	}
