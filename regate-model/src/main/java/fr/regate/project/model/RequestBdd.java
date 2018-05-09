@@ -88,30 +88,32 @@ public class RequestBdd {
 		return listShip;
 	}
 	
-	public static ArrayList<Participant> getParticipantsInscrit(int idRegate) throws SQLException {
-		String requestGetALLInscription = "SELECT * FROM participant AS p INNER JOIN inscription AS i ON i.P_ID = p.P_ID AND i.R_ID = " + idRegate;
+	public static Hashtable<String, String> getParticipantsInscrit(int idRegate) throws SQLException {
+		String requestGetALLInscription = "SELECT * FROM participant AS p INNER JOIN ship AS s INNER JOIN inscription AS i ON i.P_ID = p.P_ID AND i.S_ID = s.S_ID AND i.R_ID = " + idRegate;
 		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetALLInscription));
-		ArrayList<Participant> mesParticipants = new ArrayList<Participant>();
+		Hashtable<String, String> ParticipantAndShip = new Hashtable<String, String>();
+		int i = 0;
 		
 		while(BddConnection.getRs().next()) {
-			Participant participant = new Participant(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2), BddConnection.getRs().getString(3), BddConnection.getRs().getString(4), BddConnection.getRs().getString(5));	
-			mesParticipants.add(participant);
+			String idParticipant = String.valueOf(BddConnection.getRs().getInt(1)); 
+			String lastNamePart = BddConnection.getRs().getString(2);
+			String firstNamePart = BddConnection.getRs().getString(3);
+			String idShip = String.valueOf(BddConnection.getRs().getInt(6));
+			String nameShip = BddConnection.getRs().getString(7);
+			String categoryShip = String.valueOf(BddConnection.getRs().getInt(8));
+			String RatingShip = String.valueOf(BddConnection.getRs().getInt(9));
+			
+			ParticipantAndShip.put("idPart"+ i, idParticipant);
+			ParticipantAndShip.put("lastName"+ i, lastNamePart);
+			ParticipantAndShip.put("firstName"+ i, firstNamePart);
+			ParticipantAndShip.put("idShip"+ i, idShip);
+			ParticipantAndShip.put("nameShip"+ i, nameShip);
+			ParticipantAndShip.put("categoryShip"+ i, categoryShip);
+			ParticipantAndShip.put("ratingShip"+ i, RatingShip);
+			
+			i++;
 		}
-		return mesParticipants;
-	}
-	
-	public static ArrayList<Ship> getShipInscrit(int idRegate) throws SQLException{
-		String requestGetALLShipInscrit = "SELECT * FROM ship as s INNER JOIN inscription AS i ON i.S_ID = s.S_ID AND i.R_ID = " + idRegate;
-		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetALLShipInscrit));
-		ArrayList<Ship> mesBateaux = new ArrayList<Ship>();
-		
-		while(BddConnection.getRs().next()) {
-		
-			Ship monBateau = new Ship(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2), BddConnection.getRs().getInt(3), BddConnection.getRs().getInt(4));
-			mesBateaux.add(monBateau);
-		
-		}
-		return mesBateaux;
+		return ParticipantAndShip;
 	}
 	
 	/**

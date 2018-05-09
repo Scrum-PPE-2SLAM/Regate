@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.swing.*;
 
@@ -265,33 +266,24 @@ public class Controller {
     	clearJtable();
     	
     	Regate maRegate = manager.getAllRegates().get(views.getAr().getCboSelRegateToModif().getSelectedIndex());
-    	ArrayList<Participant> mesParticipants;
-    	ArrayList<Ship> mesBateaux;
-    	int posBateau =0;
-    	int posPart = 0;
-    	
+    	Hashtable<String, String> participantAndShip;
+    
     	try {
-    		mesParticipants = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
-    		mesBateaux = RequestBdd.getShipInscrit(maRegate.getIdRegate());
-    		
-    		for(Ship monBateau : mesBateaux) {
-    			views.getAr().setTableParticipants(String.valueOf(monBateau.getIdShip()), posBateau, 3);
-    			views.getAr().setTableParticipants(monBateau.getNameShip(), posBateau, 4);
-				views.getAr().setTableParticipants(String.valueOf(monBateau.getCategoryShip() ), posBateau, 5);
-				views.getAr().setTableParticipants(String.valueOf(monBateau.getRating()), posBateau, 6);
-				posBateau ++;
-        	}
-    		for(Participant monParticipant : mesParticipants) {
-    			views.getAr().setTableParticipants(String.valueOf(monParticipant.getIdParticipant()), posPart, 0);
-				views.getAr().setTableParticipants(monParticipant.getName(), posPart, 1);
-				views.getAr().setTableParticipants(monParticipant.getFirstName(), posPart, 2);
-				posPart++;
+    		participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
+    		for (int i= 0; i < participantAndShip.size()/6; i++) {
+    			views.getAr().setTableParticipants(String.valueOf(participantAndShip.get("idPart"+i)), i, 0);
+    			views.getAr().setTableParticipants(participantAndShip.get("lastName"+i), i, 1);
+    			views.getAr().setTableParticipants(participantAndShip.get("firstName"+i), i, 2);
+    			views.getAr().setTableParticipants(String.valueOf(participantAndShip.get("idShip"+i)), i, 3);
+    			views.getAr().setTableParticipants(participantAndShip.get("nameShip"+i), i, 4);
+				views.getAr().setTableParticipants(String.valueOf(participantAndShip.get("categoryShip"+i)), i, 5);
+				views.getAr().setTableParticipants(String.valueOf(participantAndShip.get("ratingShip"+i)), i, 6);
+    			
     		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
     	
     	views.getAr().setNameRegate(maRegate.getNameRegate());
     	views.getAr().setPlaceDeparture(maRegate.getStartPoint());
