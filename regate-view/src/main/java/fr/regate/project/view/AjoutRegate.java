@@ -22,10 +22,10 @@ public class AjoutRegate extends JFrame
 	private static final long serialVersionUID = 1L;
 	private JPanel panelInfoRegate, panelTableParticipant;
 	JPanel panelTitreRegate;
-	private JLabel lblNameRegate, lblDate, lblPlaceDeparture, lblPlaceArrival, lblDistance, lblSelRegate;
-	private JTextField tfNameRegate, tfPlaceDeparture, tfPlaceArrival, tfDistance;
+	private JLabel lblNameRegate, lblDate, lblPlaceDeparture, lblPlaceArrival, lblDistance, lblSelRegate, lblIdRegate;
+	private JTextField tfNameRegate, tfPlaceDeparture, tfPlaceArrival, tfDistance, tfIdRegate;
 	private Window window;
-	private JButton btnSend, btnAjoutParticipant, btnSelRegate;
+	private JButton btnSendNewRegate, btnSendModifRegate, btnAjoutParticipant, btnSelRegate;
 	private JScrollPane scrollPane;
 	private JTable tableParticipants;
 	private JComboBox<String> cboSelParticipant, cboSelShip, cboSelRegate;
@@ -34,7 +34,8 @@ public class AjoutRegate extends JFrame
 	{
 		this.window = window;
 		
-		this.btnSend = new JButton("Enregistrer");
+		btnSendModifRegate = new JButton("Enregistrer");
+		this.btnSendNewRegate = new JButton("Enregistrer");
 		btnAjoutParticipant  = new JButton("Ajouter");
 		btnSelRegate = new JButton("Selectionner");
 	}
@@ -78,10 +79,7 @@ public class AjoutRegate extends JFrame
 		//this.cboDate = new JDateChooser();
 		//this.cboDate.setBounds(145, 120, 118, 26);
 	
-		this.btnSend.setFont(new Font("Tahoma", Font.BOLD, 12));
-		this.btnSend.setBounds(150, 290, 120, 20);
 		
-		this.panelInfoRegate.add(btnSend);
 		this.panelInfoRegate.add(lblNameRegate);
 		this.panelInfoRegate.add(tfNameRegate);
 		this.panelInfoRegate.add(lblDate);
@@ -92,6 +90,21 @@ public class AjoutRegate extends JFrame
 		this.panelInfoRegate.add(tfPlaceArrival);
 		this.panelInfoRegate.add(lblDistance);
 		this.panelInfoRegate.add(tfDistance);		
+	}
+	
+	public void createBtnSendNewRegate() {
+		this.btnSendNewRegate.setFont(new Font("Tahoma", Font.BOLD, 12));
+		this.btnSendNewRegate.setBounds(300, 475, 120, 20);
+		
+		this.panelTitreRegate.add(btnSendNewRegate);
+	}
+	
+	public void createBtnSendModifRegate() {
+		
+		btnSendModifRegate.setFont(new Font("Tahoma", Font.BOLD, 12));
+		this.btnSendModifRegate.setBounds(300, 475, 120, 20);
+		panelTitreRegate.add(btnSendModifRegate);
+		
 	}
 	
 	public void creationPanelParticipants() {
@@ -170,7 +183,7 @@ public class AjoutRegate extends JFrame
 	public void creationPanelTitre(String titre) 
 	{
 		this.panelTitreRegate = new JPanel();
-		this.panelTitreRegate.setBounds(10, 11, 764, 119);
+		this.panelTitreRegate.setBounds(10, 11, 764, 600);
 		this.panelTitreRegate.setLayout(null);
 		this.window.add(panelTitreRegate);
 		
@@ -181,7 +194,7 @@ public class AjoutRegate extends JFrame
 		this.panelTitreRegate.add(lblSelRegate);
 	}
 	
-	public void ajoutCombo(String[] listeRegate) 
+	public void modifRegate(String[] listeRegate) 
 	{
 		this.lblSelRegate = new JLabel("Selectionner la régate à modifier : ");
 		this.lblSelRegate.setBounds(175, 68, 380, 14);
@@ -191,6 +204,15 @@ public class AjoutRegate extends JFrame
 		this.cboSelRegate.setBounds(383, 65, 161, 20);
 		this.panelTitreRegate.add(cboSelRegate);
 		
+		this.lblIdRegate = new JLabel("ID de la régate : ");
+		this.lblIdRegate.setBounds(29, 30, 116, 43);
+		
+		this.tfIdRegate = new JTextField(15); 
+		this.tfIdRegate.setBounds(145, 40, 185, 26);
+		tfIdRegate.setEditable(false);
+		
+		panelInfoRegate.add(lblIdRegate);
+		panelInfoRegate.add(tfIdRegate);
 		
 		btnSelRegate.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSelRegate.setBounds(550, 65, 120, 20);
@@ -200,6 +222,8 @@ public class AjoutRegate extends JFrame
 	public JButton getBtnSelRegate(){
 		return btnSelRegate;
 	}
+	
+	
 	
 	public void setCboSelParticipant(String[] value) {
 		cboSelParticipant = new JComboBox<String>(value);
@@ -219,8 +243,12 @@ public class AjoutRegate extends JFrame
 		cboSelShip = new JComboBox<String>(value);
 	}
 	
-	public JButton getBtnSend() {
-		return btnSend;
+	public JButton getBtnSendAjoutRegate() {
+		return btnSendNewRegate;
+	}
+	
+	public JButton getBtnSendModifRegate() {
+		return btnSendModifRegate;
 	}
 	public JButton getBtnAddParticipant() {
 		return btnAjoutParticipant;
@@ -249,6 +277,14 @@ public class AjoutRegate extends JFrame
 	}
 	public void setDistance(String value) {
 		tfDistance.setText(value);
+	}
+	
+	public String getIdRegate() {
+		return tfIdRegate.getText();
+	}
+	
+	public void setIdRegate(String value) {
+		tfIdRegate.setText(value);
 	}
 	
 	public JTable getTableParticipants() {

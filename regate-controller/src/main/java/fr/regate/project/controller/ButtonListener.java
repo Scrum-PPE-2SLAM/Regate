@@ -17,6 +17,7 @@ public class ButtonListener implements ActionListener {
     private final JButton ADDREGATE_BTN_ADDPARTICIPANT;
     private final JButton ADDSHIP_BTN_SEND;
     private final JButton MODIFREGATE_BTN_VALIDER;
+    private final JButton MODIFREGATE_BTN_SEND;
 
     private final JMenuItem MENU_ITEM_ADDREGATE;
     private final JMenuItem MENU_ITEM_RUNREGATE;
@@ -47,9 +48,10 @@ public class ButtonListener implements ActionListener {
        
         ADDPARTICIPANT_BTN_SEND = views.getAp().getBtnSend();
         
-        ADDREGATE_BTN_SEND = views.getAr().getBtnSend();
+        ADDREGATE_BTN_SEND = views.getAr().getBtnSendAjoutRegate();
         ADDREGATE_BTN_ADDPARTICIPANT = views.getAr().getBtnAddParticipant();
         MODIFREGATE_BTN_VALIDER = views.getAr().getBtnSelRegate();
+        MODIFREGATE_BTN_SEND = views.getAr().getBtnSendModifRegate();
         
         ADDSHIP_BTN_SEND =views.getAb().getBtnSend();
         this.listeners();
@@ -66,9 +68,10 @@ public class ButtonListener implements ActionListener {
 
         views.getAp().getBtnSend().addActionListener(this);
         views.getAb().getBtnSend().addActionListener(this);
-        views.getAr().getBtnSend().addActionListener(this);
+        views.getAr().getBtnSendAjoutRegate().addActionListener(this);
         views.getAr().getBtnSelRegate().addActionListener(this);
         views.getAr().getBtnAddParticipant().addActionListener(this);
+        views.getAr().getBtnSendModifRegate().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -109,6 +112,8 @@ public class ButtonListener implements ActionListener {
         	controller.bddAddShip();
         }else if (e.getSource() == MODIFREGATE_BTN_VALIDER) {
         	controller.selRegate();
+        }else if (e.getSource() == MODIFREGATE_BTN_SEND) {
+        	controller.bddUpdateRegate();
         }
     }
 }

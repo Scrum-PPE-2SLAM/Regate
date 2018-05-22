@@ -154,6 +154,8 @@ public class Controller {
     	
     }
     
+ 
+    
     public void bddAddShip() {
     	String nameShip = views.getAb().getNameShip();
     	int categoryShip = Integer.parseInt(views.getAb().getCategory());
@@ -162,6 +164,8 @@ public class Controller {
     	try {
 			RequestBdd.reqAddShip(nameShip, categoryShip, rating);
 			JOptionPane.showMessageDialog(null,"le bateau " + nameShip + " à bien été ajouté a la base de données", "information", JOptionPane.INFORMATION_MESSAGE);
+			
+			this.refreshManagerInfo();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -175,7 +179,7 @@ public class Controller {
     	ArrayList<Integer> mesBateauxId = new ArrayList<Integer>();
     	ArrayList<Integer> mesParticipantsId = new ArrayList<Integer>();
     	Regate maRegate;
-    	
+    	//Récupère la dernière régate enregistrer dans le manager
     	maRegate = manager.getAllRegates().get(manager.getAllRegates().size()-1);
     	for (int i = 0; i<20; i++) {
 			if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
@@ -189,11 +193,51 @@ public class Controller {
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
-    		}
-        	
-    	}
+    		}	
+    	}	
+    }
+    
+    //Même fonctionnement que linkRegateToPart mais permet de modifier une régate en particulier et non la derniere ajouté 
+    public void bddUpdateRegateToPart(int idRegate){
+    	this.refreshManagerInfo();
     	
+    	int pos=0;
+    	ArrayList<Integer> mesBateauxId = new ArrayList<Integer>();
+    	ArrayList<Integer> mesParticipantsId = new ArrayList<Integer>();
     	
+    	for (int i = 0; i<20; i++) {
+			if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
+				mesParticipantsId.add(Integer.parseInt(views.getAr().getTableParticipants().getValueAt(i, 0).toString()));
+				mesBateauxId.add(Integer.parseInt(views.getAr().getTableParticipants().getValueAt(i, 3).toString()));
+			}
+		}
+    	for(int i = 0; i < mesParticipantsId.size(); i++) {
+    		try {
+    			RequestBdd.reqLinkPartToRegate(mesParticipantsId.get(i), idRegate, mesBateauxId.get(i), null);
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}	
+    	}	
+    }
+    
+   public void bddUpdateRegate(){
+	   
+	   int idRegate = Integer.parseInt(views.getAr().getIdRegate());
+	   String nameRegate = views.getAr().getNameRegate();
+	   Date dateRegate = null;
+	   String startPlace = views.getAr().getPlaceDeparture();
+	   String endPlace = views.getAr().getPlaceArrival();
+	   int distance = views.getAr().getDistance();
+	   int status = 0;
+	   	
+	   try {
+		RequestBdd.reqUpdateRegate(idRegate, nameRegate, startPlace, endPlace, distance, status);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	   bddUpdateRegateToPart(idRegate);
     }
     
     public String[] getAllNameParticipants() {
@@ -284,13 +328,15 @@ public class Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+    	views.getAr().setIdRegate(String.valueOf(maRegate.getIdRegate()));
     	views.getAr().setNameRegate(maRegate.getNameRegate());
     	views.getAr().setPlaceDeparture(maRegate.getStartPoint());
     	views.getAr().setPlaceArrival(maRegate.getEndPoint());
     	views.getAr().setDistance(String.valueOf(maRegate.getDistance()));
     	
     }
+    
+    
     
     public void clearJtable() {
     	

@@ -193,17 +193,32 @@ public class RequestBdd {
 	 * @throws SQLException
 	 */
 	public static void reqLinkPartToRegate(int idParticipant, int idRegate, int idShip, Date date) throws SQLException{
-		 PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`inscription` (`S_ID`, `P_ID`, `R_ID`)"
-		 		+ "VALUES (?, ?, ?); ");
+		 PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO inscription (S_ID, P_ID, R_ID) SELECT ?, ?, ? FROM dual WHERE NOT EXISTS (SELECT 1 FROM inscription WHERE P_ID = ? AND R_ID = ?);");
 		 prepare.setInt(1, idShip);
 		 prepare.setInt(2, idParticipant);
 		 prepare.setInt (3, idRegate);
-	    // prepare.setDate (4, date);
+		 prepare.setInt (4, idParticipant);
+		 prepare.setInt (5, idRegate);
 	 
+		 System.out.println(prepare.toString());
 	     prepare.executeUpdate();
 	     System.out.println("Request inscription send !");
 	}
 	
+	
+	public static void reqUpdateRegate(int idRegate, String nameRegate, String startPlace, String endPlace, int distance, int status) throws SQLException {
+		PreparedStatement prepare =BddConnection.getCon().prepareStatement(" UPDATE `regate` SET `R_NAME` = ?, `R_STARTPLACE` = ?, `R_ENDPLACE` = ?, `R_DISTANCE` = ?, `R_STATUS` = ? WHERE `regate`.`R_ID` = ?;");
+		prepare.setString(1, nameRegate);
+		prepare.setString(2, startPlace);
+		prepare.setString(3, endPlace);
+		prepare.setInt(4, distance);
+		prepare.setInt(5, status);
+		prepare.setInt(6, idRegate);
+		
+		prepare.executeUpdate();
+		System.out.println("Request Update Regate send !");
+		
+	}
 	
 	
 }

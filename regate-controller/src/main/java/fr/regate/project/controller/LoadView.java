@@ -72,6 +72,7 @@ public class LoadView {
         ar.setCboSelShip(listAllShip);
         ar.creationPanelParticipants();
         ar.creationPanelTitre("AJOUT NOUVELLE REGATE");
+        ar.createBtnSendNewRegate();
         window.revalidateContentPane();
         return ar;
     }
@@ -83,7 +84,8 @@ public class LoadView {
         ar.setCboSelShip(listAllShip);
         ar.creationPanelParticipants();
         ar.creationPanelTitre("MODIFIER REGATE");
-        ar.ajoutCombo(listeRegate);
+        ar.modifRegate(listeRegate);
+        ar.createBtnSendModifRegate();
         window.revalidateContentPane();
         return mr;
     }
