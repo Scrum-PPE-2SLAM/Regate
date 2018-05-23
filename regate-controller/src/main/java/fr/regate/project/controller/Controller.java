@@ -73,7 +73,8 @@ public class Controller {
         ADD_REGATE,
         CLASSEMENT,
         RUN_REGATE,
-        MODIF_REGATE;
+        MODIF_REGATE,
+        SUPPR_REGATE;
     }
 
     public void showView(String viewName) {
@@ -100,6 +101,8 @@ public class Controller {
             case MODIF_REGATE:
                 views.showModifRegateView(this.getAllNameParticipants(), this.getAllShip(), this.getAllRegate());
                 break;
+            case SUPPR_REGATE:
+            	views.showDeletRegateView(getAllRegate());
         }
     }
     
@@ -239,6 +242,20 @@ public class Controller {
 	}
 	   bddUpdateRegateToPart(idRegate);
     }
+   
+   	public void bddDeletRegate() {
+   		Regate maRegate = manager.getAllRegates().get(views.getSr().getcboDelRegate().getSelectedIndex());
+   		try {
+   			int value = JOptionPane.showConfirmDialog(null,"êtes vous sûr de vouloir supprimer " + maRegate.getIdRegate() + " : " + maRegate.getNameRegate() + " de la base de données", "Alerte", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION);
+			if(value == 0) {
+				RequestBdd.reqDeletRegate(maRegate.getIdRegate());
+				JOptionPane.showMessageDialog(null,"la regate " + maRegate.getNameRegate() + " a bien été supprimé de la base de données", "information", JOptionPane.INFORMATION_MESSAGE);
+			}
+   		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   	}
     
     public String[] getAllNameParticipants() {
         this.refreshManagerInfo();

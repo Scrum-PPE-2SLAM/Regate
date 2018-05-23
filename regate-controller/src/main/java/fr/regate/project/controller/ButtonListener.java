@@ -18,11 +18,13 @@ public class ButtonListener implements ActionListener {
     private final JButton ADDSHIP_BTN_SEND;
     private final JButton MODIFREGATE_BTN_VALIDER;
     private final JButton MODIFREGATE_BTN_SEND;
+    private final JButton DELETREGATE_BTN_DELET;
 
     private final JMenuItem MENU_ITEM_ADDREGATE;
     private final JMenuItem MENU_ITEM_RUNREGATE;
     private final JMenuItem MENU_ITEM_ADDPARTICIPANT;
     private final JMenuItem MENU_ITEM_CHANGEREGATE;
+    private final JMenuItem MENU_ITEM_DELETREGATE;
     private final JMenuItem MENU_ITEM_CLASSEMENT;
     private final JMenuItem MENU_ITEM_MODIFYPARTICIPANT;
     private final JMenuItem MENU_ITEM_ADDSHIP;
@@ -43,6 +45,7 @@ public class ButtonListener implements ActionListener {
         MENU_ITEM_ADDPARTICIPANT = views.getWindow().getMntmAddParticipant();
         MENU_ITEM_MODIFYPARTICIPANT = views.getWindow().getMntmModifyParticipant();
         MENU_ITEM_CHANGEREGATE = views.getWindow().getMntmModifyRegate();
+        MENU_ITEM_DELETREGATE = views.getWindow().getMntmDeleteRgate();
         MENU_ITEM_CLASSEMENT = views.getWindow().getMntmClassementPerCatgorie();
         MENU_ITEM_ADDSHIP = views.getWindow().getmntmAddShip();
        
@@ -52,6 +55,7 @@ public class ButtonListener implements ActionListener {
         ADDREGATE_BTN_ADDPARTICIPANT = views.getAr().getBtnAddParticipant();
         MODIFREGATE_BTN_VALIDER = views.getAr().getBtnSelRegate();
         MODIFREGATE_BTN_SEND = views.getAr().getBtnSendModifRegate();
+        DELETREGATE_BTN_DELET = views.getSr().getBtnDelRegate();
         
         ADDSHIP_BTN_SEND =views.getAb().getBtnSend();
         this.listeners();
@@ -72,6 +76,7 @@ public class ButtonListener implements ActionListener {
         views.getAr().getBtnSelRegate().addActionListener(this);
         views.getAr().getBtnAddParticipant().addActionListener(this);
         views.getAr().getBtnSendModifRegate().addActionListener(this);
+        views.getSr().getBtnDelRegate().addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -99,6 +104,8 @@ public class ButtonListener implements ActionListener {
             controller.showView("CLASSEMENT");
         }else if (e.getSource() == MENU_ITEM_ADDSHIP) {
         	controller.showView("ADD_SHIP");
+        }else if (e.getSource() == MENU_ITEM_DELETREGATE) {
+        	controller.showView("SUPPR_REGATE");
         }
         
         else if (e.getSource() == ADDPARTICIPANT_BTN_SEND) {
@@ -114,6 +121,8 @@ public class ButtonListener implements ActionListener {
         	controller.selRegate();
         }else if (e.getSource() == MODIFREGATE_BTN_SEND) {
         	controller.bddUpdateRegate();
+        }else if(e.getSource() == DELETREGATE_BTN_DELET) {
+        	controller.bddDeletRegate();
         }
     }
 }

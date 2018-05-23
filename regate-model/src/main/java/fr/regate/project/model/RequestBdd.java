@@ -199,8 +199,6 @@ public class RequestBdd {
 		 prepare.setInt (3, idRegate);
 		 prepare.setInt (4, idParticipant);
 		 prepare.setInt (5, idRegate);
-	 
-		 System.out.println(prepare.toString());
 	     prepare.executeUpdate();
 	     System.out.println("Request inscription send !");
 	}
@@ -220,5 +218,18 @@ public class RequestBdd {
 		
 	}
 	
+	public static void reqDeletRegate(int idRegate) throws SQLException {
+		PreparedStatement deletInscription = BddConnection.getCon().prepareStatement("DELETE FROM `inscription` WHERE `inscription`.`R_ID` = ? ");
+		deletInscription.setInt(1, idRegate);
+		
+		deletInscription.executeUpdate();
+		System.out.println("inscription supprimé");
+		
+		PreparedStatement prepare = BddConnection.getCon().prepareStatement("DELETE FROM `regate` WHERE `regate`.`R_ID` = ? ");
+		prepare.setInt(1, idRegate);
+		
+		prepare.executeUpdate();
+		System.out.println("request Delet Send !");
+	}
 	
 }

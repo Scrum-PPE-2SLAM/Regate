@@ -14,6 +14,7 @@ public class LoadView {
     private LancementRegate lr;
     private ModifRegate mr;
     private AjouterBateau ab;
+    private SupprimerRegate sr;
 
     public LoadView() {
         window = new Window("Regate Manager 2017",800,600);
@@ -29,6 +30,7 @@ public class LoadView {
         lr = new LancementRegate(window);
         mr = new ModifRegate(window);
         ab = new AjouterBateau(window);
+        sr = new SupprimerRegate(window);
     }
 
     public Window getWindow() {
@@ -89,6 +91,14 @@ public class LoadView {
         window.revalidateContentPane();
         return mr;
     }
+    
+    public SupprimerRegate showDeletRegateView(String[] listeRegate) {
+    	window.reinitContentPane();
+    	sr.creationPanelTitre("SUPPRIMER REGATE");
+    	sr.ajoutComboDelet(listeRegate);
+    	window.revalidateContentPane();
+    	return sr;
+    }
    
     public Classement showclassementView() {
         window.reinitContentPane();
@@ -133,5 +143,9 @@ public class LoadView {
     
     public AjouterBateau getAb() {
     	return ab;
+    }
+    
+    public SupprimerRegate getSr() {
+    	return sr;
     }
 }
