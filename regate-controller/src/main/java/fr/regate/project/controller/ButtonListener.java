@@ -84,6 +84,7 @@ public class ButtonListener implements ActionListener {
             controller.runRegStopChrono();
         }else if (e.getSource() == RUNREGATE_BTN_VALIDATE) {
            controller.runRegValidate();
+           controller.selRegate();
         }else if (e.getSource() == RUNREGATE_BTN_START) {
             controller.runRegRunChrono();
         }else if (e.getSource() == RUNREGATE_BTN_REINIT) {
@@ -110,7 +111,9 @@ public class ButtonListener implements ActionListener {
         
         else if (e.getSource() == ADDPARTICIPANT_BTN_SEND) {
         	controller.bddAddParticipant();
-        }else if (e.getSource() == ADDREGATE_BTN_SEND) {
+        }
+        
+        else if (e.getSource() == ADDREGATE_BTN_SEND) {
         	controller.bddAddRegate();
         	controller.bddLinkRegateToPart();
         }else if (e.getSource() == ADDREGATE_BTN_ADDPARTICIPANT) {
@@ -118,7 +121,7 @@ public class ButtonListener implements ActionListener {
         }else if (e.getSource() == ADDSHIP_BTN_SEND) {
         	controller.bddAddShip();
         }else if (e.getSource() == MODIFREGATE_BTN_VALIDER) {
-        	controller.selRegate();
+        	controller.selRegateToModif();
         }else if (e.getSource() == MODIFREGATE_BTN_SEND) {
         	controller.bddUpdateRegate();
         }else if(e.getSource() == DELETREGATE_BTN_DELET) {

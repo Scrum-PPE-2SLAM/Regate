@@ -58,10 +58,10 @@ public class Controller {
     }
 
     public void runRegValidate() {
-        if (chrono.isRunning() || runRegate.regateIsLoad()) {
+        if (chrono.isRunning() && runRegate.regateIsLoad()) {
             JOptionPane.showMessageDialog(null, "Une régate est en cours. Impossible d'en selectionner une autre.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else {
-            runRegate.reinitTab();
+        	clearJtableRunRegate();
         }
     }
 
@@ -96,7 +96,7 @@ public class Controller {
             case CLASSEMENT:
                 views.showclassementView();
             case RUN_REGATE:
-                views.showRunRegateView();
+                views.showRunRegateView(getAllRegate());
                 break;
             case MODIF_REGATE:
                 views.showModifRegateView(this.getAllNameParticipants(), this.getAllShip(), this.getAllRegate());
@@ -322,7 +322,7 @@ public class Controller {
 		}
     }
     
-    public void selRegate() {
+    public void selRegateToModif() {
     	this.refreshManagerInfo();
     	clearJtable();
     	
@@ -353,7 +353,30 @@ public class Controller {
     	
     }
     
+    public void selRegate() {
+    	this.refreshManagerInfo();
+    	clearJtableRunRegate();
+    	Regate maRegate = manager.getAllRegates().get(views.getLr().getCboSelRegate().getSelectedIndex());
+    	Hashtable<String, String> participantAndShip;
     
+    	try {
+    		participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
+    		for (int i= 0; i < participantAndShip.size()/6; i++) {
+    			views.getLr().setTableParticipants(String.valueOf(participantAndShip.get("idPart"+i)), i, 0);
+    			views.getLr().setTableParticipants(participantAndShip.get("lastName"+i), i, 1);
+    			views.getLr().setTableParticipants(participantAndShip.get("nameShip"+i), i, 2);
+    			
+    		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	//views.getLr().setIdRegate(String.valueOf(maRegate.getIdRegate()));
+    	views.getLr().setNameRegate(maRegate.getNameRegate());
+    	views.getLr().setPlaceDeparture(maRegate.getStartPoint());
+    	views.getLr().setPlaceArrival(maRegate.getEndPoint());
+    	views.getLr().setDistance(String.valueOf(maRegate.getDistance()));
+    }
     
     public void clearJtable() {
     	
@@ -364,6 +387,15 @@ public class Controller {
 				}
 			}
     	}
+    }
+    
+    public void clearJtableRunRegate() {
+        for (int i = 0; i<20; i++) {
+        	views.getLr().setTableParticipants(null, i, 0);
+        	views.getLr().setTableParticipants(null, i, 1);
+        	views.getLr().setTableParticipants(null, i, 2);
+        	views.getLr().setTableParticipants(null, i, 5);
+        }
     }
     
     public void refreshManagerInfo() {

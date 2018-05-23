@@ -110,7 +110,14 @@ public class LoadView {
     public LancementRegate showRunRegateView() {
         window.reinitContentPane();
         lr.createAll();
-        
+        window.revalidateContentPane();
+        return lr;
+    }
+    
+    public LancementRegate showRunRegateView(String[] listeRegate) {
+        window.reinitContentPane();
+        lr.createAll();
+        lr.setCboSelRegate(listeRegate);
         window.revalidateContentPane();
         return lr;
     }

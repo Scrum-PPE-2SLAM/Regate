@@ -19,7 +19,9 @@ public class LancementRegate extends JFrame
     private JTextField tfDate;
     private Window window;
     private JButton btnSelect, btnEnd, btnReinit, btnStart;
-
+    private JComboBox<String> cboSelRegate;
+    private JPanel panelSelRegate;
+    
     public LancementRegate(Window window)
     {
         this.window = window;
@@ -27,6 +29,7 @@ public class LancementRegate extends JFrame
         this.btnSelect = new JButton("Valider");
         this.btnEnd = new JButton("FIN");
         this.btnReinit = new JButton("Reinitialiser");
+        
     }
 
     public void createAll()
@@ -39,7 +42,7 @@ public class LancementRegate extends JFrame
 
     public void createPanelSelRegate()
     {
-        JPanel panelSelRegate = new JPanel();
+        panelSelRegate = new JPanel();
         panelSelRegate.setBounds(10, 11, 764, 57);
         panelSelRegate.setLayout(null);
         this.window.add(panelSelRegate);
@@ -48,9 +51,8 @@ public class LancementRegate extends JFrame
         lblSelRegate.setBounds(190, 14, 220, 14);
         panelSelRegate.add(lblSelRegate);
 
-        JComboBox<String> cboSelRegate = new JComboBox<String>();
-        cboSelRegate.setBounds(383, 11, 161, 20);
-        panelSelRegate.add(cboSelRegate);
+        
+        
 
         btnSelect.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnSelect.setBounds(550, 11, 100, 20);
@@ -164,30 +166,30 @@ public class LancementRegate extends JFrame
         //this.tableParticipants.setFillsViewportHeight(true);
         this.tableParticipants.setModel(new DefaultTableModel(new Object[][]
                 {
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                        {null, null, "✔", "✘", null},
-                },new String[] {"Participant", "Voilier", "Arriv\u00E9e", "Abandon", "Temps"})
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                        {null, null, null, "✔", "✘", null},
+                },new String[] {"ID","Participant", "Voilier", "Arriv\u00E9e", "Abandon", "Temps"})
         {
             private static final long serialVersionUID = 1L;
-            boolean[] columnEditables = new boolean[] {false, false, true, true, false};
+            boolean[] columnEditables = new boolean[] {false, false, false, true, true, false};
 
             public boolean isCellEditable(int row, int column)
             {
@@ -200,10 +202,12 @@ public class LancementRegate extends JFrame
         tableParticipants.getColumn("Abandon").setCellRenderer(new ButtonRenderer());
         tableParticipants.getColumn("Abandon").setCellEditor(new ButtonEditor(new JCheckBox(), this));
 
-        this.tableParticipants.getColumnModel().getColumn(2).setPreferredWidth(40);
-        this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(40);
-        this.tableParticipants.getColumnModel().getColumn(4).setPreferredWidth(40);
-        this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(40);
+        this.tableParticipants.getColumnModel().getColumn(0).setPreferredWidth(5);
+        this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(30);
+        this.tableParticipants.getColumnModel().getColumn(2).setPreferredWidth(30);
+        this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(20);
+        this.tableParticipants.getColumnModel().getColumn(4).setPreferredWidth(20);
+        this.tableParticipants.getColumnModel().getColumn(5).setPreferredWidth(30);
         this.tableParticipants.setRowHeight(18);
     }
     public boolean regateIsLoad() {
@@ -214,17 +218,21 @@ public class LancementRegate extends JFrame
         return false;
     }
 
-    public void reinitTab() {
-        for (int i = 0; i<20; i++) {
-            tableParticipants.setValueAt(null, i, 0);
-            tableParticipants.setValueAt(null, i, 1);
-            tableParticipants.setValueAt(null, i, 4);
-        }
-    }
+
 
     public void updateChrono(int timeCount, SimpleDateFormat df)
     {
         this.lblChrono.setText(df.format(timeCount - 3.6 * Math.pow(10,6)));
+    }
+    
+    public void setCboSelRegate(String[] listeRegate) {
+    	cboSelRegate = new JComboBox<String>(listeRegate);
+    	cboSelRegate.setBounds(383, 11, 161, 20);
+        panelSelRegate.add(cboSelRegate);
+    }
+    
+    public JComboBox<String> getCboSelRegate(){
+    	return cboSelRegate;
     }
 
     public JButton getBtnSelect() {
@@ -259,4 +267,24 @@ public class LancementRegate extends JFrame
     public void setLblChrono(String chrono) {
         lblChrono.setText(chrono);
     }
+    
+    public void setNameRegate(String nameRegate) {
+    	tfNameRegate.setText(nameRegate);
+    }
+    public void setPlaceDeparture(String placeDeparture) {
+    	tfStartPoint.setText(placeDeparture);
+    }
+    public void setPlaceArrival(String endPlace) {
+    	tfEndPoint.setText(endPlace);
+    }
+    public void setDistance(String distance) {
+    	tfDistance.setText(distance);
+    }
+    
+    public JTable getTableParticipants() {
+		return tableParticipants;
+	}
+	public void setTableParticipants(String monString, int row, int column) {
+		tableParticipants.setValueAt(monString, row, column);
+	}
 }
