@@ -1,5 +1,7 @@
 package fr.regate.project.view;
 
+import com.toedter.calendar.JDateChooser;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window;
@@ -29,11 +31,11 @@ public class AjoutRegate extends JFrame
 	private JScrollPane scrollPane;
 	private JTable tableParticipants;
 	private JComboBox<String> cboSelParticipant, cboSelShip, cboSelRegate;
+	private JDateChooser dateChooser;
 
 	public AjoutRegate(Window window) 
 	{
 		this.window = window;
-		
 		btnSendModifRegate = new JButton("Enregistrer");
 		this.btnSendNewRegate = new JButton("Enregistrer");
 		btnAjoutParticipant  = new JButton("Ajouter");
@@ -66,6 +68,12 @@ public class AjoutRegate extends JFrame
 		
 		this.tfNameRegate = new JTextField(15); 
 		this.tfNameRegate.setBounds(145, 80, 185, 26);
+
+
+		this.dateChooser = new JDateChooser();
+		this.dateChooser.setBounds(145, 120, 185, 26);
+
+
 		
 		this.tfPlaceDeparture = new JTextField(15);
 		this.tfPlaceDeparture.setBounds(145, 160, 185, 26);
@@ -76,20 +84,16 @@ public class AjoutRegate extends JFrame
 		this.tfDistance = new JTextField(15);
 		this.tfDistance.setBounds(145, 240, 185, 26);
 		
-		//this.cboDate = new JDateChooser();
-		//this.cboDate.setBounds(145, 120, 118, 26);
-	
-		
 		this.panelInfoRegate.add(lblNameRegate);
 		this.panelInfoRegate.add(tfNameRegate);
 		this.panelInfoRegate.add(lblDate);
-		//this.panelInfoRegate.add(cboDate);
 		this.panelInfoRegate.add(lblPlaceDeparture);
 		this.panelInfoRegate.add(tfPlaceDeparture);
 		this.panelInfoRegate.add(lblPlaceArrival);
 		this.panelInfoRegate.add(tfPlaceArrival);
 		this.panelInfoRegate.add(lblDistance);
-		this.panelInfoRegate.add(tfDistance);		
+		this.panelInfoRegate.add(tfDistance);
+		this.panelInfoRegate.add(dateChooser);
 	}
 	
 	public void createBtnSendNewRegate() {
