@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import fr.regate.project.model.RequestBdd;
 import fr.regate.project.view.*;
 
+import javax.swing.*;
+
 public class LoadView {
     private Window window;
     private Accueil accueil;
@@ -15,6 +17,7 @@ public class LoadView {
     private ModifRegate mr;
     private AjouterBateau ab;
     private SupprimerRegate sr;
+    private Controller ctr;
 
     public LoadView() {
         window = new Window("Regate Manager 2017",800,600);
@@ -31,6 +34,10 @@ public class LoadView {
         mr = new ModifRegate(window);
         ab = new AjouterBateau(window);
         sr = new SupprimerRegate(window);
+    }
+
+    public void setController(Controller ctr) {
+        this.ctr = ctr;
     }
 
     public Window getWindow() {
@@ -119,6 +126,10 @@ public class LoadView {
         window.reinitContentPane();
         lr.createAll();
         lr.setCboSelRegate(listeRegate);
+        lr.getTableParticipants().getColumn("Arriv\u00E9e").setCellRenderer(new ButtonRenderer());
+        lr.getTableParticipants().getColumn("Arriv\u00E9e").setCellEditor(new ButtonEditor(ctr));
+        lr.getTableParticipants().getColumn("Abandon").setCellRenderer(new ButtonRenderer());
+        lr.getTableParticipants().getColumn("Abandon").setCellEditor(new ButtonEditor(ctr));
         window.revalidateContentPane();
         return lr;
     }

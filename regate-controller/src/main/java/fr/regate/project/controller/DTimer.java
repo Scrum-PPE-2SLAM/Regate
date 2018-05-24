@@ -32,7 +32,7 @@ public class DTimer implements ActionListener
 	
 	public int getTime ()
 	{	
-		return ( this.timeCount * 1000); 
+		return ( this.timeCount);
 	}
 	
 	public void reinitDTimer() 

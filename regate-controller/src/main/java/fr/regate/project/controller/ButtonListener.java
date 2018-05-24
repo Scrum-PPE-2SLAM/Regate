@@ -34,6 +34,7 @@ public class ButtonListener implements ActionListener {
     ButtonListener(LoadView views) {
         this.views = views;
         controller = new Controller(views);
+        this.views.setController(controller);
 
         RUNREGATE_BTN_END = views.getLr().getBtnEnd();
         RUNREGATE_BTN_START = views.getLr().getBtnStart();
@@ -77,6 +78,7 @@ public class ButtonListener implements ActionListener {
         views.getAr().getBtnAddParticipant().addActionListener(this);
         views.getAr().getBtnSendModifRegate().addActionListener(this);
         views.getSr().getBtnDelRegate().addActionListener(this);
+
     }
 
     public void actionPerformed(ActionEvent e) {

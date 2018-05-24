@@ -197,10 +197,6 @@ public class LancementRegate extends JFrame
             }
         });
 
-        tableParticipants.getColumn("Arriv\u00E9e").setCellRenderer(new ButtonRenderer());
-        tableParticipants.getColumn("Arriv\u00E9e").setCellEditor(new ButtonEditor(new JCheckBox(), this));
-        tableParticipants.getColumn("Abandon").setCellRenderer(new ButtonRenderer());
-        tableParticipants.getColumn("Abandon").setCellEditor(new ButtonEditor(new JCheckBox(), this));
 
         this.tableParticipants.getColumnModel().getColumn(0).setPreferredWidth(5);
         this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(30);

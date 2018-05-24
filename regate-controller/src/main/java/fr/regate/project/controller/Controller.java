@@ -5,6 +5,7 @@ import fr.regate.project.model.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -28,7 +29,7 @@ public class Controller {
 
     public void runRegRunChrono() {
         if (chrono.isRunning()) {
-            JOptionPane.showMessageDialog(null, "le chronomètre nTourne vous ne pouvez pas le lancer.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "le chronomètre Tourne vous ne pouvez pas le lancer.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else if (runRegate.getLblChrono().getText() != "00:00:00") {
             JOptionPane.showMessageDialog(null, "le chronomètre n'est pas à 0. Veuillez le réinitialiser.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else {
@@ -407,4 +408,26 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    public void completeTabLineLr(Boolean abandon, int row) {
+		if ((chrono.isRunning()) && (views.getLr().getTableParticipants().getValueAt(row, 5) == null) &&
+				views.getLr().getTableParticipants().getValueAt(row, 0) != null)
+		{
+			if (abandon)
+			{
+				views.getLr().getTableParticipants().setValueAt("Abandon",row,5);
+
+			}else
+			{
+				views.getLr().getTableParticipants().setValueAt(new SimpleDateFormat("HH:mm:ss").format(
+						chrono.getTime()*1000- 3.6 * Math.pow(10,6)),row,5);
+			}
+		}else if  (views.getLr().getTableParticipants().getValueAt(row, 5) != null)
+		{
+			JOptionPane.showMessageDialog(null, "Ce participant est déjà arrivé ou a abandoné", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}else if  (!chrono.isRunning())
+		{
+			JOptionPane.showMessageDialog(null, "Le chronomètre n'est pas lancé", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
