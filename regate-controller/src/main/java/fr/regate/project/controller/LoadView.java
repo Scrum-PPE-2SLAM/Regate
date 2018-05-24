@@ -100,10 +100,11 @@ public class LoadView {
     	return sr;
     }
    
-    public Classement showclassementView() {
+    public Classement showClassementView() {
         window.reinitContentPane();
+        cla.createPanelSelRegate("CLASSEMENT");
         cla.createClassement();
-        window.reinitContentPane();
+        window.revalidateContentPane();
         return cla;
     }
 

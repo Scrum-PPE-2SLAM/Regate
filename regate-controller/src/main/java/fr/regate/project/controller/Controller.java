@@ -94,7 +94,7 @@ public class Controller {
                 views.showAddRegateView(this.getAllNameParticipants(), this.getAllShip());
                 break;
             case CLASSEMENT:
-                views.showclassementView();
+                views.showClassementView();
             case RUN_REGATE:
                 views.showRunRegateView(getAllRegate());
                 break;

@@ -46,7 +46,7 @@ public class ButtonListener implements ActionListener {
         MENU_ITEM_MODIFYPARTICIPANT = views.getWindow().getMntmModifyParticipant();
         MENU_ITEM_CHANGEREGATE = views.getWindow().getMntmModifyRegate();
         MENU_ITEM_DELETREGATE = views.getWindow().getMntmDeleteRgate();
-        MENU_ITEM_CLASSEMENT = views.getWindow().getMntmClassementPerCatgorie();
+        MENU_ITEM_CLASSEMENT = views.getWindow().getMntmClassementRegate();
         MENU_ITEM_ADDSHIP = views.getWindow().getmntmAddShip();
        
         ADDPARTICIPANT_BTN_SEND = views.getAp().getBtnSend();
