@@ -225,7 +225,7 @@ public class Controller {
     	}	
     }
     
-   public void bddUpdateRegate(){
+    public void bddUpdateRegate(){
 	   
 	   int idRegate = Integer.parseInt(views.getAr().getIdRegate());
 	   String nameRegate = views.getAr().getNameRegate();
@@ -243,8 +243,8 @@ public class Controller {
 	}
 	   bddUpdateRegateToPart(idRegate);
     }
-   
-   	public void bddDeletRegate() {
+
+    public void bddDeletRegate() {
    		Regate maRegate = manager.getAllRegates().get(views.getSr().getcboDelRegate().getSelectedIndex());
    		try {
    			int value = JOptionPane.showConfirmDialog(null,"êtes vous sûr de vouloir supprimer " + maRegate.getIdRegate() + " : " + maRegate.getNameRegate() + " de la base de données", "Alerte", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION);
@@ -269,7 +269,7 @@ public class Controller {
 		}
     	for(int i = 0; i < mesParticipantsId.size(); i++) {
     		try {
-				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), tempsParticipants.get(i).getTime());
+				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), Integer.parseInt(views.getLr().getIdRegate()), tempsParticipants.get(i).getTime());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
