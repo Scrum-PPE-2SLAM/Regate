@@ -133,7 +133,8 @@ public class Controller {
     
     public void bddAddRegate() {
     	String nameRegate = views.getAr().getNameRegate();
-    	Date dateRegate = null;
+    	System.out.println(views.getAr().getDateRegate().getTime());
+    	Date dateRegate =new java.sql.Date(views.getAr().getDateRegate().getTime());
 
     	String startPlace = views.getAr().getPlaceDeparture();
     	String endPlace = views.getAr().getPlaceArrival();
@@ -158,8 +159,6 @@ public class Controller {
 		}
     	
     }
-    
- 
     
     public void bddAddShip() {
     	String nameShip = views.getAb().getNameShip();
@@ -382,6 +381,8 @@ public class Controller {
     	views.getAr().setPlaceDeparture(maRegate.getStartPoint());
     	views.getAr().setPlaceArrival(maRegate.getEndPoint());
     	views.getAr().setDistance(String.valueOf(maRegate.getDistance()));
+    	views.getAr().setDate((new java.util.Date(maRegate.getDateRegate().getTime())));
+
     	
     }
     
@@ -408,6 +409,7 @@ public class Controller {
     	views.getLr().setPlaceDeparture(maRegate.getStartPoint());
     	views.getLr().setPlaceArrival(maRegate.getEndPoint());
     	views.getLr().setDistance(String.valueOf(maRegate.getDistance()));
+    	views.getLr().setDate(maRegate.getDateRegate());
     }
     
     public void clearJtable() {
