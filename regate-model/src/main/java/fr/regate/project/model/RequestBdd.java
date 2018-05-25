@@ -232,4 +232,26 @@ public class RequestBdd {
 		System.out.println("request Delet Send !");
 	}
 	
+	public static void reqUpdateTimePart(int idParticipant, long time) throws SQLException {
+		PreparedStatement updateParticipant = BddConnection.getCon().prepareStatement("UPDATE `inscription` SET `I_COMPTIME` = ? WHERE `inscription`.`I_ID` = ?;");
+		updateParticipant.setLong(1, time);
+		updateParticipant.setInt(2, idParticipant);
+		
+		updateParticipant.executeUpdate();
+		System.out.println("Participant update");
+		
+	}
+	public static void reqUpdateRegateFinish(int idRegate) throws SQLException {
+		PreparedStatement updateRegate = BddConnection.getCon().prepareStatement("UPDATE `regate` SET `R_STATUS` = ? WHERE `regate`.`R_ID` = ?;");
+		updateRegate.setInt(1, 1);
+		updateRegate.setInt(2, idRegate);
+		
+		updateRegate.executeUpdate();
+		System.out.println("Regate was finished");
+	}
+	
+	
+	
+	
+	
 }

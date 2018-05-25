@@ -5,6 +5,7 @@ import fr.regate.project.model.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -257,6 +258,36 @@ public class Controller {
 			e.printStackTrace();
 		}
    	}
+   	
+   	public void bddFinishRegate() {
+   		ArrayList<Integer> mesParticipantsId = new ArrayList<Integer>();
+    	ArrayList<Time> tempsParticipants = new ArrayList<Time>();
+    	for (int i = 0; i<20; i++) {
+			if (views.getLr().getTableParticipants().getValueAt(i, 0) != null) {
+				mesParticipantsId.add(Integer.parseInt(views.getLr().getTableParticipants().getValueAt(i, 0).toString()));
+				tempsParticipants.add(Time.valueOf(String.valueOf(views.getLr().getTableParticipants().getValueAt(i, 5))));
+			}
+		}
+    	for(int i = 0; i < mesParticipantsId.size(); i++) {
+    		try {
+				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), tempsParticipants.get(i).getTime());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	if(mesParticipantsId.size() > 0) {
+    		try {
+				RequestBdd.reqUpdateRegateFinish(Integer.parseInt(views.getLr().getIdRegate()));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+   	}
     
     public String[] getAllNameParticipants() {
         this.refreshManagerInfo();
@@ -372,7 +403,7 @@ public class Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	//views.getLr().setIdRegate(String.valueOf(maRegate.getIdRegate()));
+    	views.getLr().setIdRegate(String.valueOf(maRegate.getIdRegate()));
     	views.getLr().setNameRegate(maRegate.getNameRegate());
     	views.getLr().setPlaceDeparture(maRegate.getStartPoint());
     	views.getLr().setPlaceArrival(maRegate.getEndPoint());

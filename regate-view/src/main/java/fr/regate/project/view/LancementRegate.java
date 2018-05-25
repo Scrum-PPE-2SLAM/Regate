@@ -15,7 +15,7 @@ public class LancementRegate extends JFrame
     private static final long serialVersionUID = 1L;
     private JTable tableParticipants;
     private JLabel lblChrono;
-    private JTextField tfNameRegate, tfStartPoint, tfEndPoint, tfDistance;
+    private JTextField tfNameRegate, tfStartPoint, tfEndPoint, tfDistance, tfIdRegate;
     private JTextField tfDate;
     private Window window;
     private JButton btnSelect, btnEnd, btnReinit, btnStart;
@@ -69,41 +69,50 @@ public class LancementRegate extends JFrame
 
         panelInfoRegate.setLayout(null);
 
+        JLabel lblIdRegate = new JLabel("ID régate : ");
+        lblIdRegate.setBounds(20, 11, 150, 43);
+        
         JLabel lblNameRegate = new JLabel("Nom de la régate : ");
-        lblNameRegate.setBounds(20, 21, 150, 43);
+        lblNameRegate.setBounds(20, 45, 150, 43);
 
         JLabel lblDate = new JLabel("Date : ");
-        lblDate.setBounds(20, 52, 150, 43);
+        lblDate.setBounds(20, 80, 150, 43);
 
         JLabel lbStartPoint = new JLabel("Lieu de départ : ");
-        lbStartPoint.setBounds(20, 92, 150, 43);
+        lbStartPoint.setBounds(20, 110, 150, 43);
 
         JLabel lblEndPoint = new JLabel("Lieu d'arrivée : ");
-        lblEndPoint.setBounds(20, 130, 150, 43);
+        lblEndPoint.setBounds(20, 140, 150, 43);
 
         JLabel lblDistance = new JLabel("Distance : ");
-        lblDistance.setBounds(20, 165, 150, 43);
+        lblDistance.setBounds(20, 170, 150, 43);
 
+        tfIdRegate = new JTextField(15);
+        tfIdRegate.setEditable(false);
+        tfIdRegate.setBounds(160, 20, 185, 26);
+        
         this.tfNameRegate = new JTextField(15);
         this.tfNameRegate.setEditable(false);
-        this.tfNameRegate.setBounds(160, 29, 185, 26);
+        this.tfNameRegate.setBounds(160, 55, 185, 26);
 
         this.tfStartPoint = new JTextField(15);
         this.tfStartPoint.setEditable(false);
-        this.tfStartPoint.setBounds(160, 100, 185, 26);
+        this.tfStartPoint.setBounds(160, 120, 185, 26);
 
         this.tfEndPoint = new JTextField(15);
         this.tfEndPoint.setEditable(false);
-        this.tfEndPoint.setBounds(160, 138, 185, 26);
+        this.tfEndPoint.setBounds(160, 150, 185, 26);
 
         this.tfDistance = new JTextField(15);
         this.tfDistance.setEditable(false);
-        this.tfDistance.setBounds(160, 173, 185, 26);
+        this.tfDistance.setBounds(160, 180, 185, 26);
 
         this.tfDate = new JTextField();
-        this.tfDate.setBounds(160, 64, 118, 26);
+        this.tfDate.setBounds(160, 91, 118, 26);
         this.tfDate.setEditable(false);
 
+        panelInfoRegate.add(lblIdRegate);
+        panelInfoRegate.add(tfIdRegate);
         panelInfoRegate.add(lblNameRegate);
         panelInfoRegate.add(tfNameRegate);
         panelInfoRegate.add(lblDate);
@@ -264,6 +273,13 @@ public class LancementRegate extends JFrame
         lblChrono.setText(chrono);
     }
     
+    public void setIdRegate(String idRegate) {
+    	tfIdRegate.setText(idRegate);
+    }
+    
+    public String getIdRegate() {
+    	return tfIdRegate.getText();
+    }
     public void setNameRegate(String nameRegate) {
     	tfNameRegate.setText(nameRegate);
     }

@@ -84,6 +84,7 @@ public class ButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == RUNREGATE_BTN_END) {
             controller.runRegStopChrono();
+            controller.bddFinishRegate();
         }else if (e.getSource() == RUNREGATE_BTN_VALIDATE) {
            controller.runRegValidate();
            controller.selRegate();
