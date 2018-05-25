@@ -382,14 +382,28 @@ public class Controller {
     	views.getAr().setPlaceArrival(maRegate.getEndPoint());
     	views.getAr().setDistance(String.valueOf(maRegate.getDistance()));
     	views.getAr().setDate((new java.util.Date(maRegate.getDateRegate().getTime())));
-
-    	
     }
     
     public void selRegate() {
-    	this.refreshManagerInfo();
     	clearJtableRunRegate();
-    	Regate maRegate = manager.getAllRegates().get(views.getLr().getCboSelRegate().getSelectedIndex());
+
+		String selRegate = (String) views.getLr().getCboSelRegate().getSelectedItem();
+		String idRegate = "";
+
+		int index = 0;
+		while (selRegate.charAt(index) != ' ') {
+			idRegate += selRegate.charAt(index);
+			index ++;
+		}
+		Regate maRegate = manager.getAllRegates().get(0);
+		for (int i=0; i <=  manager.getAllRegates().size(); i++) {
+			if (manager.getAllRegates().get(i).getIdRegate() == Integer.parseInt(idRegate)) {
+				maRegate = manager.getAllRegates().get(i);
+				break;
+			}
+
+		}
+
     	Hashtable<String, String> participantAndShip;
     
     	try {
