@@ -362,16 +362,56 @@ public class Controller {
 		}
     }
     
+    public void infoClassement() {
+    	refreshManagerInfo();
+    	clearTableClassement();
+    	
+    	Regate maRegate = manager.getRunRegates().get(views.getCla().getCboSelRegate().getSelectedIndex());
+    	Hashtable<String, String> participantAndShip;
+    	
+    	try {
+			participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
+			System.out.println(participantAndShip.size()/8);
+			for (int i= 0; i < participantAndShip.size()/8; i++) {
+				views.getCla().setTableClassement(String.valueOf(i), i, 0);
+				views.getCla().setTableClassement(String.valueOf(participantAndShip.get("idPart"+i)), i, 1);
+				views.getCla().setTableClassement(participantAndShip.get("lastName"+i), i, 2);
+				views.getCla().setTableClassement(participantAndShip.get("firstName"+i), i, 3);
+				views.getCla().setTableClassement(participantAndShip.get("nameShip"+i), i, 4);
+				views.getCla().setTableClassement(String.valueOf(participantAndShip.get("tempsReel"+i)), i, 5);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    }
+    
     public void selRegateToModif() {
     	this.refreshManagerInfo();
     	clearJtable();
     	
-    	Regate maRegate = manager.getAllRegates().get(views.getAr().getCboSelRegateToModif().getSelectedIndex());
+    	String selRegate = (String) views.getAr().getCboSelRegateToModif().getSelectedItem();
+		String idRegate = "";
+
+		int index = 0;
+		while (selRegate.charAt(index) != ' ') {
+			idRegate += selRegate.charAt(index);
+			index ++;
+		}
+		Regate maRegate = manager.getAllRegates().get(0);
+		for (int i=0; i <=  manager.getAllRegates().size(); i++) {
+			if (manager.getAllRegates().get(i).getIdRegate() == Integer.parseInt(idRegate)) {
+				maRegate = manager.getAllRegates().get(i);
+				break;
+			}
+
+		}
     	Hashtable<String, String> participantAndShip;
     
     	try {
     		participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
-    		for (int i= 0; i < participantAndShip.size()/6; i++) {
+    		for (int i= 0; i < participantAndShip.size()/8; i++) {
     			views.getAr().setTableParticipants(String.valueOf(participantAndShip.get("idPart"+i)), i, 0);
     			views.getAr().setTableParticipants(participantAndShip.get("lastName"+i), i, 1);
     			views.getAr().setTableParticipants(participantAndShip.get("firstName"+i), i, 2);
@@ -391,6 +431,7 @@ public class Controller {
     	views.getAr().setPlaceArrival(maRegate.getEndPoint());
     	views.getAr().setDistance(String.valueOf(maRegate.getDistance()));
     	views.getAr().setDate((new java.util.Date(maRegate.getDateRegate().getTime())));
+    	
     }
     
     public void selRegate() {
@@ -417,7 +458,7 @@ public class Controller {
     
     	try {
     		participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
-    		for (int i= 0; i < participantAndShip.size()/6; i++) {
+    		for (int i= 0; i < participantAndShip.size()/8; i++) {
     			views.getLr().setTableParticipants(String.valueOf(participantAndShip.get("idPart"+i)), i, 0);
     			views.getLr().setTableParticipants(participantAndShip.get("lastName"+i), i, 1);
     			views.getLr().setTableParticipants(participantAndShip.get("nameShip"+i), i, 2);
@@ -441,6 +482,16 @@ public class Controller {
 			if (views.getAr().getTableParticipants().getValueAt(i, 0) != null) {
 				for(int j = 0; j < 7; j++ ) {
 					views.getAr().setTableParticipants(null, i, j);					
+				}
+			}
+    	}
+    }
+    
+    public void clearTableClassement(){
+    	for (int i = 0; i<20; i++) {
+			if (views.getCla().getTableClassement().getValueAt(i, 0) != null) {
+				for(int j = 0; j < 6; j++ ) {
+					views.getCla().setTableClassement(null, i, j);					
 				}
 			}
     	}

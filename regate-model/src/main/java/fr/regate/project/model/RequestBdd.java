@@ -103,7 +103,7 @@ public class RequestBdd {
 	}
 	
 	public static Hashtable<String, String> getParticipantsInscrit(int idRegate) throws SQLException {
-		String requestGetALLInscription = "SELECT * FROM participant AS p INNER JOIN ship AS s INNER JOIN inscription AS i ON i.P_ID = p.P_ID AND i.S_ID = s.S_ID AND i.R_ID = " + idRegate;
+		String requestGetALLInscription = "SELECT * FROM participant AS p INNER JOIN ship AS s INNER JOIN inscription AS i ON i.P_ID = p.P_ID AND i.S_ID = s.S_ID AND i.R_ID = " + idRegate +" ORDER BY I.I_REALTIME";
 		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetALLInscription));
 		Hashtable<String, String> ParticipantAndShip = new Hashtable<String, String>();
 		int i = 0;
@@ -116,6 +116,7 @@ public class RequestBdd {
 			String nameShip = BddConnection.getRs().getString(7);
 			String categoryShip = String.valueOf(BddConnection.getRs().getInt(8));
 			String RatingShip = String.valueOf(BddConnection.getRs().getInt(9));
+			String tempsReel = String.valueOf(BddConnection.getRs().getInt(17));
 			
 			ParticipantAndShip.put("idPart"+ i, idParticipant);
 			ParticipantAndShip.put("lastName"+ i, lastNamePart);
@@ -124,7 +125,7 @@ public class RequestBdd {
 			ParticipantAndShip.put("nameShip"+ i, nameShip);
 			ParticipantAndShip.put("categoryShip"+ i, categoryShip);
 			ParticipantAndShip.put("ratingShip"+ i, RatingShip);
-			
+			ParticipantAndShip.put("tempsReel"+ i, tempsReel);
 			i++;
 		}
 		return ParticipantAndShip;

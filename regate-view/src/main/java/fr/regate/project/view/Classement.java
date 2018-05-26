@@ -28,6 +28,7 @@ public class Classement extends JFrame {
 
 	public Classement(Window window){
 		this.window = window;
+		btnSelect = new JButton("Valider");
 	}
 	
 	public void createClassement(){	
@@ -49,44 +50,46 @@ public class Classement extends JFrame {
 		tableClassement.setFillsViewportHeight(true);
 		tableClassement.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
 			},
-			new String[] {"Position", "Nom", "Prenom", "Temp r\u00E9el", "Temp compens\u00E9"}
+			new String[] {"Position", "ID Participant", "Nom", "Prenom","Nom du bateau", "Temp r\u00E9el", "Temp compens\u00E9"}
 		) {
 
 			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false
+				false, false, false, false, false,false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
 		
-		tableClassement.getColumnModel().getColumn(0).setPreferredWidth(1);
-		tableClassement.getColumnModel().getColumn(1).setPreferredWidth(70);
-		tableClassement.getColumnModel().getColumn(2).setPreferredWidth(70);
-		tableClassement.getColumnModel().getColumn(3).setPreferredWidth(70);
-		tableClassement.getColumnModel().getColumn(4).setPreferredWidth(70);
+		tableClassement.getColumnModel().getColumn(0).setPreferredWidth(10);
+		tableClassement.getColumnModel().getColumn(1).setPreferredWidth(35);
+		tableClassement.getColumnModel().getColumn(2).setPreferredWidth(50);
+		tableClassement.getColumnModel().getColumn(3).setPreferredWidth(50);
+		tableClassement.getColumnModel().getColumn(4).setPreferredWidth(50);
+		tableClassement.getColumnModel().getColumn(3).setPreferredWidth(50);
+		tableClassement.getColumnModel().getColumn(4).setPreferredWidth(50);
 	}
 	
 	public void createPanelSelRegate(String categorie) {
@@ -102,18 +105,6 @@ public class Classement extends JFrame {
 			
 			
 			
-			this.btnSelect = new JButton("Valider");
-			this.btnSelect.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for (int i=0; i<20; i++) {
-						tableClassement.setValueAt("",i,0);
-						tableClassement.setValueAt("",i,1);
-						tableClassement.setValueAt("",i,2);
-						tableClassement.setValueAt("",i,3);
-						tableClassement.setValueAt("",i,4);
-					}
-				}
-			});
 			this.btnSelect.setFont(new Font("Tahoma", Font.BOLD, 12));
 			this.btnSelect.setBounds(550, 11, 100, 20);
 			this.panelSelRegate.add(btnSelect);
@@ -124,5 +115,21 @@ public class Classement extends JFrame {
 		cboSelRegate.setBounds(383, 11, 161, 20);
 		panelSelRegate.add(cboSelRegate);
 	}
+	
+	public JComboBox<String> getCboSelRegate() {
+		return cboSelRegate;
+	}
+	
+	public JButton getBtnSelect() {
+		return btnSelect;
+	}
+	
+	public JTable getTableClassement() {
+		return tableClassement;
+	}
+	public void setTableClassement(String monString, int row, int column) {
+		tableClassement.setValueAt(monString, row, column);
+	}
+
 }
 

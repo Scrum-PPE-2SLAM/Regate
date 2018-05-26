@@ -19,6 +19,8 @@ public class ButtonListener implements ActionListener {
     private final JButton MODIFREGATE_BTN_VALIDER;
     private final JButton MODIFREGATE_BTN_SEND;
     private final JButton DELETREGATE_BTN_DELET;
+    private final JButton CLASSEMENT_BTN_SELECT;
+    
 
     private final JMenuItem MENU_ITEM_ADDREGATE;
     private final JMenuItem MENU_ITEM_RUNREGATE;
@@ -59,6 +61,8 @@ public class ButtonListener implements ActionListener {
         DELETREGATE_BTN_DELET = views.getSr().getBtnDelRegate();
         
         ADDSHIP_BTN_SEND =views.getAb().getBtnSend();
+        CLASSEMENT_BTN_SELECT = views.getCla().getBtnSelect();
+        
         this.listeners();
     }
 
@@ -78,6 +82,7 @@ public class ButtonListener implements ActionListener {
         views.getAr().getBtnAddParticipant().addActionListener(this);
         views.getAr().getBtnSendModifRegate().addActionListener(this);
         views.getSr().getBtnDelRegate().addActionListener(this);
+        views.getCla().getBtnSelect().addActionListener(this);
 
     }
 
@@ -129,6 +134,8 @@ public class ButtonListener implements ActionListener {
         	controller.bddUpdateRegate();
         }else if(e.getSource() == DELETREGATE_BTN_DELET) {
         	controller.bddDeletRegate();
+        }else if (e.getSource() == CLASSEMENT_BTN_SELECT) {
+        	controller.infoClassement();
         }
     }
 }
