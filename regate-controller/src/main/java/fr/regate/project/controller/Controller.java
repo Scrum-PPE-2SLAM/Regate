@@ -133,7 +133,8 @@ public class Controller {
     
     public void bddAddRegate() {
     	String nameRegate = views.getAr().getNameRegate();
-    	Date dateRegate = null;
+    	System.out.println(views.getAr().getDateRegate().getTime());
+    	Date dateRegate =new java.sql.Date(views.getAr().getDateRegate().getTime());
 
     	String startPlace = views.getAr().getPlaceDeparture();
     	String endPlace = views.getAr().getPlaceArrival();
@@ -158,8 +159,6 @@ public class Controller {
 		}
     	
     }
-    
- 
     
     public void bddAddShip() {
     	String nameShip = views.getAb().getNameShip();
@@ -226,7 +225,7 @@ public class Controller {
     	}	
     }
     
-   public void bddUpdateRegate(){
+    public void bddUpdateRegate(){
 	   
 	   int idRegate = Integer.parseInt(views.getAr().getIdRegate());
 	   String nameRegate = views.getAr().getNameRegate();
@@ -244,8 +243,8 @@ public class Controller {
 	}
 	   bddUpdateRegateToPart(idRegate);
     }
-   
-   	public void bddDeletRegate() {
+
+    public void bddDeletRegate() {
    		Regate maRegate = manager.getAllRegates().get(views.getSr().getcboDelRegate().getSelectedIndex());
    		try {
    			int value = JOptionPane.showConfirmDialog(null,"êtes vous sûr de vouloir supprimer " + maRegate.getIdRegate() + " : " + maRegate.getNameRegate() + " de la base de données", "Alerte", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION);
@@ -269,9 +268,8 @@ public class Controller {
 			}
 		}
     	for(int i = 0; i < mesParticipantsId.size(); i++) {
-    		System.out.println(i + " : " +tempsParticipants.get(i).getTime());
-			try {
-				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), tempsParticipants.get(i).getTime());
+    		try {
+				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), Integer.parseInt(views.getLr().getIdRegate()), tempsParticipants.get(i).getTime());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -380,13 +378,29 @@ public class Controller {
     	views.getAr().setPlaceDeparture(maRegate.getStartPoint());
     	views.getAr().setPlaceArrival(maRegate.getEndPoint());
     	views.getAr().setDistance(String.valueOf(maRegate.getDistance()));
-    	
+    	views.getAr().setDate((new java.util.Date(maRegate.getDateRegate().getTime())));
     }
     
     public void selRegate() {
-    	this.refreshManagerInfo();
     	clearJtableRunRegate();
-    	Regate maRegate = manager.getAllRegates().get(views.getLr().getCboSelRegate().getSelectedIndex());
+
+		String selRegate = (String) views.getLr().getCboSelRegate().getSelectedItem();
+		String idRegate = "";
+
+		int index = 0;
+		while (selRegate.charAt(index) != ' ') {
+			idRegate += selRegate.charAt(index);
+			index ++;
+		}
+		Regate maRegate = manager.getAllRegates().get(0);
+		for (int i=0; i <=  manager.getAllRegates().size(); i++) {
+			if (manager.getAllRegates().get(i).getIdRegate() == Integer.parseInt(idRegate)) {
+				maRegate = manager.getAllRegates().get(i);
+				break;
+			}
+
+		}
+
     	Hashtable<String, String> participantAndShip;
     
     	try {
@@ -406,6 +420,7 @@ public class Controller {
     	views.getLr().setPlaceDeparture(maRegate.getStartPoint());
     	views.getLr().setPlaceArrival(maRegate.getEndPoint());
     	views.getLr().setDistance(String.valueOf(maRegate.getDistance()));
+    	views.getLr().setDate(maRegate.getDateRegate());
     }
     
     public void clearJtable() {

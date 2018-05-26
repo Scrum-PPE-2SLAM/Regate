@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -269,6 +270,10 @@ public class AjoutRegate extends JFrame
 	public int getDistance() {
 		return Integer.parseInt(tfDistance.getText());
 	}
+
+	public Date getDateRegate() {
+		return dateChooser.getDate();
+	}
 	
 	public void setNameRegate(String value) {
 		tfNameRegate.setText(value);
@@ -296,6 +301,11 @@ public class AjoutRegate extends JFrame
 	}
 	public void setTableParticipants(String monString, int row, int column) {
 		tableParticipants.setValueAt(monString, row, column);
+	}
+
+	public void setDate(Date date) {
+		dateChooser.setDate(date);
+
 	}
 	
 

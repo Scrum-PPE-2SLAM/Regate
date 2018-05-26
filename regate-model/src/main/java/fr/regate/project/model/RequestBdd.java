@@ -150,14 +150,14 @@ public class RequestBdd {
 	 * @throws SQLException
 	 */
 	public static void reqAddRegate(String nameRegate, Date dateRegate, String startPlace, String endPlace, int distance, int status) throws SQLException {
-		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`regate` (`R_NAME`, `R_STARTPLACE`, `R_ENDPLACE`, `R_DISTANCE`, `R_STATUS`)"
-				+ "VALUES (?, ?, ?, ?, ?); ");
+		PreparedStatement prepare = BddConnection.getCon().prepareStatement("INSERT INTO `eole`.`regate` (`R_NAME`,`R_DATE`, `R_STARTPLACE`, `R_ENDPLACE`, `R_DISTANCE`, `R_STATUS`)"
+				+ "VALUES (?, ?, ?, ?, ?,?); ");
 		prepare.setString (1, nameRegate);
-	    //prepare.setDate (2, dateRegate);
-	    prepare.setString (2, startPlace);
-	    prepare.setString (3, endPlace);
-	    prepare.setInt (4, distance);
-	    prepare.setInt (5, status);
+	    prepare.setDate (2, dateRegate);
+	    prepare.setString (3, startPlace);
+	    prepare.setString (4, endPlace);
+	    prepare.setInt (5, distance);
+	    prepare.setInt (6, status);
 		
 	    prepare.executeUpdate();
 	    System.out.println("request add régate send !");
@@ -232,10 +232,11 @@ public class RequestBdd {
 		System.out.println("request Delet Send !");
 	}
 	
-	public static void reqUpdateTimePart(int idParticipant, long time) throws SQLException {
-		PreparedStatement updateParticipant = BddConnection.getCon().prepareStatement("UPDATE `inscription` SET `I_COMPTIME` = ? WHERE `inscription`.`I_ID` = ?;");
-		updateParticipant.setLong(1, time);
+	public static void reqUpdateTimePart(int idParticipant, int idRegate, long time) throws SQLException {
+		PreparedStatement updateParticipant = BddConnection.getCon().prepareStatement("UPDATE `inscription` SET `I_REALTIME` = ? WHERE P_ID = ? AND R_ID = ?;");
+		updateParticipant.setLong(1, time/1000 + 3600);
 		updateParticipant.setInt(2, idParticipant);
+		updateParticipant.setInt(3, idRegate);
 		
 		updateParticipant.executeUpdate();
 		System.out.println("Participant update");

@@ -2,6 +2,7 @@ package fr.regate.project.view;
 
 import java.awt.*;
 import java.awt.Window;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -292,6 +293,7 @@ public class LancementRegate extends JFrame
     public void setDistance(String distance) {
     	tfDistance.setText(distance);
     }
+    public void setDate(Date date) {tfDate.setText(date.toString());}
     
     public JTable getTableParticipants() {
 		return tableParticipants;
