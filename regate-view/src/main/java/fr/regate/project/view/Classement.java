@@ -100,9 +100,7 @@ public class Classement extends JFrame {
 			lblSelRegate.setBounds(217, 14, 156, 14);
 			panelSelRegate.add(lblSelRegate);
 			
-			cboSelRegate = new JComboBox<String>();
-			cboSelRegate.setBounds(383, 11, 161, 20);
-			panelSelRegate.add(cboSelRegate);
+			
 			
 			this.btnSelect = new JButton("Valider");
 			this.btnSelect.addActionListener(new ActionListener() {
@@ -120,5 +118,11 @@ public class Classement extends JFrame {
 			this.btnSelect.setBounds(550, 11, 100, 20);
 			this.panelSelRegate.add(btnSelect);
 		}
+	
+	public void ajoutCombo(String[] listRegate) {
+		cboSelRegate = new JComboBox<String>(listRegate);
+		cboSelRegate.setBounds(383, 11, 161, 20);
+		panelSelRegate.add(cboSelRegate);
+	}
 }
 

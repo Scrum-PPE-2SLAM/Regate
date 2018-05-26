@@ -107,10 +107,12 @@ public class LoadView {
     	return sr;
     }
    
-    public Classement showClassementView() {
+    public Classement showClassementView(String[] listeRegate) {
         window.reinitContentPane();
-        cla.createPanelSelRegate("CLASSEMENT");
+        cla.createPanelSelRegate("");
+        cla.ajoutCombo(listeRegate);
         cla.createClassement();
+        
         window.revalidateContentPane();
         return cla;
     }

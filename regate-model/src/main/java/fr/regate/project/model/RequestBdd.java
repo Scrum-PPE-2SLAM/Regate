@@ -88,6 +88,20 @@ public class RequestBdd {
 		return listShip;
 	}
 	
+
+	public static ArrayList<Regate> getListRunRegate() throws SQLException {
+		String requestGetRunRegate = "SELECT * FROM regate WHERE R_STATUS = 1;";
+		ArrayList<Regate> listRunRegate = new ArrayList<Regate>();
+		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetRunRegate));
+		while(BddConnection.getRs().next()) {
+			Regate regate = new Regate(BddConnection.getRs().getInt(1), BddConnection.getRs().getString(2), BddConnection.getRs().getDate(3), BddConnection.getRs().getString(4),
+					BddConnection.getRs().getString(5), BddConnection.getRs().getInt(6), BddConnection.getRs().getInt(7));
+			
+			listRunRegate.add(regate);
+		}
+		return listRunRegate;
+	}
+	
 	public static Hashtable<String, String> getParticipantsInscrit(int idRegate) throws SQLException {
 		String requestGetALLInscription = "SELECT * FROM participant AS p INNER JOIN ship AS s INNER JOIN inscription AS i ON i.P_ID = p.P_ID AND i.S_ID = s.S_ID AND i.R_ID = " + idRegate;
 		BddConnection.setRs(BddConnection.getSt().executeQuery(requestGetALLInscription));
@@ -250,7 +264,6 @@ public class RequestBdd {
 		updateRegate.executeUpdate();
 		System.out.println("Regate was finished");
 	}
-	
 	
 	
 	

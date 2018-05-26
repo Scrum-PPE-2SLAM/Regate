@@ -6,6 +6,7 @@ public class Manager {
     private Manager() {}
     ArrayList<Participant> allParticipants;
     ArrayList<Regate> allRegates;
+    ArrayList<Regate> runRegates;
     ArrayList<Ship> allShip;
 
 
@@ -28,7 +29,14 @@ public class Manager {
     public ArrayList<Regate> getAllRegates() {
         return allRegates;
     }
+    
+    public ArrayList<Regate> getRunRegates(){
+    	return runRegates;
+    }
 
+    public void setRunRegates(ArrayList<Regate> runRegates) {
+    	this.runRegates = runRegates;
+    }
     public void setAllRegates(ArrayList<Regate> allRegates) {
         this.allRegates = allRegates;
     }

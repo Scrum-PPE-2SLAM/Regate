@@ -96,7 +96,8 @@ public class Controller {
                 views.showAddRegateView(this.getAllNameParticipants(), this.getAllShip());
                 break;
             case CLASSEMENT:
-                views.showClassementView();
+                views.showClassementView(getRunRegate());
+                break;
             case RUN_REGATE:
                 views.showRunRegateView(getAllRegate());
                 break;
@@ -105,6 +106,7 @@ public class Controller {
                 break;
             case SUPPR_REGATE:
             	views.showDeletRegateView(getAllRegate());
+            	break;
         }
     }
     
@@ -276,9 +278,9 @@ public class Controller {
 			}
     	}
     	if(mesParticipantsId.size() > 0) {
-    		try {
-				//RequestBdd.reqUpdateRegateFinish(Integer.parseInt(views.getLr().getIdRegate()));
-			} catch (NumberFormatException e) {
+			try {
+				RequestBdd.reqUpdateRegateFinish(Integer.parseInt(views.getLr().getIdRegate()));
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -312,6 +314,16 @@ public class Controller {
     		if(maRegate.getStatus() < 1) {    			
     			mesRegates.add(maRegate.getIdRegate() + " : " + maRegate.getNameRegate());
     		}
+    	}
+    	String[] StringArray = mesRegates.toArray(new String[0]);
+    	return StringArray;
+    }
+    
+    public String[] getRunRegate() {
+    	this.refreshManagerInfo();
+    	ArrayList<String> mesRegates = new ArrayList<String>();
+    	for (Regate maRegate : manager.getRunRegates()) {			
+    		mesRegates.add(maRegate.getIdRegate() + " : " + maRegate.getNameRegate());
     	}
     	String[] StringArray = mesRegates.toArray(new String[0]);
     	return StringArray;
@@ -448,6 +460,7 @@ public class Controller {
             manager.setAllParticipants(RequestBdd.getListParticipant());
             manager.setAllRegates(RequestBdd.getListRegate());
             manager.setAllShip(RequestBdd.getListShip());
+            manager.setRunRegates(RequestBdd.getListRunRegate());
         } catch (SQLException e) {
             e.printStackTrace();
         }
