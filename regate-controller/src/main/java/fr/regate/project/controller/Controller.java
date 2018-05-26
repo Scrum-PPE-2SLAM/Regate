@@ -269,7 +269,8 @@ public class Controller {
 			}
 		}
     	for(int i = 0; i < mesParticipantsId.size(); i++) {
-    		try {
+    		System.out.println(i + " : " +tempsParticipants.get(i).getTime());
+			try {
 				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), tempsParticipants.get(i).getTime());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -278,11 +279,8 @@ public class Controller {
     	}
     	if(mesParticipantsId.size() > 0) {
     		try {
-				RequestBdd.reqUpdateRegateFinish(Integer.parseInt(views.getLr().getIdRegate()));
+				//RequestBdd.reqUpdateRegateFinish(Integer.parseInt(views.getLr().getIdRegate()));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
