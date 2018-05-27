@@ -391,17 +391,39 @@ public class Controller {
     	
     	Regate maRegate = manager.getRunRegates().get(views.getCla().getCboSelRegate().getSelectedIndex());
     	Hashtable<String, String> participantAndShip;
-    	
+    	Hashtable<String, String> participantAbandon = new Hashtable<String, String>();
+    	int row =0;
+    	int j = 0;
     	try {
 			participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
 			for (int i= 0; i < participantAndShip.size()/9; i++) {
-				views.getCla().setTableClassement(String.valueOf(i), i, 0);
-				views.getCla().setTableClassement(String.valueOf(participantAndShip.get("idPart"+i)), i, 1);
-				views.getCla().setTableClassement(participantAndShip.get("lastName"+i), i, 2);
-				views.getCla().setTableClassement(participantAndShip.get("firstName"+i), i, 3);
-				views.getCla().setTableClassement(participantAndShip.get("nameShip"+i), i, 4);
-				views.getCla().setTableClassement(String.valueOf(participantAndShip.get("tempsReel"+i)), i, 5);
-				views.getCla().setTableClassement(participantAndShip.get("tempsCompense"+i), i, 6);
+				
+				if(participantAndShip.get("tempsReel"+i).equals("0")) {
+					participantAbandon.put("idPart"+j, participantAndShip.get("idPart"+i));
+					participantAbandon.put("lastName"+j, participantAndShip.get("lastName"+i));
+					participantAbandon.put("firstName"+j, participantAndShip.get("firstName"+i));
+					participantAbandon.put("nameShip"+j, participantAndShip.get("nameShip"+i));
+					j++;
+				}else {
+					views.getCla().setTableClassement(String.valueOf(row+1), row, 0);
+					views.getCla().setTableClassement(String.valueOf(participantAndShip.get("idPart"+i)), row, 1);
+					views.getCla().setTableClassement(participantAndShip.get("lastName"+i), row, 2);
+					views.getCla().setTableClassement(participantAndShip.get("firstName"+i), row, 3);
+					views.getCla().setTableClassement(participantAndShip.get("nameShip"+i), row, 4);
+					views.getCla().setTableClassement(String.valueOf(participantAndShip.get("tempsReel"+i)), row, 5);
+					views.getCla().setTableClassement(participantAndShip.get("tempsCompense"+i), row, 6);
+					row ++;
+				}
+			}
+			for (int i= 0; i < participantAbandon.size()/4; i++) {
+				views.getCla().setTableClassement("Abandon", row, 0);
+				views.getCla().setTableClassement(String.valueOf(participantAbandon.get("idPart"+i)), row, 1);
+				views.getCla().setTableClassement(participantAbandon.get("lastName"+i), row, 2);
+				views.getCla().setTableClassement(participantAbandon.get("firstName"+i), row, 3);
+				views.getCla().setTableClassement(participantAbandon.get("nameShip"+i), row, 4);
+				views.getCla().setTableClassement("Abandon", row, 5);
+				views.getCla().setTableClassement("Abanbon", row, 6);
+				row ++;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -513,7 +535,7 @@ public class Controller {
     public void clearTableClassement(){
     	for (int i = 0; i<20; i++) {
 			if (views.getCla().getTableClassement().getValueAt(i, 0) != null) {
-				for(int j = 0; j < 6; j++ ) {
+				for(int j = 0; j < 7; j++ ) {
 					views.getCla().setTableClassement(null, i, j);					
 				}
 			}
