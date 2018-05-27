@@ -135,7 +135,6 @@ public class Controller {
     
     public void bddAddRegate() {
     	String nameRegate = views.getAr().getNameRegate();
-    	System.out.println(views.getAr().getDateRegate().getTime());
     	Date dateRegate =new java.sql.Date(views.getAr().getDateRegate().getTime());
 
     	String startPlace = views.getAr().getPlaceDeparture();
@@ -261,17 +260,41 @@ public class Controller {
    	}
    	
    	public void bddFinishRegate() {
+   		int distanceRegate = 0;
+   		try {
+			for(Regate laRegate : RequestBdd.getListRegate()) {
+				if(laRegate.getIdRegate() == Integer.valueOf(views.getLr().getIdRegate())) {
+					distanceRegate = laRegate.getDistance();
+				}
+			} 
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
    		ArrayList<Integer> mesParticipantsId = new ArrayList<Integer>();
+   		ArrayList<Integer> ratingShip = new ArrayList<Integer>();
     	ArrayList<Time> tempsParticipants = new ArrayList<Time>();
     	for (int i = 0; i<20; i++) {
 			if (views.getLr().getTableParticipants().getValueAt(i, 0) != null) {
 				mesParticipantsId.add(Integer.parseInt(views.getLr().getTableParticipants().getValueAt(i, 0).toString()));
-				tempsParticipants.add(Time.valueOf(String.valueOf(views.getLr().getTableParticipants().getValueAt(i, 5))));
+				ratingShip.add(Integer.valueOf(views.getLr().getTableParticipants().getValueAt(i, 3).toString()));
+				if(views.getLr().getTableParticipants().getValueAt(i, 6) == "Abandon") {
+					tempsParticipants.add(Time.valueOf("00:00:00"));
+				}else {
+					tempsParticipants.add(Time.valueOf(String.valueOf(views.getLr().getTableParticipants().getValueAt(i, 6))));
+				}
+				
 			}
 		}
     	for(int i = 0; i < mesParticipantsId.size(); i++) {
     		try {
-				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), Integer.parseInt(views.getLr().getIdRegate()), tempsParticipants.get(i).getTime());
+    			if(tempsParticipants.get(i).getTime() == -3600000){
+    				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), Integer.parseInt(views.getLr().getIdRegate()), tempsParticipants.get(i).getTime(), 0);
+    			}else {
+    				long tempsCompense =(long) (Math.round(tempsParticipants.get(i).getTime()/1000+3600)+(5143/Math.sqrt(ratingShip.get(i)+3.5))*distanceRegate);
+    				RequestBdd.reqUpdateTimePart(mesParticipantsId.get(i), Integer.parseInt(views.getLr().getIdRegate()), tempsParticipants.get(i).getTime(), tempsCompense);
+    			}
+    			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -371,14 +394,14 @@ public class Controller {
     	
     	try {
 			participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
-			System.out.println(participantAndShip.size()/8);
-			for (int i= 0; i < participantAndShip.size()/8; i++) {
+			for (int i= 0; i < participantAndShip.size()/9; i++) {
 				views.getCla().setTableClassement(String.valueOf(i), i, 0);
 				views.getCla().setTableClassement(String.valueOf(participantAndShip.get("idPart"+i)), i, 1);
 				views.getCla().setTableClassement(participantAndShip.get("lastName"+i), i, 2);
 				views.getCla().setTableClassement(participantAndShip.get("firstName"+i), i, 3);
 				views.getCla().setTableClassement(participantAndShip.get("nameShip"+i), i, 4);
 				views.getCla().setTableClassement(String.valueOf(participantAndShip.get("tempsReel"+i)), i, 5);
+				views.getCla().setTableClassement(participantAndShip.get("tempsCompense"+i), i, 6);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -411,7 +434,7 @@ public class Controller {
     
     	try {
     		participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
-    		for (int i= 0; i < participantAndShip.size()/8; i++) {
+    		for (int i= 0; i < participantAndShip.size()/9; i++) {
     			views.getAr().setTableParticipants(String.valueOf(participantAndShip.get("idPart"+i)), i, 0);
     			views.getAr().setTableParticipants(participantAndShip.get("lastName"+i), i, 1);
     			views.getAr().setTableParticipants(participantAndShip.get("firstName"+i), i, 2);
@@ -458,11 +481,11 @@ public class Controller {
     
     	try {
     		participantAndShip = RequestBdd.getParticipantsInscrit(maRegate.getIdRegate());
-    		for (int i= 0; i < participantAndShip.size()/8; i++) {
+    		for (int i= 0; i < participantAndShip.size()/9; i++) {
     			views.getLr().setTableParticipants(String.valueOf(participantAndShip.get("idPart"+i)), i, 0);
     			views.getLr().setTableParticipants(participantAndShip.get("lastName"+i), i, 1);
     			views.getLr().setTableParticipants(participantAndShip.get("nameShip"+i), i, 2);
-    			
+    			views.getLr().setTableParticipants(participantAndShip.get("ratingShip"+i), i, 3);
     		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -502,7 +525,8 @@ public class Controller {
         	views.getLr().setTableParticipants(null, i, 0);
         	views.getLr().setTableParticipants(null, i, 1);
         	views.getLr().setTableParticipants(null, i, 2);
-        	views.getLr().setTableParticipants(null, i, 5);
+        	views.getLr().setTableParticipants(null, i, 3);
+        	views.getLr().setTableParticipants(null, i, 6);
         }
     }
     
@@ -518,19 +542,19 @@ public class Controller {
     }
 
     public void completeTabLineLr(Boolean abandon, int row) {
-		if ((chrono.isRunning()) && (views.getLr().getTableParticipants().getValueAt(row, 5) == null) &&
+		if ((chrono.isRunning()) && (views.getLr().getTableParticipants().getValueAt(row, 6) == null) &&
 				views.getLr().getTableParticipants().getValueAt(row, 0) != null)
 		{
 			if (abandon)
 			{
-				views.getLr().getTableParticipants().setValueAt("Abandon",row,5);
+				views.getLr().getTableParticipants().setValueAt("Abandon",row,6);
 
 			}else
 			{
 				views.getLr().getTableParticipants().setValueAt(new SimpleDateFormat("HH:mm:ss").format(
-						chrono.getTime()*1000- 3.6 * Math.pow(10,6)),row,5);
+						chrono.getTime()*1000- 3.6 * Math.pow(10,6)),row,6);
 			}
-		}else if  (views.getLr().getTableParticipants().getValueAt(row, 5) != null)
+		}else if  (views.getLr().getTableParticipants().getValueAt(row, 6) != null)
 		{
 			JOptionPane.showMessageDialog(null, "Ce participant est déjà arrivé ou a abandoné", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}else if  (!chrono.isRunning())

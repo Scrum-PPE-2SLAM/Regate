@@ -117,6 +117,7 @@ public class RequestBdd {
 			String categoryShip = String.valueOf(BddConnection.getRs().getInt(8));
 			String RatingShip = String.valueOf(BddConnection.getRs().getInt(9));
 			String tempsReel = String.valueOf(BddConnection.getRs().getInt(17));
+			String tempsCompense = String.valueOf(BddConnection.getRs().getInt(16));
 			
 			ParticipantAndShip.put("idPart"+ i, idParticipant);
 			ParticipantAndShip.put("lastName"+ i, lastNamePart);
@@ -126,6 +127,7 @@ public class RequestBdd {
 			ParticipantAndShip.put("categoryShip"+ i, categoryShip);
 			ParticipantAndShip.put("ratingShip"+ i, RatingShip);
 			ParticipantAndShip.put("tempsReel"+ i, tempsReel);
+			ParticipantAndShip.put("tempsCompense"+i, tempsCompense);
 			i++;
 		}
 		return ParticipantAndShip;
@@ -247,11 +249,12 @@ public class RequestBdd {
 		System.out.println("request Delet Send !");
 	}
 	
-	public static void reqUpdateTimePart(int idParticipant, int idRegate, long time) throws SQLException {
-		PreparedStatement updateParticipant = BddConnection.getCon().prepareStatement("UPDATE `inscription` SET `I_REALTIME` = ? WHERE P_ID = ? AND R_ID = ?;");
-		updateParticipant.setLong(1, time/1000 + 3600);
-		updateParticipant.setInt(2, idParticipant);
-		updateParticipant.setInt(3, idRegate);
+	public static void reqUpdateTimePart(int idParticipant, int idRegate, long time, double tempsCompense) throws SQLException {
+		PreparedStatement updateParticipant = BddConnection.getCon().prepareStatement("UPDATE `inscription` SET `I_REALTIME` = ?, `I_COMPTIME` = ? WHERE P_ID = ? AND R_ID = ?;");
+		updateParticipant.setDouble(1, time/1000 + 3600);
+		updateParticipant.setDouble(2, tempsCompense);
+		updateParticipant.setInt(3, idParticipant);
+		updateParticipant.setInt(4, idRegate);
 		
 		updateParticipant.executeUpdate();
 		System.out.println("Participant update");

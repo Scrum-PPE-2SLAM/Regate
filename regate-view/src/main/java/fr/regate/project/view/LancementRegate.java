@@ -176,30 +176,30 @@ public class LancementRegate extends JFrame
         //this.tableParticipants.setFillsViewportHeight(true);
         this.tableParticipants.setModel(new DefaultTableModel(new Object[][]
                 {
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                        {null, null, null, "✔", "✘", null},
-                },new String[] {"ID","Participant", "Voilier", "Arriv\u00E9e", "Abandon", "Temps"})
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                        {null, null, null, null, "✔", "✘", null},
+                },new String[] {"ID","Participant", "Voilier", "Rat", "Arriv\u00E9e", "Abandon", "Temps"})
         {
             private static final long serialVersionUID = 1L;
-            boolean[] columnEditables = new boolean[] {false, false, false, true, true, false};
+            boolean[] columnEditables = new boolean[] {false, false,false, false, true, true, false};
 
             public boolean isCellEditable(int row, int column)
             {
@@ -211,9 +211,10 @@ public class LancementRegate extends JFrame
         this.tableParticipants.getColumnModel().getColumn(0).setPreferredWidth(5);
         this.tableParticipants.getColumnModel().getColumn(1).setPreferredWidth(30);
         this.tableParticipants.getColumnModel().getColumn(2).setPreferredWidth(30);
-        this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(20);
-        this.tableParticipants.getColumnModel().getColumn(4).setPreferredWidth(20);
+        this.tableParticipants.getColumnModel().getColumn(3).setPreferredWidth(5);
+        this.tableParticipants.getColumnModel().getColumn(4).setPreferredWidth(30);
         this.tableParticipants.getColumnModel().getColumn(5).setPreferredWidth(30);
+        this.tableParticipants.getColumnModel().getColumn(6).setPreferredWidth(30);
         this.tableParticipants.setRowHeight(18);
     }
     public boolean regateIsLoad() {
