@@ -404,14 +404,14 @@ public class Controller {
 					participantAbandon.put("firstName"+j, participantAndShip.get("firstName"+i));
 					participantAbandon.put("nameShip"+j, participantAndShip.get("nameShip"+i));
 					j++;
-				}else {
+				}else {					
 					views.getCla().setTableClassement(String.valueOf(row+1), row, 0);
 					views.getCla().setTableClassement(String.valueOf(participantAndShip.get("idPart"+i)), row, 1);
 					views.getCla().setTableClassement(participantAndShip.get("lastName"+i), row, 2);
 					views.getCla().setTableClassement(participantAndShip.get("firstName"+i), row, 3);
 					views.getCla().setTableClassement(participantAndShip.get("nameShip"+i), row, 4);
-					views.getCla().setTableClassement(String.valueOf(participantAndShip.get("tempsReel"+i)), row, 5);
-					views.getCla().setTableClassement(participantAndShip.get("tempsCompense"+i), row, 6);
+					views.getCla().setTableClassement(convertMinutes(Integer.valueOf(participantAndShip.get("tempsReel"+i))), row, 5);
+					views.getCla().setTableClassement(convertMinutes(Integer.valueOf(participantAndShip.get("tempsCompense"+i))), row, 6);
 					row ++;
 				}
 			}
@@ -561,6 +561,31 @@ public class Controller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public String convertMinutes(int duree) {
+    	int heures= duree / 3600;
+    	int minutes= (duree % 3600) / 60;
+    	int secondes= (((duree % 3600) % 60));
+    	String time ="";
+    	
+    	if(heures < 10) {
+    		time = "0" + heures +":" ;
+    	}else {
+    		time = heures +":";
+    	}
+    	if(minutes < 10) {
+    		time += "0"+minutes +":";
+    	}else {
+    		time += minutes+ ":";
+    	}
+    	if (secondes < 10) {
+    		time+= "0"+secondes;
+    	}else {
+    		time += secondes;
+    	}
+    	
+    	return time;
     }
 
     public void completeTabLineLr(Boolean abandon, int row) {

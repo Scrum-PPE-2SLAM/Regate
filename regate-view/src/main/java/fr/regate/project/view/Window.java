@@ -110,7 +110,7 @@ public class Window extends JFrame {
 		mnClassement.add(mntmClassementRegate);
 		
 		mntmClassementPerCatgorie = new JMenuItem("Classement par catégorie");
-		mnClassement.add(mntmClassementPerCatgorie);
+		//mnClassement.add(mntmClassementPerCatgorie);
 		
 		mnHelp = new JMenu("Aide");
 		menuBar.add(mnHelp);
